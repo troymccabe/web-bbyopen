@@ -2,8 +2,10 @@
     * Updated to PHP 5.3+
     * Added composer support
 
+
   * Version 1.0.4 (2010-01-14)
     * Updated URI build method to use unescaped ampersands.
+
 
   * Version 1.0.3 (2009-02-08)
     * Removed parameter validation in the Type constructor
@@ -11,11 +13,14 @@
         * The service will handle bad parameters with an error response anyway
     * Added WADL to documentation folder
 
+
   * Version 1.0.2 (2009-02-01)
     * Fixed bug when retrieving individual store or product data in JSON format
 
+
   * Version 1.0.1 (2009-02-01)
     * Fixed bug when retrieving individual store or product data
+
 
   * Version 1.0.0 (2009-02-01)
     * Initial release
