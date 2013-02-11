@@ -28,7 +28,7 @@
 namespace BestBuy\Service\Remix;
 
 /**
- * {@link BestBuy\Service\Remix\Type} represents a resource type to be targeted by an API call.
+ * {@link \BestBuy\Service\Remix\Type} represents a resource type to be targeted by an API call.
  * Remix currently includes 2 types of information:
  * {@link http://remix.bestbuy.com/docs/Types/Stores stores} and
  * {@link http://remix.bestbuy.com/docs/Types/Products products}.

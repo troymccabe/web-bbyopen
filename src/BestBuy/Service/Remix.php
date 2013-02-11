@@ -26,7 +26,7 @@
 namespace BestBuy\Service;
 
 /**
- * {@link BestBuy\Service\Remix} provides methods for interacting with (version 1 of)
+ * {@link \BestBuy\Service\Remix} provides methods for interacting with (version 1 of)
  * {@link http://www.bestbuy.com Best Buy}'s {@link http://remix.bestbuy.com Remix} API
  * and is based on the publicly available {@link http://remix.bestbuy.com/docs API documentation}.
  *
@@ -244,7 +244,7 @@ class Remix
     }
 
     /**
-     * Submits a query to the Remix API and returns the {@link BestBuy_Service_Remix_Response response}.
+     * Submits a query to the Remix API and returns the {@link \BestBuy\Service\Remix\Response response}.
      *
      * @return \BestBuy\Service\Remix
      * @throws \BestBuy\Service\Remix\Exception
@@ -273,7 +273,7 @@ class Remix
     }
 
     /**
-     * Builds a resource {@link BestBuy_Service_Remix_Type type} to be targeted for an API call.
+     * Builds a resource {@link \BestBuy\Service\Remix\Type type} to be targeted for an API call.
      *
      * @param string       $type   Desired resource type ('stores' or 'products')
      * @param string|array $filter Identifier or filter array used to target this type resource

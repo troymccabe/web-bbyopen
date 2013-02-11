@@ -28,7 +28,7 @@ is neither affiliated with, nor endorsed by,
       <full_name>\BestBuy\Service\Remix\Exception</full_name>
       <docblock line="29">
         <description>Base exception class used by the BestBuy\Service\Remix package.</description>
-        <long-description></long-description>
+        <long-description/>
         <tag line="29" name="category" description="BestBuy"/>
         <tag line="29" name="package" description="BestBuy\Service\Remix"/>
         <tag line="29" name="author" description="Matt Williams &lt;matt@mattwilliamsnyc.com&gt;"/>
@@ -165,7 +165,7 @@ a BestBuy\Service\Remix\Response provides the following HTTP metadata collected 
         <default>array()</default>
         <docblock line="130">
           <description>Metadata related to the HTTP response collected by cURL</description>
-          <long-description></long-description>
+          <long-description/>
           <tag line="130" name="var" description="" type="array">
             <type by_reference="false">array</type>
           </tag>
@@ -176,7 +176,7 @@ a BestBuy\Service\Remix\Response provides the following HTTP metadata collected 
         <default>''</default>
         <docblock line="137">
           <description>Response body (if any) returned by Remix</description>
-          <long-description></long-description>
+          <long-description/>
           <tag line="137" name="var" description="" type="string">
             <type by_reference="false">string</type>
           </tag>
@@ -187,7 +187,7 @@ a BestBuy\Service\Remix\Response provides the following HTTP metadata collected 
         <full_name>__construct</full_name>
         <docblock line="144">
           <description>Creates a new BestBuy\Service\Remix\Response object.</description>
-          <long-description></long-description>
+          <long-description/>
           <tag line="144" name="param" description="Response body (if any) returned by Remix" type="string" variable="$data">
             <type by_reference="false">string</type>
           </tag>
@@ -197,12 +197,12 @@ a BestBuy\Service\Remix\Response provides the following HTTP metadata collected 
         </docblock>
         <argument line="150">
           <name>$data</name>
-          <default></default>
+          <default/>
           <type/>
         </argument>
         <argument line="150">
           <name>$meta</name>
-          <default></default>
+          <default/>
           <type>array</type>
         </argument>
       </method>
@@ -221,7 +221,7 @@ a BestBuy\Service\Remix\Response provides the following HTTP metadata collected 
         </docblock>
         <argument line="163">
           <name>$name</name>
-          <default></default>
+          <default/>
           <type/>
         </argument>
       </method>
@@ -240,7 +240,7 @@ a BestBuy\Service\Remix\Response provides the following HTTP metadata collected 
         </docblock>
         <argument line="185">
           <name>$name</name>
-          <default></default>
+          <default/>
           <type/>
         </argument>
       </method>
@@ -249,7 +249,7 @@ a BestBuy\Service\Remix\Response provides the following HTTP metadata collected 
         <full_name>__toString</full_name>
         <docblock line="194">
           <description>Allows casting of this response object to a string; returns raw response body.</description>
-          <long-description></long-description>
+          <long-description/>
           <tag line="194" name="return" description="" type="string">
             <type by_reference="false">string</type>
           </tag>
@@ -260,7 +260,7 @@ a BestBuy\Service\Remix\Response provides the following HTTP metadata collected 
         <full_name>getData</full_name>
         <docblock line="204">
           <description>Returns the content body (if any) returned by Remix.</description>
-          <long-description></long-description>
+          <long-description/>
           <tag line="204" name="return" description="" type="string">
             <type by_reference="false">string</type>
           </tag>
@@ -271,7 +271,7 @@ a BestBuy\Service\Remix\Response provides the following HTTP metadata collected 
         <full_name>toSimpleXml</full_name>
         <docblock line="214">
           <description>Returns response document wrapped in a {@link http://us2.php.net/simplexml SimpleXml} object.</description>
-          <long-description></long-description>
+          <long-description/>
           <tag line="214" name="return" description="" type="\SimpleXmlElement|boolean">
             <type by_reference="false">\SimpleXmlElement</type>
             <type by_reference="false">boolean</type>
@@ -283,7 +283,7 @@ a BestBuy\Service\Remix\Response provides the following HTTP metadata collected 
         <full_name>isError</full_name>
         <docblock line="230">
           <description>Checks the HTTP status code of the response for 4xx or 5xx class errors.</description>
-          <long-description></long-description>
+          <long-description/>
           <tag line="230" name="return" description="" type="boolean">
             <type by_reference="false">boolean</type>
           </tag>
@@ -294,7 +294,7 @@ a BestBuy\Service\Remix\Response provides the following HTTP metadata collected 
         <full_name>toArray</full_name>
         <docblock line="240">
           <description>Returns response data (and metadata) as an associative array.</description>
-          <long-description></long-description>
+          <long-description/>
           <tag line="240" name="return" description="" type="array">
             <type by_reference="false">array</type>
           </tag>
@@ -331,7 +331,7 @@ is neither affiliated with, nor endorsed by,
       <full_name>\BestBuy\Service\Remix\Type\Exception</full_name>
       <docblock line="30">
         <description>Base exception class used by the BestBuy\Service\Remix package.</description>
-        <long-description></long-description>
+        <long-description/>
         <tag line="30" name="category" description="BestBuy"/>
         <tag line="30" name="package" description="BestBuy\Service\Remix"/>
         <tag line="30" name="subpackage" description="Type"/>
@@ -385,10 +385,10 @@ is available by "joining" the store and product types.&lt;/p&gt;</long-descripti
       </docblock>
       <property final="false" static="false" visibility="protected" line="53" namespace="BestBuy\Service\Remix" package="Default">
         <name>$identifier</name>
-        <default></default>
+        <default/>
         <docblock line="48">
           <description>Unique identifier (Store ID or Product SKU); only used when targeting an individual resource</description>
-          <long-description></long-description>
+          <long-description/>
           <tag line="48" name="var" description="" type="string">
             <type by_reference="false">string</type>
           </tag>
@@ -396,10 +396,10 @@ is available by "joining" the store and product types.&lt;/p&gt;</long-descripti
       </property>
       <property final="false" static="false" visibility="protected" line="60" namespace="BestBuy\Service\Remix" package="Default">
         <name>$params</name>
-        <default></default>
+        <default/>
         <docblock line="55">
           <description>Filters; only used when targeting a collection of stores or products</description>
-          <long-description></long-description>
+          <long-description/>
           <tag line="55" name="var" description="" type="array">
             <type by_reference="false">array</type>
           </tag>
@@ -407,10 +407,10 @@ is available by "joining" the store and product types.&lt;/p&gt;</long-descripti
       </property>
       <property final="false" static="false" visibility="protected" line="67" namespace="BestBuy\Service\Remix" package="Default">
         <name>$format</name>
-        <default></default>
+        <default/>
         <docblock line="62">
           <description>Desired response format; only used when targeting an individual store or product</description>
-          <long-description></long-description>
+          <long-description/>
           <tag line="62" name="var" description="" type="string">
             <type by_reference="false">string</type>
           </tag>
@@ -418,10 +418,10 @@ is available by "joining" the store and product types.&lt;/p&gt;</long-descripti
       </property>
       <property final="false" static="false" visibility="protected" line="74" namespace="BestBuy\Service\Remix" package="Default">
         <name>$type</name>
-        <default></default>
+        <default/>
         <docblock line="69">
           <description>Primary type of the targeted resource ("stores" or "products")</description>
-          <long-description></long-description>
+          <long-description/>
           <tag line="69" name="var" description="" type="string">
             <type by_reference="false">string</type>
           </tag>
@@ -432,7 +432,7 @@ is available by "joining" the store and product types.&lt;/p&gt;</long-descripti
         <default>array('xml', 'json')</default>
         <docblock line="76">
           <description>Supported resource formats</description>
-          <long-description></long-description>
+          <long-description/>
           <tag line="76" name="var" description="" type="array">
             <type by_reference="false">array</type>
           </tag>
@@ -443,7 +443,7 @@ is available by "joining" the store and product types.&lt;/p&gt;</long-descripti
         <default>array('stores', 'products')</default>
         <docblock line="83">
           <description>Supported resource types</description>
-          <long-description></long-description>
+          <long-description/>
           <tag line="83" name="var" description="" type="array">
             <type by_reference="false">array</type>
           </tag>
@@ -495,12 +495,12 @@ contain an array of filtering statements (e.g. array('name=bat*', 'itemUpdateDat
         </docblock>
         <argument line="126">
           <name>$type</name>
-          <default></default>
+          <default/>
           <type/>
         </argument>
         <argument line="126">
           <name>$filter</name>
-          <default></default>
+          <default/>
           <type/>
         </argument>
         <argument line="126">
@@ -514,7 +514,7 @@ contain an array of filtering statements (e.g. array('name=bat*', 'itemUpdateDat
         <full_name>__toString</full_name>
         <docblock line="154">
           <description>Allows this type to be cast to a string.</description>
-          <long-description></long-description>
+          <long-description/>
           <tag line="154" name="return" description="" type="string">
             <type by_reference="false">string</type>
           </tag>
@@ -538,7 +538,7 @@ contain an array of filtering statements (e.g. array('name=bat*', 'itemUpdateDat
       </method>
     </class>
   </file>
-  <file path="Remix.php" hash="efa3b22243d9e26ca5182007573777e0" package="BestBuy\Service\Remix">
+  <file path="Remix.php" hash="53cd5872ac81313e52b766314b0fb642" package="BestBuy\Service\Remix">
     <docblock line="2">
       <description>LICENSE</description>
       <long-description>&lt;p&gt;This source file is subject to the BSD license bundled with this package.&lt;/p&gt;
@@ -560,325 +560,325 @@ is neither affiliated with, nor endorsed by,
       <tag line="2" name="license" description="http://www.opensource.org/licenses/bsd-license.php"/>
       <tag line="2" name="version" description="$Id: Remix.php 23 2010-01-14 15:27:13Z mattwilliamsnyc $"/>
     </docblock>
-    <class final="false" abstract="false" namespace="BestBuy\Service" line="39" package="BestBuy\Service\Remix">
+    <class final="false" abstract="false" namespace="BestBuy\Service" line="41" package="BestBuy\Service\Remix">
       <extends/>
       <name>Remix</name>
       <full_name>\BestBuy\Service\Remix</full_name>
       <docblock line="28">
-        <description>{@link BestBuy\Service\Remix} provides methods for interacting with (version 1 of)
+        <description>{@link \BestBuy\Service\Remix} provides methods for interacting with (version 1 of)
 {@link http://www.bestbuy.com Best Buy}'s {@link http://remix.bestbuy.com Remix} API
 and is based on the publicly available {@link http://remix.bestbuy.com/docs API documentation}.</description>
-        <long-description></long-description>
+        <long-description>&lt;p&gt;testing {@link http://google.com} links&lt;/p&gt;</long-description>
         <tag line="28" name="category" description="BestBuy"/>
         <tag line="28" name="package" description="BestBuy\Service\Remix"/>
         <tag line="28" name="author" description="Matt Williams &lt;matt@mattwilliamsnyc.com&gt;"/>
         <tag line="28" name="author" description="Troy McCabe (v2.0+) &lt;troy.mccabe@geeksquad.com&gt;"/>
         <tag line="28" name="copyright" description="Copyright (c) 2008 {@link http://mattwilliamsnyc.com Matt Williams}"/>
       </docblock>
-      <constant namespace="BestBuy\Service" line="44" package="BestBuy\Service\Remix">
+      <constant namespace="BestBuy\Service" line="46" package="BestBuy\Service\Remix">
         <name>API_BASE</name>
         <full_name>API_BASE</full_name>
         <value>'http://api.remix.bestbuy.com/v1'</value>
-        <docblock line="41">
+        <docblock line="43">
           <description>Entry point for all API requests</description>
           <long-description></long-description>
         </docblock>
       </constant>
-      <property final="false" static="false" visibility="protected" line="49" namespace="BestBuy\Service" package="Default">
+      <property final="false" static="false" visibility="protected" line="51" namespace="BestBuy\Service" package="Default">
         <name>$apiKey</name>
         <default></default>
-        <docblock line="46">
+        <docblock line="48">
           <description>Key used to identify a client application to the API service</description>
           <long-description></long-description>
         </docblock>
       </property>
-      <property final="false" static="false" visibility="protected" line="54" namespace="BestBuy\Service" package="Default">
+      <property final="false" static="false" visibility="protected" line="56" namespace="BestBuy\Service" package="Default">
         <name>$timeout</name>
         <default>10</default>
-        <docblock line="51">
+        <docblock line="53">
           <description>Length of time (in seconds) to wait for a response to an API call</description>
           <long-description></long-description>
         </docblock>
       </property>
-      <property final="false" static="false" visibility="protected" line="59" namespace="BestBuy\Service" package="Default">
+      <property final="false" static="false" visibility="protected" line="61" namespace="BestBuy\Service" package="Default">
         <name>$params</name>
         <default>array()</default>
-        <docblock line="56">
+        <docblock line="58">
           <description>Query parameters to be appended to an API request URI</description>
           <long-description></long-description>
         </docblock>
       </property>
-      <property final="false" static="false" visibility="protected" line="64" namespace="BestBuy\Service" package="Default">
+      <property final="false" static="false" visibility="protected" line="66" namespace="BestBuy\Service" package="Default">
         <name>$types</name>
         <default>array()</default>
-        <docblock line="61">
+        <docblock line="63">
           <description>Resource types (e.g.</description>
           <long-description>&lt;p&gt;stores, products) to be targeted by an API call&lt;/p&gt;</long-description>
         </docblock>
       </property>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="BestBuy\Service" line="73" package="BestBuy\Service\Remix">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="BestBuy\Service" line="75" package="BestBuy\Service\Remix">
         <name>__construct</name>
         <full_name>__construct</full_name>
-        <docblock line="66">
+        <docblock line="68">
           <description>Constructor.</description>
           <long-description>&lt;p&gt;Instantiates a new Remix API client with an API Key identifier&lt;/p&gt;</long-description>
-          <tag line="66" name="param" description="Key used to identify a client application to the API service" type="string" variable="$apiKey">
+          <tag line="68" name="param" description="Key used to identify a client application to the API service" type="string" variable="$apiKey">
             <type by_reference="false">string</type>
           </tag>
         </docblock>
-        <argument line="73">
+        <argument line="75">
           <name>$apiKey</name>
           <default></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="BestBuy\Service" line="88" package="BestBuy\Service\Remix">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="BestBuy\Service" line="90" package="BestBuy\Service\Remix">
         <name>__call</name>
         <full_name>__call</full_name>
-        <docblock line="78">
+        <docblock line="80">
           <description>Allows query parameters to be assigned using a convenient key($value) syntax (e.g.</description>
           <long-description>&lt;p&gt;format('json')).&lt;/p&gt;
 
 &lt;p&gt;This is an alternative to setting all parameters simultaneously via the {@link params()} method.&lt;/p&gt;</long-description>
-          <tag line="78" name="param" description="Name of the query parameter to which a value will be assigned" type="string" variable="$method">
+          <tag line="80" name="param" description="Name of the query parameter to which a value will be assigned" type="string" variable="$method">
             <type by_reference="false">string</type>
           </tag>
-          <tag line="78" name="param" description="List of arguments; the first value is assigned to the targeted query parameter" type="array" variable="$args">
+          <tag line="80" name="param" description="List of arguments; the first value is assigned to the targeted query parameter" type="array" variable="$args">
             <type by_reference="false">array</type>
           </tag>
-          <tag line="78" name="return" description="" type="\BestBuy\Service\Remix">
+          <tag line="80" name="return" description="" type="\BestBuy\Service\Remix">
             <type by_reference="false">\BestBuy\Service\Remix</type>
           </tag>
         </docblock>
-        <argument line="88">
+        <argument line="90">
           <name>$method</name>
           <default></default>
           <type/>
         </argument>
-        <argument line="88">
+        <argument line="90">
           <name>$args</name>
           <default></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="BestBuy\Service" line="113" package="BestBuy\Service\Remix">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="BestBuy\Service" line="115" package="BestBuy\Service\Remix">
         <name>products</name>
         <full_name>products</full_name>
-        <docblock line="101">
+        <docblock line="103">
           <description>Targets the (optionally filtered) {@link http://remix.bestbuy.com/docs/Types/Products products}
 resource for an API call.</description>
           <long-description>&lt;p&gt;May be used in combination with {@link stores()} to check for
 {@link http://remix.bestbuy.com/docs/Types/Store_Availability store availability}.&lt;/p&gt;</long-description>
-          <tag line="101" name="param" description="One or more criteria used to filter results" type="array" variable="$filters">
+          <tag line="103" name="param" description="One or more criteria used to filter results" type="array" variable="$filters">
             <type by_reference="false">array</type>
           </tag>
-          <tag line="101" name="return" description="" type="\BestBuy\Service\Remix">
+          <tag line="103" name="return" description="" type="\BestBuy\Service\Remix">
             <type by_reference="false">\BestBuy\Service\Remix</type>
           </tag>
-          <tag line="101" name="throws" description="" type="\BestBuy\Service\Remix\Exception">
+          <tag line="103" name="throws" description="" type="\BestBuy\Service\Remix\Exception">
             <type by_reference="false">\BestBuy\Service\Remix\Exception</type>
           </tag>
         </docblock>
-        <argument line="113">
+        <argument line="115">
           <name>$filters</name>
           <default>array()</default>
           <type>array</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="BestBuy\Service" line="130" package="BestBuy\Service\Remix">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="BestBuy\Service" line="132" package="BestBuy\Service\Remix">
         <name>product</name>
         <full_name>product</full_name>
-        <docblock line="120">
+        <docblock line="122">
           <description>Targets a specific {@link http://remix.bestbuy.com/docs/Types/Products product}
 resource (by SKU #) for an API call.</description>
           <long-description></long-description>
-          <tag line="120" name="param" description="Identifier (SKU #) of the product to be targeted" type="string" variable="$sku">
+          <tag line="122" name="param" description="Identifier (SKU #) of the product to be targeted" type="string" variable="$sku">
             <type by_reference="false">string</type>
           </tag>
-          <tag line="120" name="param" description="Desired response format ('xml' or 'json')" type="string" variable="$format">
+          <tag line="122" name="param" description="Desired response format ('xml' or 'json')" type="string" variable="$format">
             <type by_reference="false">string</type>
           </tag>
-          <tag line="120" name="return" description="" type="\BestBuy\Service\Remix">
+          <tag line="122" name="return" description="" type="\BestBuy\Service\Remix">
             <type by_reference="false">\BestBuy\Service\Remix</type>
           </tag>
-          <tag line="120" name="throws" description="" type="\BestBuy\Service\Remix\Exception">
+          <tag line="122" name="throws" description="" type="\BestBuy\Service\Remix\Exception">
             <type by_reference="false">\BestBuy\Service\Remix\Exception</type>
           </tag>
         </docblock>
-        <argument line="130">
+        <argument line="132">
           <name>$sku</name>
           <default></default>
           <type/>
         </argument>
-        <argument line="130">
+        <argument line="132">
           <name>$format</name>
           <default>'xml'</default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="BestBuy\Service" line="149" package="BestBuy\Service\Remix">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="BestBuy\Service" line="151" package="BestBuy\Service\Remix">
         <name>stores</name>
         <full_name>stores</full_name>
-        <docblock line="137">
+        <docblock line="139">
           <description>Targets the (optionally filtered) {@link http://remix.bestbuy.com/docs/Types/Stores stores}
 resource for an API call.</description>
           <long-description>&lt;p&gt;May be used in combination with {@link products()} to check for
 {@link http://remix.bestbuy.com/docs/Types/Store_Availability store availability}.&lt;/p&gt;</long-description>
-          <tag line="137" name="param" description="One or more criteria used to filter results" type="array" variable="$filters">
+          <tag line="139" name="param" description="One or more criteria used to filter results" type="array" variable="$filters">
             <type by_reference="false">array</type>
           </tag>
-          <tag line="137" name="return" description="" type="\BestBuy\Service\Remix">
+          <tag line="139" name="return" description="" type="\BestBuy\Service\Remix">
             <type by_reference="false">\BestBuy\Service\Remix</type>
           </tag>
-          <tag line="137" name="throws" description="" type="\BestBuy\Service\Remix\Exception">
+          <tag line="139" name="throws" description="" type="\BestBuy\Service\Remix\Exception">
             <type by_reference="false">\BestBuy\Service\Remix\Exception</type>
           </tag>
         </docblock>
-        <argument line="149">
+        <argument line="151">
           <name>$filters</name>
           <default>array()</default>
           <type>array</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="BestBuy\Service" line="166" package="BestBuy\Service\Remix">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="BestBuy\Service" line="168" package="BestBuy\Service\Remix">
         <name>store</name>
         <full_name>store</full_name>
-        <docblock line="156">
+        <docblock line="158">
           <description>Targets a specific {@link http://remix.bestbuy.com/docs/Types/Stores store}
 resource (by Store ID) for an API call.</description>
           <long-description></long-description>
-          <tag line="156" name="param" description="Identifier (Store ID) of the store to be targeted" type="string" variable="$storeId">
+          <tag line="158" name="param" description="Identifier (Store ID) of the store to be targeted" type="string" variable="$storeId">
             <type by_reference="false">string</type>
           </tag>
-          <tag line="156" name="param" description="Desired response format ('xml' or 'json')" type="string" variable="$format">
+          <tag line="158" name="param" description="Desired response format ('xml' or 'json')" type="string" variable="$format">
             <type by_reference="false">string</type>
           </tag>
-          <tag line="156" name="return" description="" type="\BestBuy\Service\Remix">
+          <tag line="158" name="return" description="" type="\BestBuy\Service\Remix">
             <type by_reference="false">\BestBuy\Service\Remix</type>
           </tag>
-          <tag line="156" name="throws" description="" type="\BestBuy\Service\Remix\Exception">
+          <tag line="158" name="throws" description="" type="\BestBuy\Service\Remix\Exception">
             <type by_reference="false">\BestBuy\Service\Remix\Exception</type>
           </tag>
         </docblock>
-        <argument line="166">
+        <argument line="168">
           <name>$identifier</name>
           <default></default>
           <type/>
         </argument>
-        <argument line="166">
+        <argument line="168">
           <name>$format</name>
           <default>'xml'</default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="BestBuy\Service" line="180" package="BestBuy\Service\Remix">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="BestBuy\Service" line="182" package="BestBuy\Service\Remix">
         <name>params</name>
         <full_name>params</full_name>
-        <docblock line="173">
+        <docblock line="175">
           <description>Assigns one or more query parameters (as name/value pairs) to be included with an API call.</description>
           <long-description></long-description>
-          <tag line="173" name="param" description="Name/value pairs to be assigned as query parameters" type="array" variable="$params">
+          <tag line="175" name="param" description="Name/value pairs to be assigned as query parameters" type="array" variable="$params">
             <type by_reference="false">array</type>
           </tag>
-          <tag line="173" name="return" description="" type="\BestBuy\Service\Remix">
+          <tag line="175" name="return" description="" type="\BestBuy\Service\Remix">
             <type by_reference="false">\BestBuy\Service\Remix</type>
           </tag>
         </docblock>
-        <argument line="180">
+        <argument line="182">
           <name>$params</name>
           <default></default>
           <type>array</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="BestBuy\Service" line="198" package="BestBuy\Service\Remix">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="BestBuy\Service" line="200" package="BestBuy\Service\Remix">
         <name>clear</name>
         <full_name>clear</full_name>
-        <docblock line="193">
+        <docblock line="195">
           <description>Clears all targeted resource types and query parameters; called after every {@link query()}.</description>
           <long-description></long-description>
-          <tag line="193" name="return" description="" type="\BestBuy\Service\Remix">
+          <tag line="195" name="return" description="" type="\BestBuy\Service\Remix">
             <type by_reference="false">\BestBuy\Service\Remix</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="BestBuy\Service" line="213" package="BestBuy\Service\Remix">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="BestBuy\Service" line="215" package="BestBuy\Service\Remix">
         <name>getTargetUri</name>
         <full_name>getTargetUri</full_name>
-        <docblock line="206">
+        <docblock line="208">
           <description>Returns the current target URI including any assigned query parameters.</description>
           <long-description>&lt;p&gt;IMPORTANT: Target URIs include the API key assigned to this client; protect this data appropriately.&lt;/p&gt;</long-description>
-          <tag line="206" name="return" description="" type="string">
+          <tag line="208" name="return" description="" type="string">
             <type by_reference="false">string</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="BestBuy\Service" line="235" package="BestBuy\Service\Remix">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="BestBuy\Service" line="237" package="BestBuy\Service\Remix">
         <name>setTimeout</name>
         <full_name>setTimeout</full_name>
-        <docblock line="227">
+        <docblock line="229">
           <description>Sets the amount of time (in seconds) to wait for a response to an API call.</description>
           <long-description></long-description>
-          <tag line="227" name="param" description="Length of time (in seconds) to wait before timing out" type="integer" variable="$timeout">
+          <tag line="229" name="param" description="Length of time (in seconds) to wait before timing out" type="integer" variable="$timeout">
             <type by_reference="false">integer</type>
           </tag>
-          <tag line="227" name="return" description="" type="\BestBuy\Service\Remix">
+          <tag line="229" name="return" description="" type="\BestBuy\Service\Remix">
             <type by_reference="false">\BestBuy\Service\Remix</type>
           </tag>
-          <tag line="227" name="throws" description="" type="\BestBuy\Service\Remix\Exception">
+          <tag line="229" name="throws" description="" type="\BestBuy\Service\Remix\Exception">
             <type by_reference="false">\BestBuy\Service\Remix\Exception</type>
           </tag>
         </docblock>
-        <argument line="235">
+        <argument line="237">
           <name>$timeout</name>
           <default></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="BestBuy\Service" line="252" package="BestBuy\Service\Remix">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="BestBuy\Service" line="254" package="BestBuy\Service\Remix">
         <name>query</name>
         <full_name>query</full_name>
-        <docblock line="246">
+        <docblock line="248">
           <description>Submits a query to the Remix API and returns the {@link BestBuy_Service_Remix_Response response}.</description>
           <long-description></long-description>
-          <tag line="246" name="return" description="" type="\BestBuy\Service\Remix">
+          <tag line="248" name="return" description="" type="\BestBuy\Service\Remix">
             <type by_reference="false">\BestBuy\Service\Remix</type>
           </tag>
-          <tag line="246" name="throws" description="" type="\BestBuy\Service\Remix\Exception">
+          <tag line="248" name="throws" description="" type="\BestBuy\Service\Remix\Exception">
             <type by_reference="false">\BestBuy\Service\Remix\Exception</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="true" visibility="protected" namespace="BestBuy\Service" line="284" package="BestBuy\Service\Remix">
+      <method final="false" abstract="false" static="true" visibility="protected" namespace="BestBuy\Service" line="286" package="BestBuy\Service\Remix">
         <name>buildType</name>
         <full_name>buildType</full_name>
-        <docblock line="275">
+        <docblock line="277">
           <description>Builds a resource {@link BestBuy_Service_Remix_Type type} to be targeted for an API call.</description>
           <long-description></long-description>
-          <tag line="275" name="param" description="Desired resource type ('stores' or 'products')" type="string" variable="$type">
+          <tag line="277" name="param" description="Desired resource type ('stores' or 'products')" type="string" variable="$type">
             <type by_reference="false">string</type>
           </tag>
-          <tag line="275" name="param" description="Identifier or filter array used to target this type resource" type="string|array" variable="$filter">
+          <tag line="277" name="param" description="Identifier or filter array used to target this type resource" type="string|array" variable="$filter">
             <type by_reference="false">string</type>
             <type by_reference="false">array</type>
           </tag>
-          <tag line="275" name="param" description="Desired response format ('json' or 'xml')" type="string" variable="$format">
+          <tag line="277" name="param" description="Desired response format ('json' or 'xml')" type="string" variable="$format">
             <type by_reference="false">string</type>
           </tag>
-          <tag line="275" name="return" description="" type="\BestBuy\Service\Remix\Type">
+          <tag line="277" name="return" description="" type="\BestBuy\Service\Remix\Type">
             <type by_reference="false">\BestBuy\Service\Remix\Type</type>
           </tag>
         </docblock>
-        <argument line="284">
+        <argument line="286">
           <name>$type</name>
           <default></default>
           <type/>
         </argument>
-        <argument line="284">
+        <argument line="286">
           <name>$filter</name>
           <default></default>
           <type/>
         </argument>
-        <argument line="284">
+        <argument line="286">
           <name>$format</name>
           <default>'xml'</default>
           <type/>
@@ -886,8 +886,8 @@ resource (by Store ID) for an API call.</description>
       </method>
     </class>
     <parse_markers>
-      <error line="156" code="50014">Name of argument $identifier does not match with the DocBlock's name $storeId in store()</error>
-      <notice line="156" code="50013">Parameter $storeId could not be found in store()</notice>
+      <error line="158" code="50014">Name of argument $identifier does not match with the DocBlock's name $storeId in store()</error>
+      <notice line="158" code="50013">Parameter $storeId could not be found in store()</notice>
     </parse_markers>
   </file>
   <package name="BestBuy" full_name="BestBuy">
