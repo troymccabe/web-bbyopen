@@ -13,7 +13,6 @@
         },
         {
             "name": "Troy McCabe",
-            "homepage": "http://troymccabe.com",
             "email": "troy.mccabe@geeksquad.com"
         }
     ],
@@ -26,7 +25,7 @@
         "ext-curl": "*"
     },
     "autoload": {
-        "psr-0": {"BestBuy\Service\Remix": "src/"}
+        "psr-0": {"BestBuy\\Service\\Remix": "src/"}
     },
     "minimum-stability": "dev",
     "extra": {
