@@ -1,0 +1,1448 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="wadl_documentation.xsl"?>
+<application
+    xmlns:xsi          = "http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation = "http://research.sun.com/wadl/2006/10 wadl.xsd"
+    xmlns:html         = "http://www.w3.org/1999/xhtml"
+    xmlns:xsd          = "http://www.w3.org/2001/XMLSchema"
+    xmlns              = "http://research.sun.com/wadl/2006/10">
+    <doc title="Best Buy Remix REST API v1.0">
+        <html:h2>Introduction</html:h2>
+        <html:p>
+            <html:a href="http://remix.bestbuy.com">Remix</html:a> is an API that gives you access to
+            <html:a href="http://www.bestbuy.com">BestBuy.com's</html:a> product catalog data and more.
+        </html:p>
+        <html:p>
+            <html:strong>Note</html:strong>:
+            This WADL is <html:strong>not</html:strong> "official" documentation and is not provided or endorsed
+            by Best Buy. This WADL is a work in progress and makes no claim to completeness. Its purpose is to
+            provide a useful companion to the <html:a href="http://remix.bestbuy.com/docs/">official
+            documentation</html:a> for developers who prefer the WADL style.
+        </html:p>
+        <html:h3>Quick Start</html:h3>
+        <html:p>
+        </html:p>
+        <html:pre>curl -i http://api.remix.bestbuy.com/v1/stores?apiKey=&lt;YourApiKey&gt;</html:pre>
+        <html:h4>Request</html:h4>
+        <html:pre>GET /v1/stores?apiKey=&lt;YourApiKey&gt; HTTP/1.1
+Host: api.remix.bestbuy.com
+Accept: */*</html:pre>
+        <html:h4>Response</html:h4>
+        <html:pre><![CDATA[HTTP/1.1 200 OK
+X-Lighty-Magnet-Uri-Path: /v1/stores
+X-Mashery-Responder: mashery-1.cust.iad.llnw.net
+Date: Mon, 02 Feb 2009 00:37:27 GMT
+Server: thin 1.0.0 codename Pivotal 2009-1-26
+Etag: "faabc3793681624ff719f7d1101c918f"
+X-Runtime: 32ms
+Content-Type: text/xml; charset=UTF-8
+Cache-Control: private, max-age=0, must-revalidate
+Vary: Accept-Encoding
+Accept-Ranges: bytes
+Content-Length: 4355
+
+<?xml version="1.0" encoding="UTF-8"?>
+<stores currentPage="1" totalPages="106" from="1" to="10" total="1052" queryTime="0.004" totalTime="0.028"
+  canonicalUrl="/v1/stores?apiKey=<YourApiKey>">
+    <store>
+        <storeId>1504</storeId>
+        <name>Caguas, PR</name>
+        <address>Las Catalinas Mall</address>
+        <city>Caguas</city>
+        <region>PR</region>
+        <postalCode>00725</postalCode>
+        <fullPostalCode>00725</fullPostalCode>
+        <country>US</country>
+        <lat>18.205647</lat>
+        <lng>-66.034454</lng>
+        <phone>787-258-0110</phone>
+        <hours>10:00am - 9:00pm Monday - Friday, 11:00am - 6:00pm Saturday, 11:00am - 6:00pm Sunday</hours>
+    </store>
+    ...
+</stores>]]></html:pre>
+    </doc>
+    <resources base="http://api.remix.bestbuy.com/v1/">
+        <resource path="stores({filter(s)})" id="stores">
+            <method name="GET">
+                <doc>
+                    <html:p><html:strong>Retrieve a collection of stores (Status 200)</html:strong></html:p>
+                    <html:p>Best Buy store data may be retrieved via requests to the 'stores' resource:</html:p>
+                    <html:p>
+                        http://api.remix.bestbuy.com/v1/stores?apiKey=&lt;YourApiKey&gt;
+                    </html:p>
+                    <html:p>By default, data is returned in XML format. JSON data may be requested via the &apos;format&apos; query parameter:</html:p>
+                    <html:p>
+                        http://api.remix.bestbuy.com/v1/stores?apiKey=&lt;YourApiKey&gt;&amp;format=json
+                    </html:p>
+                    <html:p>Optionally, this data may be filtered by one or more attribute comparisons:</html:p>
+                    <html:p>
+                        http://api.remix.bestbuy.com/v1/stores(city=&apos;New York&apos;&amp;region=&apos;NY&apos;)?apiKey=&lt;YourApiKey&gt;
+                    </html:p>
+                    <html:p>Several comparison types are supported:</html:p>
+                    <html:ul>
+                        <html:li>
+                            <html:strong>equal/not equal</html:strong>:
+                            <html:ul>
+                                <html:li>stores(name=Noho Manhattan NY)</html:li>
+                                <html:li>stores(state!=NY)</html:li>
+                                <html:li>stores(postalCode&lt;&gt;10010)</html:li>
+                            </html:ul>
+                        </html:li>
+                        <html:li>
+                            <html:strong>wildcard</html:strong>:
+                            <html:ul>
+                                <html:li>stores(name=Noho*)</html:li>
+                                <html:li>stores(postalCode=100*)</html:li>
+                            </html:ul>
+                        </html:li>
+                        <html:li>
+                            <html:strong>less/greater numeric</html:strong>:
+                            <html:ul>
+                                <html:li>stores(storeId&lt;100)</html:li>
+                                <html:li>stores(lat&lt;=40)</html:li>
+                                <html:li>stores(lng&gt;-73)</html:li>
+                                <html:li>stores(storeId&gt;=500)</html:li>
+                            </html:ul>
+                        </html:li>
+                        <html:li>
+                            <html:strong>and</html:strong>:
+                            <html:ul>
+                                <html:li>stores(name=Noho*&amp;state=NY)</html:li>
+                            </html:ul>
+                        </html:li>
+                        <html:li>
+                            <html:strong>or</html:strong>:
+                            <html:ul>
+                                <html:li>stores(name=Noho*|state=NY)</html:li>
+                            </html:ul>
+                        </html:li>
+                    </html:ul>
+                    <html:p>Additionally, the stores resource supports an <html:code>area()</html:code> function.</html:p>
+                    <html:p>
+                        This function accepts a postal code and a maximum distance to return a list of stores
+                        from a given area:
+                    </html:p>
+                    <html:p>
+                        http://api.remix.bestbuy.com/v1/stores(area(10010,5))?apiKey=&lt;YourApiKey&gt;
+                    </html:p>
+                </doc>
+                <request>
+                    <param name="apiKey" style="query" required="true" type="xsd:string">
+                        <doc>
+                            <html:p>Key used to identify a client application to the Remix service</html:p>
+                        </doc>
+                    </param>
+                    <param name="format" style="query" required="false" default="xml" type="xsd:string">
+                        <doc>
+                            <html:p>Specifies a response format ('xml' or 'json')</html:p>
+                        </doc>
+                    </param>
+                    <param name="page" style="query" required="false" default="1" type="xsd:integer">
+                        <doc>
+                            <html:p>Specifies which page of results to retrieve</html:p>
+                        </doc>
+                    </param>
+                    <param name="show" style="query" required="false" type="xsd:integer">
+                        <doc>
+                            <html:p>Limits the returned data to a list of fields (e.g. show=name,storeId,phone)</html:p>
+                        </doc>
+                    </param>
+                    <param name="sort" style="query" required="false" type="xsd:integer">
+                        <doc>
+                            <html:p>
+                                Specifies a sort field for result ordering; .desc may be appended for descending order
+                            </html:p>
+                        </doc>
+                    </param>
+                </request>
+                <response status="200">
+                    <param name="Accept-Ranges" style="header" type="xsd:string">
+                        <doc>
+                            <html:p>
+                                 Indicate the server's acceptance of range requests for a resource
+                            </html:p>
+                        </doc>
+                    </param>
+                    <param name="Cache-Control" style="header" type="xsd:string">
+                        <doc>
+                            <html:p>
+                                Specifies directives that MUST be obeyed by all caching mechanisms
+                            </html:p>
+                        </doc>
+                    </param>
+                    <param name="Content-Length" style="header" type="xsd:integer">
+                        <doc>
+                            <html:p>
+                                Indicates the length (in bytes) of the entity being returned
+                            </html:p>
+                        </doc>
+                    </param>
+                    <param name="Content-Type" style="header" type="xsd:string">
+                        <doc>
+                            <html:p>
+                                Indicates the media type of the entity being returned
+                            </html:p>
+                        </doc>
+                    </param>
+                    <param name="Date" style="header" type="xsd:string">
+                        <doc>
+                            <html:p>
+                                Represents the date and time at which the message was originated (RFC1123)
+                            </html:p>
+                        </doc>
+                    </param>
+                    <param name="Etag" style="header" type="xsd:string">
+                        <doc>
+                            <html:p>
+                                Provides the current value of the entity tag for the requested variant
+                            </html:p>
+                        </doc>
+                    </param>
+                    <param name="Server" style="header" type="xsd:string">
+                        <doc>
+                            <html:p>
+                                Contains information about the software used by the origin server to handle the request
+                            </html:p>
+                        </doc>
+                    </param>
+                    <param name="Vary" style="header" type="xsd:string">
+                        <doc>
+                            <html:p>
+                                Indicates the set of request-header fields that fully determines, while the response is fresh,
+                                whether a cache is permitted to use the response to reply to a subsequent request without revalidation.
+                            </html:p>
+                        </doc>
+                    </param>
+                    <param name="X-Lighty-Magnet-Uri-Path" style="header" type="xsd:string">
+                        <doc>
+                            <html:p>
+                                Service header
+                            </html:p>
+                        </doc>
+                    </param>
+                    <param name="X-Mashery-Error-Code" style="header" type="xsd:string">
+                        <doc>
+                            <html:p>
+                                Service header
+                            </html:p>
+                        </doc>
+                    </param>
+                    <param name="X-Mashery-Responder" style="header" type="xsd:string">
+                        <doc>
+                            <html:p>
+                                Service header
+                            </html:p>
+                        </doc>
+                    </param>
+                    <param name="X-Runtime" style="header" type="xsd:string">
+                        <doc>
+                            <html:p>
+                                Service header
+                            </html:p>
+                        </doc>
+                    </param>
+                    <representation href="#stores_xml" status="200"/>
+                    <representation href="#stores_json" status="200"/>
+                    <fault href="#error_400_xml" status="400"/>
+                    <fault href="#error_400_json" status="400"/>
+                    <fault href="#error_403_xml" status="403"/>
+                </response>
+            </method>
+        </resource>
+        <resource path="stores/{storeId}.{format}" id="store">
+            <method name="GET">
+                <doc>
+                    <html:p><html:strong>Retrieve data for a single store (Status 200)</html:strong></html:p>
+                    <html:p>Data related to a specific Best Buy store may be retrieved via requests to the 'store' resource:</html:p>
+                    <html:p>
+                        http://api.remix.bestbuy.com/v1/stores/4.xml?apiKey=&lt;YourApiKey&gt;
+                    </html:p>
+                    <html:p>By default, data is returned in XML format. JSON data may be requested via the &apos;format&apos; URI segment:</html:p>
+                    <html:p>
+                        http://api.remix.bestbuy.com/v1/stores/4.<html:strong>json</html:strong>?apiKey=&lt;YourApiKey&gt;
+                    </html:p>
+                </doc>
+                <request>
+                    <param name="apiKey" style="query" required="true" type="xsd:string">
+                        <doc>
+                            <html:p>Key used to identify a client application to the Remix service</html:p>
+                        </doc>
+                    </param>
+                    <param name="show" style="query" required="false" type="xsd:integer">
+                        <doc>
+                            <html:p>Limits the returned data to a list of fields (e.g. show=name,storeId,phone)</html:p>
+                        </doc>
+                    </param>
+                </request>
+                <response status="200">
+                    <param name="Accept-Ranges" style="header" type="xsd:string">
+                        <doc>
+                            <html:p>Indicate the server's acceptance of range requests for a resource</html:p>
+                        </doc>
+                    </param>
+                    <param name="Cache-Control" style="header" type="xsd:string">
+                        <doc>
+                            <html:p>Specifies directives that MUST be obeyed by all caching mechanisms</html:p>
+                        </doc>
+                    </param>
+                    <param name="Content-Length" style="header" type="xsd:integer">
+                        <doc>
+                            <html:p>Indicates the length (in bytes) of the entity being returned</html:p>
+                        </doc>
+                    </param>
+                    <param name="Content-Type" style="header" type="xsd:string">
+                        <doc>
+                            <html:p>Indicates the media type of the entity being returned</html:p>
+                        </doc>
+                    </param>
+                    <param name="Date" style="header" type="xsd:string">
+                        <doc>
+                            <html:p>Represents the date and time at which the message was originated (RFC1123)</html:p>
+                        </doc>
+                    </param>
+                    <param name="Etag" style="header" type="xsd:string">
+                        <doc>
+                            <html:p>Provides the current value of the entity tag for the requested variant</html:p>
+                        </doc>
+                    </param>
+                    <param name="Server" style="header" type="xsd:string">
+                        <doc>
+                            <html:p>Contains information about the software used by the origin server to handle the request</html:p>
+                        </doc>
+                    </param>
+                    <param name="Vary" style="header" type="xsd:string">
+                        <doc>
+                            <html:p>
+                                Indicates the set of request-header fields that fully determines, while the response is fresh,
+                                whether a cache is permitted to use the response to reply to a subsequent request without revalidation.
+                            </html:p>
+                        </doc>
+                    </param>
+                    <param name="X-Lighty-Magnet-Uri-Path" style="header" type="xsd:string">
+                        <doc>
+                            <html:p>Service header</html:p>
+                        </doc>
+                    </param>
+                    <param name="X-Mashery-Error-Code" style="header" type="xsd:string">
+                        <doc>
+                            <html:p>Service header</html:p>
+                        </doc>
+                    </param>
+                    <param name="X-Mashery-Responder" style="header" type="xsd:string">
+                        <doc>
+                            <html:p>Service header</html:p>
+                        </doc>
+                    </param>
+                    <param name="X-Runtime" style="header" type="xsd:string">
+                        <doc>
+                            <html:p>Service header</html:p>
+                        </doc>
+                    </param>
+                    <representation href="#store_xml" status="200"/>
+                    <representation href="#store_json" status="200"/>
+                    <fault href="#error_400_xml" status="400"/>
+                    <fault href="#error_400_json" status="400"/>
+                    <fault href="#error_403_xml" status="403"/>
+                    <fault href="#error_404_xml" status="404"/>
+                    <fault href="#error_404_json" status="404"/>
+                </response>
+            </method>
+        </resource>
+        <resource path="products({filter(s)})" id="products">
+            <method name="GET">
+                <doc>
+                    <html:p><html:strong>Retrieve a collection of products (Status 200)</html:strong></html:p>
+                    <html:p>Best Buy product data may be retrieved via requests to the 'products' resource:</html:p>
+                    <html:p>
+                        http://api.remix.bestbuy.com/v1/products?apiKey=&lt;YourApiKey&gt;
+                    </html:p>
+                    <html:p>By default, data is returned in XML format. JSON data may be requested via the &apos;format&apos; query parameter:</html:p>
+                    <html:p>
+                        http://api.remix.bestbuy.com/v1/products?apiKey=&lt;YourApiKey&gt;&amp;format=json
+                    </html:p>
+                    <html:p>Optionally, this data may be filtered by one or more attribute comparisons:</html:p>
+                    <html:p>
+                        http://api.remix.bestbuy.com/v1/products(name=&apos;Bat*&apos;&amp;type=&apos;Movie&apos;)?apiKey=&lt;YourApiKey&gt;
+                    </html:p>
+                    <html:p>Several comparison types are supported:</html:p>
+                    <html:ul>
+                        <html:li>
+                            <html:strong>equal/not equal</html:strong>:
+                            <html:ul>
+                                <html:li>products(salePrice=11.99)</html:li>
+                                <html:li>products(salePrice!=11.99)</html:li>
+                                <html:li>products(salePrice&lt;&gt;11.99)</html:li>
+                            </html:ul>
+                        </html:li>
+                        <html:li>
+                            <html:strong>wildcard</html:strong>:
+                            <html:ul>
+                                <html:li>products(name=bat*)</html:li>
+                            </html:ul>
+                        </html:li>
+                        <html:li>
+                            <html:strong>less/greater numeric</html:strong>:
+                            <html:ul>
+                                <html:li>products(salePrice&lt;11.99)</html:li>
+                                <html:li>products(salePrice&lt;=11.99)</html:li>
+                                <html:li>products(salePrice&gt;11.99)</html:li>
+                                <html:li>products(salePrice&gt;=11.99)</html:li>
+                            </html:ul>
+                        </html:li>
+                        <html:li>
+                            <html:strong>less/greater date</html:strong>:
+                            <html:ul>
+                                <html:li>products(itemUpdateDate&lt;2008-09-03)</html:li>
+                                <html:li>products(itemUpdateDate&gt;2008-06-11)</html:li>
+                            </html:ul>
+                        </html:li>
+                        <html:li>
+                            <html:strong>and</html:strong>:
+                            <html:ul>
+                                <html:li>products(name=bat*&amp;salePrice&lt;20)</html:li>
+                            </html:ul>
+                        </html:li>
+                        <html:li>
+                            <html:strong>or</html:strong>:
+                            <html:ul>
+                                <html:li>products(name=bat*|salePrice&lt;20)</html:li>
+                            </html:ul>
+                        </html:li>
+                    </html:ul>
+                </doc>
+                <request>
+                    <param name="apiKey" style="query" required="true" type="xsd:string">
+                        <doc>
+                            <html:p>Key used to identify a client application to the Remix service</html:p>
+                        </doc>
+                    </param>
+                    <param name="format" style="query" required="false" default="xml" type="xsd:string">
+                        <doc>
+                            <html:p>Specifies a response format ('xml' or 'json')</html:p>
+                        </doc>
+                    </param>
+                    <param name="page" style="query" required="false" default="1" type="xsd:integer">
+                        <doc>
+                            <html:p>Specifies which page of results to retrieve</html:p>
+                        </doc>
+                    </param>
+                    <param name="show" style="query" required="false" type="xsd:integer">
+                        <doc>
+                            <html:p>Limits the returned data to a list of fields (e.g. show=name,storeId,phone)</html:p>
+                        </doc>
+                    </param>
+                    <param name="sort" style="query" required="false" type="xsd:integer">
+                        <doc>
+                            <html:p>
+                                Specifies a sort field for result ordering; .desc may be appended for descending order
+                            </html:p>
+                        </doc>
+                    </param>
+                </request>
+                <response status="200">
+                    <param name="Accept-Ranges" style="header" type="xsd:string">
+                        <doc>
+                            <html:p>
+                                 Indicate the server's acceptance of range requests for a resource
+                            </html:p>
+                        </doc>
+                    </param>
+                    <param name="Cache-Control" style="header" type="xsd:string">
+                        <doc>
+                            <html:p>
+                                Specifies directives that MUST be obeyed by all caching mechanisms
+                            </html:p>
+                        </doc>
+                    </param>
+                    <param name="Content-Length" style="header" type="xsd:integer">
+                        <doc>
+                            <html:p>
+                                Indicates the length (in bytes) of the entity being returned
+                            </html:p>
+                        </doc>
+                    </param>
+                    <param name="Content-Type" style="header" type="xsd:string">
+                        <doc>
+                            <html:p>
+                                Indicates the media type of the entity being returned
+                            </html:p>
+                        </doc>
+                    </param>
+                    <param name="Date" style="header" type="xsd:string">
+                        <doc>
+                            <html:p>
+                                Represents the date and time at which the message was originated (RFC1123)
+                            </html:p>
+                        </doc>
+                    </param>
+                    <param name="Etag" style="header" type="xsd:string">
+                        <doc>
+                            <html:p>
+                                Provides the current value of the entity tag for the requested variant
+                            </html:p>
+                        </doc>
+                    </param>
+                    <param name="Server" style="header" type="xsd:string">
+                        <doc>
+                            <html:p>
+                                Contains information about the software used by the origin server to handle the request
+                            </html:p>
+                        </doc>
+                    </param>
+                    <param name="Vary" style="header" type="xsd:string">
+                        <doc>
+                            <html:p>
+                                Indicates the set of request-header fields that fully determines, while the response is fresh,
+                                whether a cache is permitted to use the response to reply to a subsequent request without revalidation.
+                            </html:p>
+                        </doc>
+                    </param>
+                    <param name="X-Lighty-Magnet-Uri-Path" style="header" type="xsd:string">
+                        <doc>
+                            <html:p>
+                                Service header
+                            </html:p>
+                        </doc>
+                    </param>
+                    <param name="X-Mashery-Error-Code" style="header" type="xsd:string">
+                        <doc>
+                            <html:p>
+                                Service header
+                            </html:p>
+                        </doc>
+                    </param>
+                    <param name="X-Mashery-Responder" style="header" type="xsd:string">
+                        <doc>
+                            <html:p>
+                                Service header
+                            </html:p>
+                        </doc>
+                    </param>
+                    <param name="X-Runtime" style="header" type="xsd:string">
+                        <doc>
+                            <html:p>
+                                Service header
+                            </html:p>
+                        </doc>
+                    </param>
+                    <representation href="#products_xml" status="200"/>
+                    <representation href="#products_json" status="200"/>
+                    <fault href="#error_400_xml" status="400"/>
+                    <fault href="#error_400_json" status="400"/>
+                    <fault href="#error_403_xml" status="403"/>
+                </response>
+            </method>
+        </resource>
+        <resource path="products/{sku}.{format}" id="product">
+            <method name="GET">
+                <doc>
+                    <html:p><html:strong>Retrieve data for a single product (Status 200)</html:strong></html:p>
+                    <html:p>Data related to a specific Best Buy product may be retrieved via requests to the 'product' resource:</html:p>
+                    <html:p>http://api.remix.bestbuy.com/v1/products/8982988.xml?apiKey=&lt;YourApiKey&gt;</html:p>
+                    <html:p>By default, data is returned in XML format. JSON data may be requested via the &apos;format&apos; URI segment:</html:p>
+                    <html:p>
+                        http://api.remix.bestbuy.com/v1/products/8982988.<html:strong>json</html:strong>?apiKey=&lt;YourApiKey&gt;
+                    </html:p>
+                </doc>
+                <request>
+                    <param name="apiKey" style="query" required="true" type="xsd:string">
+                        <doc>
+                            <html:p>Key used to identify a client application to the Remix service</html:p>
+                        </doc>
+                    </param>
+                    <param name="show" style="query" required="false" type="xsd:integer">
+                        <doc>
+                            <html:p>Limits the returned data to a list of fields (e.g. show=sku,name,salePrice)</html:p>
+                        </doc>
+                    </param>
+                </request>
+                <response status="200">
+                    <param name="Accept-Ranges" style="header" type="xsd:string">
+                        <doc>
+                            <html:p>
+                                 Indicate the server's acceptance of range requests for a resource
+                            </html:p>
+                        </doc>
+                    </param>
+                    <param name="Cache-Control" style="header" type="xsd:string">
+                        <doc>
+                            <html:p>
+                                Specifies directives that MUST be obeyed by all caching mechanisms
+                            </html:p>
+                        </doc>
+                    </param>
+                    <param name="Content-Length" style="header" type="xsd:integer">
+                        <doc>
+                            <html:p>
+                                Indicates the length (in bytes) of the entity being returned
+                            </html:p>
+                        </doc>
+                    </param>
+                    <param name="Content-Type" style="header" type="xsd:string">
+                        <doc>
+                            <html:p>
+                                Indicates the media type of the entity being returned
+                            </html:p>
+                        </doc>
+                    </param>
+                    <param name="Date" style="header" type="xsd:string">
+                        <doc>
+                            <html:p>
+                                Represents the date and time at which the message was originated (RFC1123)
+                            </html:p>
+                        </doc>
+                    </param>
+                    <param name="Etag" style="header" type="xsd:string">
+                        <doc>
+                            <html:p>
+                                Provides the current value of the entity tag for the requested variant
+                            </html:p>
+                        </doc>
+                    </param>
+                    <param name="Server" style="header" type="xsd:string">
+                        <doc>
+                            <html:p>
+                                Contains information about the software used by the origin server to handle the request
+                            </html:p>
+                        </doc>
+                    </param>
+                    <param name="Vary" style="header" type="xsd:string">
+                        <doc>
+                            <html:p>
+                                Indicates the set of request-header fields that fully determines, while the response is fresh,
+                                whether a cache is permitted to use the response to reply to a subsequent request without revalidation.
+                            </html:p>
+                        </doc>
+                    </param>
+                    <param name="X-Lighty-Magnet-Uri-Path" style="header" type="xsd:string">
+                        <doc>
+                            <html:p>
+                                Service header
+                            </html:p>
+                        </doc>
+                    </param>
+                    <param name="X-Mashery-Error-Code" style="header" type="xsd:string">
+                        <doc>
+                            <html:p>
+                                Service header
+                            </html:p>
+                        </doc>
+                    </param>
+                    <param name="X-Mashery-Responder" style="header" type="xsd:string">
+                        <doc>
+                            <html:p>
+                                Service header
+                            </html:p>
+                        </doc>
+                    </param>
+                    <param name="X-Runtime" style="header" type="xsd:string">
+                        <doc>
+                            <html:p>
+                                Service header
+                            </html:p>
+                        </doc>
+                    </param>
+                    <representation href="#product_xml" status="200"/>
+                    <representation href="#product_json" status="200"/>
+                    <fault href="#error_400_xml" status="400"/>
+                    <fault href="#error_400_json" status="400"/>
+                    <fault href="#error_403_xml" status="403"/>
+                    <fault href="#error_404_xml" status="404"/>
+                    <fault href="#error_404_json" status="404"/>
+                </response>
+            </method>
+        </resource>
+        <resource path="stores({filter(s)})+products({filter(s)})" id="storeAvailability">
+            <method name="GET">
+                <doc>
+                    <html:p><html:strong>Retrieve a collection of specific products in specific stores (Status 200)</html:strong></html:p>
+                    <html:p>Store availability data may be retrieved via requests to a combined 'products+stores' resource:</html:p>
+                    <html:p>
+                        http://api.remix.bestbuy.com/v1/stores(area(10010,5))+products(sku=8982988)?apiKey=&lt;YourApiKey&gt;
+                    </html:p>
+                    <html:p>By default, data is returned in XML format. JSON data may be requested via the &apos;format&apos; query parameter:</html:p>
+                    <html:p>
+                        http://api.remix.bestbuy.com/v1/stores(area(10010,5))+products(sku=8982988)?apiKey=&lt;YourApiKey&gt;&amp;format=json
+                    </html:p>
+                    <html:p>Data is filtered by one or more attribute comparisons:</html:p>
+                    <html:p>
+                        http://api.remix.bestbuy.com/v1/stores(area(10010,5))+products(sku=8982988)?apiKey=&lt;YourApiKey&gt;
+                    </html:p>
+                    <html:p>Several comparison types are supported:</html:p>
+                    <html:ul>
+                        <html:li>
+                            <html:strong>equal/not equal</html:strong>:
+                            <html:ul>
+                                <html:li>stores(name=Noho Manhattan NY)</html:li>
+                                <html:li>stores(state!=NY)</html:li>
+                                <html:li>stores(postalCode&lt;&gt;10010)</html:li>
+                            </html:ul>
+                        </html:li>
+                        <html:li>
+                            <html:strong>wildcard</html:strong>:
+                            <html:ul>
+                                <html:li>stores(name=Noho*)</html:li>
+                                <html:li>stores(postalCode=100*)</html:li>
+                            </html:ul>
+                        </html:li>
+                        <html:li>
+                            <html:strong>less/greater numeric</html:strong>:
+                            <html:ul>
+                                <html:li>stores(storeId&lt;100)</html:li>
+                                <html:li>stores(lat&lt;=40)</html:li>
+                                <html:li>stores(lng&gt;-73)</html:li>
+                                <html:li>stores(storeId&gt;=500)</html:li>
+                            </html:ul>
+                        </html:li>
+                        <html:li>
+                            <html:strong>and</html:strong>:
+                            <html:ul>
+                                <html:li>stores(name=Noho*&amp;state=NY)</html:li>
+                            </html:ul>
+                        </html:li>
+                        <html:li>
+                            <html:strong>or</html:strong>:
+                            <html:ul>
+                                <html:li>stores(name=Noho*|state=NY)</html:li>
+                            </html:ul>
+                        </html:li>
+                    </html:ul>
+                </doc>
+                <request>
+                    <param name="apiKey" style="query" required="true" type="xsd:string">
+                        <doc>
+                            <html:p>Key used to identify a client application to the Remix service</html:p>
+                        </doc>
+                    </param>
+                    <param name="format" style="query" required="false" default="xml" type="xsd:string">
+                        <doc>
+                            <html:p>Specifies a response format ('xml' or 'json')</html:p>
+                        </doc>
+                    </param>
+                    <param name="page" style="query" required="false" default="1" type="xsd:integer">
+                        <doc>
+                            <html:p>Specifies which page of results to retrieve</html:p>
+                        </doc>
+                    </param>
+                    <param name="show" style="query" required="false" type="xsd:integer">
+                        <doc>
+                            <html:p>Limits the returned data to a list of fields (e.g. show=name,storeId,phone)</html:p>
+                        </doc>
+                    </param>
+                    <param name="sort" style="query" required="false" type="xsd:integer">
+                        <doc>
+                            <html:p>
+                                Specifies a sort field for result ordering; .desc may be appended for descending order
+                            </html:p>
+                        </doc>
+                    </param>
+                </request>
+                <response status="200">
+                    <param name="Accept-Ranges" style="header" type="xsd:string">
+                        <doc>
+                            <html:p>
+                                 Indicate the server's acceptance of range requests for a resource
+                            </html:p>
+                        </doc>
+                    </param>
+                    <param name="Cache-Control" style="header" type="xsd:string">
+                        <doc>
+                            <html:p>
+                                Specifies directives that MUST be obeyed by all caching mechanisms
+                            </html:p>
+                        </doc>
+                    </param>
+                    <param name="Content-Length" style="header" type="xsd:integer">
+                        <doc>
+                            <html:p>
+                                Indicates the length (in bytes) of the entity being returned
+                            </html:p>
+                        </doc>
+                    </param>
+                    <param name="Content-Type" style="header" type="xsd:string">
+                        <doc>
+                            <html:p>
+                                Indicates the media type of the entity being returned
+                            </html:p>
+                        </doc>
+                    </param>
+                    <param name="Date" style="header" type="xsd:string">
+                        <doc>
+                            <html:p>
+                                Represents the date and time at which the message was originated (RFC1123)
+                            </html:p>
+                        </doc>
+                    </param>
+                    <param name="Etag" style="header" type="xsd:string">
+                        <doc>
+                            <html:p>
+                                Provides the current value of the entity tag for the requested variant
+                            </html:p>
+                        </doc>
+                    </param>
+                    <param name="Server" style="header" type="xsd:string">
+                        <doc>
+                            <html:p>
+                                Contains information about the software used by the origin server to handle the request
+                            </html:p>
+                        </doc>
+                    </param>
+                    <param name="Vary" style="header" type="xsd:string">
+                        <doc>
+                            <html:p>
+                                Indicates the set of request-header fields that fully determines, while the response is fresh,
+                                whether a cache is permitted to use the response to reply to a subsequent request without revalidation.
+                            </html:p>
+                        </doc>
+                    </param>
+                    <param name="X-Lighty-Magnet-Uri-Path" style="header" type="xsd:string">
+                        <doc>
+                            <html:p>
+                                Service header
+                            </html:p>
+                        </doc>
+                    </param>
+                    <param name="X-Mashery-Error-Code" style="header" type="xsd:string">
+                        <doc>
+                            <html:p>
+                                Service header
+                            </html:p>
+                        </doc>
+                    </param>
+                    <param name="X-Mashery-Responder" style="header" type="xsd:string">
+                        <doc>
+                            <html:p>
+                                Service header
+                            </html:p>
+                        </doc>
+                    </param>
+                    <param name="X-Runtime" style="header" type="xsd:string">
+                        <doc>
+                            <html:p>
+                                Service header
+                            </html:p>
+                        </doc>
+                    </param>
+                    <representation href="#store_availability_xml" status="200"/>
+                    <representation href="#store_availability_json" status="200"/>
+                    <fault href="#error_400_xml" status="400"/>
+                    <fault href="#error_400_json" status="400"/>
+                    <fault href="#error_403_xml" status="403"/>
+                </response>
+            </method>
+        </resource>
+    </resources>
+    <representation id="stores_xml" mediaType="text/xml; charset=UTF-8">
+        <doc title="Stores Collection">
+            <html:p>Some sections truncated (...) for readability:</html:p>
+            <html:pre><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<stores
+  currentPage  = "1"
+  totalPages   = "1"
+  from         = "1"
+  to           = "9"
+  total        = "9"
+  queryTime    = "0.128"
+  totalTime    = "0.160"
+  canonicalUrl = "/v1/stores(area(&quot;10006&quot;,10))?apiKey=<YourApiKey>">
+    <store>
+        <storeId>609</storeId>
+        <name>Noho Manhattan NY</name>
+        <address>622 Broadway</address>
+        <city>New York</city>
+        <region>NY</region>
+        <postalCode>10012</postalCode>
+        <fullPostalCode>10012-2600</fullPostalCode>
+        <country>US</country>
+        <lat>40.725784</lat>
+        <lng>-73.995941</lng>
+        <phone>212-673-4067</phone>
+        <hours>10:00am - 9:00pm Monday - Friday, 11:00am - 6:00pm Saturday, 11:00am - 6:00pm Sunday</hours>
+        <distance>1.52</distance>
+    </store>
+    <store>
+        <storeId>482</storeId>
+        <name>Chelsea NY</name>
+        <address>60 West 23rd Street</address>
+        <city>New York</city>
+        <region>NY</region>
+        <postalCode>10010</postalCode>
+        <fullPostalCode>10010-5201</fullPostalCode>
+        <country>US</country>
+        <lat>40.742496</lat>
+        <lng>-73.992859</lng>
+        <phone>212-366-1373</phone>
+        <hours>10:00am - 9:00pm Monday - Friday, 11:00am - 6:00pm Saturday, 11:00am - 6:00pm Sunday</hours>
+        <distance>2.61</distance>
+    </store>
+    ...
+</stores>]]></html:pre>
+        </doc>
+    </representation>
+    <representation id="stores_json" mediaType="application/x-javascript; charset=UTF-8">
+        <doc title="Stores Collection">
+            <html:p>Some sections truncated (...) for readability:</html:p>
+            <html:pre><![CDATA[{
+  "totalPages": 1,
+  "currentPage": 1,
+  "queryTime": "0.004",
+  "from": 1,
+  "total": 10,
+  "to": 10,
+  "stores": [
+    {
+      "fullPostalCode": "10012-2600",
+      "city": "New York",
+      "name": "Noho Manhattan NY",
+      "region": "NY",
+      "country": "US",
+      "lng": -73.995941,
+      "postalCode": "10012",
+      "phone": "212-673-4067",
+      "hours": "10:00am - 9:00pm Monday - Friday, 11:00am - 6:00pm Saturday, 11:00am - 6:00pm Sunday",
+      "lat": 40.725784,
+      "address": "622 Broadway",
+      "distance": 1.52,
+      "storeId": 609
+    },
+    {
+      "fullPostalCode": "10010-5201",
+      "city": "New York",
+      "name": "Chelsea NY",
+      "region": "NY",
+      "country": "US",
+      "lng": -73.992859,
+      "postalCode": "10010",
+      "phone": "212-366-1373",
+      "hours": "10:00am - 9:00pm Monday - Friday, 11:00am - 6:00pm Saturday, 11:00am - 6:00pm Sunday",
+      "lat": 40.742496,
+      "address": "60 West 23rd Street",
+      "distance": 2.61,
+      "storeId": 482
+    },
+    ...
+}]]></html:pre>
+        </doc>
+    </representation>
+    <representation id="store_xml" mediaType="text/xml; charset=UTF-8">
+        <doc title="Store">
+            <html:pre><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<store>
+    <storeId>4</storeId>
+    <name>Minnetonka Minneapolis</name>
+    <address>13513 Ridgedale Drive</address>
+    <city>Minnetonka</city>
+    <region>MN</region>
+    <postalCode>55305</postalCode>
+    <fullPostalCode>55305-1813</fullPostalCode>
+    <country>US</country>
+    <lat>44.970089</lat>
+    <lng>-93.450165</lng>
+    <phone>952-544-0377</phone>
+    <hours>10:00am - 9:00pm Monday - Friday, 11:00am - 6:00pm Saturday, 11:00am - 6:00pm Sunday</hours>
+</store>]]></html:pre>
+        </doc>
+    </representation>
+    <representation id="store_json" mediaType="application/x-javascript; charset=UTF-8">
+        <doc title="Store">
+            <html:pre><![CDATA[{
+  "fullPostalCode": "55305-1813",
+  "city": "Minnetonka",
+  "name": "Minnetonka Minneapolis",
+  "region": "MN",
+  "country": "US",
+  "lng": -93.450165,
+  "postalCode": "55305",
+  "phone": "952-544-0377",
+  "hours": "10:00am - 9:00pm Monday - Friday, 11:00am - 6:00pm Saturday, 11:00am - 6:00pm Sunday",
+  "lat": 44.970089,
+  "address": "13513 Ridgedale Drive",
+  "storeId": 4
+}]]></html:pre>
+        </doc>
+    </representation>
+    <representation id="products_xml" mediaType="text/xml; charset=UTF-8">
+        <doc title="Products Collection">
+            <html:p>Some sections truncated (...) for readability:</html:p>
+            <html:pre><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<products currentPage="1" totalPages="45282" from="1" to="10" total="452816" queryTime="0.380" totalTime="0.516"
+   canonicalUrl="/v1/products?apiKey=<YourApiKey>">
+    <product>
+        <sku>15206162</sku>
+        <productId>675935</productId>
+        <name/>
+        <type>Music</type>
+        <startDate>2005-12-26</startDate>
+        <new>false</new>
+        <active>true</active>
+        <activeUpdateDate>2008-12-20T10:45:36</activeUpdateDate>
+        <regularPrice>44.99</regularPrice>
+        <salePrice>44.99</salePrice>
+        <priceUpdateDate>2006-08-18T14:39:07</priceUpdateDate>
+        <url>http://www.bestbuy.com/site/olspage.jsp?skuId=15206162&amp;type=product&amp;id=675935</url>
+        ...
+        <upc>5051011526824</upc>
+        <categoryPath>
+            <category>
+                <id>cat00000</id>
+                <name>Best Buy</name>
+            </category>
+            <category>
+                <id>abcat0600000</id>
+                <name>Music &amp; Movies</name>
+            </category>
+            ...
+        </categoryPath>
+        ...
+        <itemUpdateDate>2008-12-20T14:02:12</itemUpdateDate>
+        <onlineAvailability>true</onlineAvailability>
+        <onlineAvailabilityText>Backordered: Usually leaves our warehouse within 1-2 weeks</onlineAvailabilityText>
+        <onlineAvailabilityUpdateDate>2008-12-20T10:45:36</onlineAvailabilityUpdateDate>
+        <releaseDate>2006-07-24</releaseDate>
+        <shippingCost>1.59</shippingCost>
+        <image>http://images.bestbuy.com/BestBuy_US/images/products/nonsku/default_music_l.jpg</image>
+        <thumbnailImage>http://images.bestbuy.com/BestBuy_US/images/products/nonsku/default_music_s.jpg</thumbnailImage>
+    </product>
+    ...
+</products>]]></html:pre>
+        </doc>
+    </representation>
+    <representation id="products_json" mediaType="application/x-javascript; charset=UTF-8">
+        <doc title="Products Collection">
+            <html:p>Some sections truncated (...) for readability:</html:p>
+            <html:pre><![CDATA[{
+    "totalPages": 45282,
+    "currentPage": 1,
+    "queryTime": "0.004",
+    "from": 1,
+    "products": [
+        {
+            "department": "VIDEO\/COMPACT DISC",
+            "priceUpdateDate": "2006-08-18T14:39:07",
+            "activeUpdateDate": "2008-12-20T10:45:36",
+            "new": false,
+            "name": null,
+            "categoryPath": [
+                {
+                    "name": "Best Buy",
+                    "id": "cat00000"
+                },
+                ...
+            ],
+            "sku": 15206162,
+            "thumbnailImage": "http:\/\/images.bestbuy.com\/BestBuy_US\/images\/products\/nonsku\/default_music_s.jpg",
+            "upc": "5051011526824",
+            "addToCartUrl": "http:\/\/www.bestbuy.com\/site\/olspage.jsp?id=pcmcat152200050035&type=category&qvsids=15206162",
+            ...
+        },
+        ...
+    ],
+    "total": 452816,
+    "to": 10,
+    "canonicalUrl": "\/v1\/products?format=json&apiKey=<YourApiKey>",
+    "totalTime": "0.016"
+}]]></html:pre>
+        </doc>
+    </representation>
+    <representation id="product_xml" mediaType="text/xml; charset=UTF-8">
+        <doc title="Product">
+            <html:pre><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<product>
+    <sku>8982988</sku>
+    <productId>1218005635152</productId>
+    <name>Sony PlayStation 3 (80GB)</name>
+    <type>HardGood</type>
+    <startDate>2008-08-18</startDate>
+    <new>false</new>
+    <active>true</active>
+    <activeUpdateDate>2008-11-14T18:52:10</activeUpdateDate>
+    <regularPrice>399.99</regularPrice>
+    <salePrice>399.99</salePrice>
+    <priceUpdateDate>2008-08-08T13:13:40</priceUpdateDate>
+    <url>http://www.bestbuy.com/site/olspage.jsp?skuId=8982988&amp;type=product&amp;id=1218005635152</url>
+    <affiliateUrl></affiliateUrl>
+    <addToCartUrl>http://www.bestbuy.com/site/olspage.jsp?id=pcmcat152200050035&amp;type=category&amp;qvsids=8982988</addToCartUrl>
+    <affiliateAddToCartUrl></affiliateAddToCartUrl>
+    <cjAffiliateUrl></cjAffiliateUrl>
+    <cjAffiliateAddToCartUrl></cjAffiliateAddToCartUrl>
+    <upc>711719801306</upc>
+    <categoryPath>
+        <category>
+            <id>cat00000</id>
+            <name>Best Buy</name>
+        </category>
+        <category>
+            <id>abcat0700000</id>
+            <name>Video Games &amp; Toys</name>
+        </category>
+        <category>
+            <id>abcat0703000</id>
+            <name>PlayStation 3</name>
+        </category>
+        <category>
+            <id>abcat0703001</id>
+            <name>Playstation 3 Hardware</name>
+        </category>
+    </categoryPath>
+    <customerReviewCount>340</customerReviewCount>
+    <customerReviewAverage>4.5</customerReviewAverage>
+    <format/>
+    <freeShipping>false</freeShipping>
+    <inStoreAvailability>false</inStoreAvailability>
+    <inStoreAvailabilityText>Store Pickup: Not Available</inStoreAvailabilityText>
+    <inStoreAvailabilityUpdateDate>2008-11-14T18:52:10</inStoreAvailabilityUpdateDate>
+    <itemUpdateDate>2009-01-19T22:56:19</itemUpdateDate>
+    <onlineAvailability>true</onlineAvailability>
+    <onlineAvailabilityText>Shipping: Usually leaves our warehouse in 1 business day</onlineAvailabilityText>
+    <onlineAvailabilityUpdateDate>2008-11-14T18:52:10</onlineAvailabilityUpdateDate>
+    <printOnly>false</printOnly>
+    <releaseDate>2008-08-20</releaseDate>
+    <shippingCost>8.99</shippingCost>
+    <specialOrder>false</specialOrder>
+    <shortDescription>Brace yourself for the marvels of the PlayStation 3 complete with 80GB hard disk storage</shortDescription>
+    <class>VIDEO GAME HARDWARE</class>
+    <classId>96</classId>
+    <subclass>PLAYSTATION 3</subclass>
+    <subclassId>395</subclassId>
+    <department>INTERACTIVE SOFTWARE</department>
+    <departmentId>9</departmentId>
+    <description/>
+    <manufacturer>Sony</manufacturer>
+    <modelNumber>98013</modelNumber>
+    <image>http://images.bestbuy.com/BestBuy_US/images/products/8982/8982988_rc.jpg</image>
+    <largeFrontImage/>
+    <mediumImage>http://images.bestbuy.com/BestBuy_US/images/products/8982/8982988fp.gif</mediumImage>
+    <thumbnailImage>http://images.bestbuy.com/BestBuy_US/images/products/8982/8982988_r.gif</thumbnailImage>
+    <largeImage>http://images.bestbuy.com/BestBuy_US/images/products/8982/8982988_rb.jpg</largeImage>
+    <alternateViewsImage>http://images.bestbuy.com/BestBuy_US/images/products/8982/8982988cv1a.jpg</alternateViewsImage>
+    <angleImage>http://images.bestbuy.com/BestBuy_US/images/products/8982/8982988_ra.jpg</angleImage>
+    <backViewImage/>
+    <energyGuideImage/>
+    <leftViewImage/>
+    <accessoriesImage/>
+    <remoteControlImage/>
+    <rightViewImage/>
+    <topViewImage/>
+    <color/>
+    <depth/>
+    <dollarSavings>0.0</dollarSavings>
+    <height/>
+    <navigability>true</navigability>
+    <orderable>Available</orderable>
+    <weight/>
+    <shippingWeight>33.6</shippingWeight>
+    <width/>
+    <warrantyLabor/>
+    <warrantyParts/>
+    <longDescription>
+        Make your multimedia dreams come true with PlayStation 3. Featuring a high-definition Blu-ray Disc player,
+        an 80GB HDD, a DUALSHOCK 3 wireless controller and free PlayStation Network membership, you&apos;ll be primed
+        to explore new horizons and amazing possibilities. The PlayStation 3 also plays DVDs and CDs, is Internet-ready
+        with built-in Wi-Fi and offers HDMI output for 1080p resolution. With blistering speeds and dazzling graphics,
+        you&apos;ll jump-start your world to brand-new levels of excitement.
+
+        It all begins with Blu-ray, a next-generation media format that boasts more than five times the storage
+        capacity of traditional DVDs. More storage capacity means a larger canvas to create high-definition, 1080p
+        graphics and a level of interaction never before seen in video gaming. At the heart of the PlayStation 3 is the
+        Cell Broadband Engine. Developed by engineers from Sony, SCEI, IBM and Toshiba, this advanced, state-of-the-art
+        microprocessor features eight Synergistic Processor Units to balance processor workload, making it significantly
+        more powerful than traditional single-core processors. Elevate your gaming experience and do so much more than
+        before.
+    </longDescription>
+</product>]]></html:pre>
+        </doc>
+    </representation>
+    <representation id="product_json" mediaType="application/x-javascript; charset=UTF-8">
+        <doc title="Product">
+            <html:pre><![CDATA[{
+    "shippingWeight": "33.6",
+    "printOnly": false,
+    "description": null,
+    "url": "http:\/\/www.bestbuy.com\/site\/olspage.jsp?skuId=8982988&type=product&id=1218005635152",
+    "inStoreAvailability": false,
+    "sku": 8982988,
+    "cjAffiliateAddToCartUrl": "",
+    "addToCartUrl": "http:\/\/www.bestbuy.com\/site\/olspage.jsp?id=pcmcat152200050035&type=category&qvsids=8982988",
+    "affiliateAddToCartUrl": "",
+    "new": false,
+    "accessoriesImage": null,
+    "salePrice": 399.99,
+    "weight": null,
+    "inStoreAvailabilityUpdateDate": "2008-11-14T18:52:10",
+    "largeFrontImage": null,
+    "freeShipping": false,
+    "dollarSavings": 0.0,
+    "remoteControlImage": null,
+    "color": null,
+    "height": null,
+    "largeImage": "http:\/\/images.bestbuy.com\/BestBuy_US\/images\/products\/8982\/8982988_rb.jpg",
+    "navigability": true,
+    "format": null,
+    "inStoreAvailabilityText": "Store Pickup: Not Available",
+    "regularPrice": 399.99,
+    "manufacturer": "Sony",
+    "onlineAvailabilityText": "Shipping: Usually leaves our warehouse in 1 business day",
+    "department": "INTERACTIVE SOFTWARE",
+    "energyGuideImage": null,
+    "customerReviewCount": 340,
+    "name": "Sony PlayStation 3 (80GB)",
+    "image": "http:\/\/images.bestbuy.com\/BestBuy_US\/images\/products\/8982\/8982988_rc.jpg",
+    "shippingCost": 8.99,
+    "shortDescription": "Brace yourself for the marvels of the PlayStation 3 complete with 80GB hard disk storage",
+    "specialOrder": false,
+    "customerReviewAverage": 4.5,
+    "warrantyParts": null,
+    "upc": "711719801306",
+    "topViewImage": null,
+    "depth": null,
+    "class": "VIDEO GAME HARDWARE",
+    "departmentId": 9,
+    "active": true,
+    "classId": 96,
+    "subclass": "PLAYSTATION 3",
+    "rightViewImage": null,
+    "cjAffiliateUrl": "",
+    "priceUpdateDate": "2008-08-08T13:13:40",
+    "alternateViewsImage": "http:\/\/images.bestbuy.com\/BestBuy_US\/images\/products\/8982\/8982988cv1a.jpg",
+    "warrantyLabor": null,
+    "releaseDate": "2008-08-20",
+    "modelNumber": "98013",
+    "longDescription": "Make your multimedia dreams come true with PlayStation 3. Featuring a high-definition Blu-ray
+        Disc player, an 80GB HDD, a DUALSHOCK 3 wireless controller and free PlayStation Network membership, you'll be
+        primed to explore new horizons and amazing possibilities. The PlayStation 3 also plays DVDs and CDs, is
+        Internet-ready with built-in Wi-Fi and offers HDMI output for 1080p resolution. With blistering speeds and
+        dazzling graphics, you'll jump-start your world to brand-new levels of excitement.\n\nIt all begins with
+        Blu-ray, a next-generation media format that boasts more than five times the storage capacity of traditional
+        DVDs. More storage capacity means a larger canvas to create high-definition, 1080p graphics and a level of
+        interaction never before seen in video gaming. At the heart of the PlayStation 3 is the Cell Broadband Engine.
+        Developed by engineers from Sony, SCEI, IBM and Toshiba, this advanced, state-of-the-art microprocessor features
+        eight Synergistic Processor Units to balance processor workload, making it significantly more powerful than
+        traditional single-core processors. Elevate your gaming experience and do so much more than before.",
+    "onlineAvailabilityUpdateDate": "2008-11-14T18:52:10",
+    "startDate": "2008-08-18",
+    "subclassId": 395,
+    "angleImage": "http:\/\/images.bestbuy.com\/BestBuy_US\/images\/products\/8982\/8982988_ra.jpg",
+    "thumbnailImage": "http:\/\/images.bestbuy.com\/BestBuy_US\/images\/products\/8982\/8982988_r.gif",
+    "leftViewImage": null,
+    "type": "HardGood",
+    "productId": 1218005635152,
+    "categoryPath": [
+        {
+          "name": "Best Buy",
+          "id": "cat00000"
+        },
+        {
+          "name": "Video Games & Toys",
+          "id": "abcat0700000"
+        },
+        {
+          "name": "PlayStation 3",
+          "id": "abcat0703000"
+        },
+        {
+          "name": "Playstation 3 Hardware",
+          "id": "abcat0703001"
+        }
+    ],
+    "orderable": "Available",
+    "mediumImage": "http:\/\/images.bestbuy.com\/BestBuy_US\/images\/products\/8982\/8982988fp.gif",
+    "itemUpdateDate": "2009-01-19T22:56:19",
+    "affiliateUrl": "",
+    "activeUpdateDate": "2008-11-14T18:52:10",
+    "width": null,
+    "backViewImage": null,
+    "onlineAvailability": true
+}
+]]></html:pre>
+        </doc>
+    </representation>
+    <representation id="store_availability_xml" mediaType="text/xml; charset=UTF-8">
+        <doc title="Store Availability">
+            <html:p>Some sections truncated (...) for readability:</html:p>
+            <html:pre><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<stores currentPage="1" totalPages="1" from="1" to="7" total="7" queryTime="0.236" totalTime="0.460"
+  canonicalUrl="/v1/stores(area(&quot;10010&quot;,5))+products(sku=8982988)?apiKey=<YourApiKey>">
+    <store>
+        <storeId>482</storeId>
+        <name>Chelsea NY</name>
+        <address>60 West 23rd Street</address>
+        <city>New York</city>
+        <region>NY</region>
+        <postalCode>10010</postalCode>
+        <fullPostalCode>10010-5201</fullPostalCode>
+        <country>US</country>
+        <lat>40.742496</lat>
+        <lng>-73.992859</lng>
+        <phone>212-366-1373</phone>
+        <hours>10:00am - 9:00pm Monday - Friday, 11:00am - 6:00pm Saturday, 11:00am - 6:00pm Sunday</hours>
+        <products>
+            <product>
+                <sku>8982988</sku>
+                <productId>1218005635152</productId>
+                <name>Sony PlayStation 3 (80GB)</name>
+                <type>HardGood</type>
+                <startDate>2008-08-18</startDate>
+                <active>true</active>
+                <activeUpdateDate>2008-11-14T18:52:10</activeUpdateDate>
+                <regularPrice>399.99</regularPrice>
+                <salePrice>399.99</salePrice>
+                <priceUpdateDate>2008-08-08T13:13:40</priceUpdateDate>
+                <url>http://www.bestbuy.com/site/olspage.jsp?skuId=8982988&amp;type=product&amp;id=1218005635152</url>
+                ...
+                <features>
+                    <feature>
+                        Next-generation gaming
+                        Delivers high-definition entertainment consisting of fast processing speeds and dazzling graphics.
+                    </feature>
+                    ...
+                </features>
+            </product>
+        </products>
+        <distance>0.65</distance>
+    </store>
+    ...
+</stores>]]></html:pre>
+        </doc>
+    </representation>
+    <representation id="store_availability_json" mediaType="application/x-javascript; charset=UTF-8">
+        <doc title="Store Availability">
+            <html:p>Some sections truncated (...) for readability:</html:p>
+            <html:pre><![CDATA[{
+    "totalPages": 1,
+    "currentPage": 1,
+    "queryTime": "0.004",
+    "from": 1,
+    "total": 7,
+    "to": 7,
+    "stores": [
+        {
+            "fullPostalCode": "10010-5201",
+            "city": "New York",
+            "name": "Chelsea NY",
+            "region": "NY",
+            "products": [
+                {
+                    "shippingWeight": "33.6",
+                    "printOnly": false,
+                    "description": null,
+                    "url": "http:\/\/www.bestbuy.com\/site\/olspage.jsp?skuId=8982988&type=product&id=1218005635152",
+                    "inStoreAvailability": false,
+                    "related": [
+                        {
+                            "title": null,
+                            "type": "complementary_products",
+                            "sku": 8877325,
+                            "active": true
+                        },
+                        ...
+                    ],
+                    "sku": 8982988,
+                    "accessoriesImage": null,
+                    "shippingCost": 8.99,
+                    "shortDescription": "Brace yourself for the marvels of the PlayStation 3 complete with 80GB hard disk storage",
+                    "specialOrder": false,
+                    "categoryIdPath": "cat00000 > abcat0700000 > abcat0703000 > abcat0703001",
+                    "customerReviewAverage": 4.5,
+                    "warrantyParts": null,
+                    "upc": "711719801306",
+                    ...
+                },
+                ...
+            ],
+            "country": "US",
+            "lng": -73.992859,
+            "postalCode": "10010",
+            "phone": "212-366-1373",
+            "hours": "10:00am - 9:00pm Monday - Friday, 11:00am - 6:00pm Saturday, 11:00am - 6:00pm Sunday",
+            "lat": 40.742496,
+            "address": "60 West 23rd Street",
+            "distance": 0.65,
+            "storeId": 482
+        },
+        ...
+    ],
+    "canonicalUrl": "\/v1\/stores(area(\"10010\",5))+products(sku=8982988)?format=json&apiKey=<YourApiKey>",
+    "totalTime": "0.020"
+}]]></html:pre>
+        </doc>
+    </representation>
+    <fault id="error_400_xml" mediaType="text/xml; charset=UTF-8">
+        <doc title="Bad Request">
+            <html:p>
+                The submitted request was not valid. The resulting error document contains an error message
+                as well as valid example URIs:
+            </html:p>
+            <html:pre><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<error>
+    <code>400</code>
+    <status>400 Bad Request</status>
+    <message>Sorry, there are too many product matches (&gt; 101). Please narrow your query.</message>
+    <examples>
+        <example>/v1/products/8880044.xml?apiKey=&lt;YourApiKey&gt; : Get product with sku 8880044, as xml</example>
+        <example>/v1/products/8880044.json?apiKey=&lt;YourApiKey&gt; : 8880044, as json</example>
+        <example>/v1/products?apiKey=&lt;YourApiKey&gt; : Get the first page of all products, sorted by name, as xml</example>
+        ...
+    </examples>
+</error>]]></html:pre>
+        </doc>
+    </fault>
+    <fault id="error_400_json" mediaType="application/x-javascript; charset=UTF-8">
+        <doc title="Bad Request">
+            <html:p>
+                The submitted request was not valid. The resulting error document contains an error message
+                as well as valid example URIs:
+            </html:p>
+            <html:pre><![CDATA[{
+  "error": {
+    "message": "Sorry, there are too many product matches (> 101).  Please narrow your query.",
+    "status": "400 Bad Request",
+    "examples": [
+      "\/v1\/products\/8880044.xml?apiKey=<YourApiKey> : Get product with sku 8880044, as xml",
+      "\/v1\/products\/8880044.json?apiKey=<YourApiKey> : 8880044, as json",
+      ...
+    ],
+    "code": 400
+  }
+}]]></html:pre>
+        </doc>
+    </fault>
+    <fault id="error_403_xml" mediaType="text/xml">
+        <doc title="Forbidden">
+            <html:p>The API key submitted is not valid:</html:p>
+            <html:pre><![CDATA[<h1>403 Developer Inactive</h1>]]></html:pre>
+        </doc>
+    </fault>
+    <fault id="error_404_xml" mediaType="text/xml; charset=UTF-8">
+        <doc title="Not Found">
+            <html:p>The requested resource could not be found:</html:p>
+            <html:pre><![CDATA[
+<?xml version="1.0" encoding="UTF-8"?>
+<error>
+    <code>404</code>
+    <status>404 Not Found</status>
+    <message>Couldn&apos;t find store with store_id 10000</message>
+    <examples>
+        <example>/v1/products/8880044.xml?apiKey=<YourApiKey> : Get product with sku 8880044, as xml</example>
+        <example>/v1/products/8880044.json?apiKey=<YourApiKey> : 8880044, as json</example>
+        ...
+    </examples>
+</error>]]></html:pre>
+        </doc>
+    </fault>
+    <fault id="error_404_json" mediaType="application/x-javascript; charset=UTF-8">
+        <doc title="Not Found">
+            <html:p>The requested resource could not be found:</html:p>
+            <html:pre><![CDATA[{
+  "error": {
+    "message": "Couldn't find store with store_id 10000",
+    "status": "404 Not Found",
+    "examples": [
+      "\/v1\/products\/8880044.xml?apiKey=<YourApiKey> : Get product with sku 8880044, as xml",
+      "\/v1\/products\/8880044.json?apiKey=<YourApiKey> : 8880044, as json",
+      "\/v1\/products\/8880044.json?callback=myFunction&apiKey=<YourApiKey> : 8880044, as json, with a JSONP callback"
+    ],
+    "code": 404
+}]]></html:pre>
+        </doc>
+    </fault>
+</application>
