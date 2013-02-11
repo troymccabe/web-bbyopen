@@ -24,37 +24,36 @@ Alternatively, you may email the developer directly: troy.mccabe@geeksquad.com
 
 # GETTING STARTED
 
-```
-$apiKey = '12345678'; // Your API key
-$remix  = new \BestBuy\Service\Remix($apiKey);
+:::php
+    $apiKey = '12345678'; // Your API key
+    $remix  = new \BestBuy\Service\Remix($apiKey);
 
-// Retrieve a list of stores within 10 miles of a zip code
-$result = $remix->stores(array('area(10006,10)'))->query();
+    // Retrieve a list of stores within 10 miles of a zip code
+    $result = $remix->stores(array('area(10006,10)'))->query();
 
-// Result objects may be implicitly cast as strings
-echo $result;
+    // Result objects may be implicitly cast as strings
+    echo $result;
 
-// Retrieve a list of Movies containing the text "Bat"
-$result = $remix->products(array('name=bat*', 'type=Movie'))->query();
+    // Retrieve a list of Movies containing the text "Bat"
+    $result = $remix->products(array('name=bat*', 'type=Movie'))->query();
 
-echo $result;
+    echo $result;
 
-// Retrieve fields from a list of Movies starting with "Bat" in JSON format
-$result = $remix->products(array('type=Movie', 'name=bat*'))
-                ->show(array('name','regularPrice','url', 'sku'))
-                ->format('json')
-                ->query();
+    // Retrieve fields from a list of Movies starting with "Bat" in JSON format
+    $result = $remix->products(array('type=Movie', 'name=bat*'))
+                    ->show(array('name','regularPrice','url', 'sku'))
+                    ->format('json')
+                    ->query();
 
-echo $result;
+    echo $result;
 
-// Check for store availability of a Playstation 3 in a given area
-$result = $remix->stores(array('area(10006,10)'))
-                ->products(array('sku=8982988'))
-                ->sort('distance')
-                ->query();
+    // Check for store availability of a Playstation 3 in a given area
+    $result = $remix->stores(array('area(10006,10)'))
+                    ->products(array('sku=8982988'))
+                    ->sort('distance')
+                    ->query();
 
-echo $result;
-```
+    echo $result;
 
 # DOCUMENTATION
 
