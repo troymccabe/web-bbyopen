@@ -16,26 +16,25 @@
  * {@link http://www.bestbuy.com/ Best Buy}.
  *
  * @category   BestBuy
- * @package    BestBuy_Service_Remix
- * @subpackage Type
+ * @package    BestBuy\Service\Remix
  * @author     Matt Williams <matt@mattwilliamsnyc.com>
+ * @author     Troy McCabe <troy.mccabe@geeksquad.com> (v2.0+)
  * @copyright  Copyright (c) 2008 {@link http://mattwilliamsnyc.com Matt Williams}
  * @license    http://www.opensource.org/licenses/bsd-license.php
  * @version    $Id: Exception.php 6 2009-02-01 20:34:37Z mattwilliamsnyc $
  */
 
-/**
- * @see BestBuy_Service_Remix_Exception
- */
-require_once 'BestBuy/Service/Remix/Exception.php';
+namespace BestBuy\Service\Remix;
 
 /**
- * Base exception class used by the BestBuy_Service_Remix package.
+ * Base exception class used by the BestBuy\Service\Remix package.
  *
  * @category   BestBuy
- * @package    BestBuy_Service_Remix
- * @subpackage Type
+ * @package    BestBuy\Service\Remix
  * @author     Matt Williams <matt@mattwilliamsnyc.com>
+ * @author     Troy McCabe <troy.mccabe@geeksquad.com> (v2.0+)
  * @copyright  Copyright (c) 2008 {@link http://mattwilliamsnyc.com Matt Williams}
  */
-class BestBuy_Service_Remix_Type_Exception extends BestBuy_Service_Remix_Exception {}
+class Exception extends \Exception
+{
+}

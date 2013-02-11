@@ -1,0 +1,37 @@
+{
+    "name": "troymccabe/web-bbyopen",
+    "description": "An adaptation of http://code.google.com/p/bestbuy-service-remix/ for making BBYOpen calls.",
+    "type": "library",
+    "keywords": ["bbyopen", "remix", "best buy", "bby", "geek squad"],
+    "homepage": "https://bitbucket.org/troymccabe/web-bbyopen",
+    "license": "BSD",
+    "authors": [
+        {
+            "name": "Matt Williams",
+            "homepage": "http://mattwilliamsnyc.com",
+            "email": "matt@mattwilliamsnyc.com"
+        },
+        {
+            "name": "Troy McCabe",
+            "homepage": "http://troymccabe.com",
+            "email": "troy.mccabe@geeksquad.com"
+        }
+    ],
+    "support": {
+        "issues": "https://bitbucket.org/troymccabe/web-bbyopen/issues",
+        "source": "https://bitbucket.org/troymccabe/web-bbyopen"
+    },
+    "require": {
+        "php": ">=5.3.3",
+        "ext-curl": "*"
+    },
+    "autoload": {
+        "psr-0": {"BestBuy\Service\Remix": "src/"}
+    },
+    "minimum-stability": "dev",
+    "extra": {
+        "branch-alias": {
+            "dev-master": "2.0.x-dev"
+        }
+    }
+}

@@ -1,7 +1,6 @@
-INTRODUCTION
-------------
+# INTRODUCTION
 
-BestBuy_Service_Remix is a PHP library that supports interaction with
+`\BestBuy\Service\Remix` is a PHP library that supports interaction with
 Best Buy's Remix API (http://remix.bestbuy.com/).
 
 Best Buy provides the following resources to API users:
@@ -10,27 +9,24 @@ Developer Network: http://remix.bestbuy.com/
 API Documentation: http://remix.bestbuy.com/docs
 Discussion Forums: http://remix.bestbuy.com/forum
 
-DISCLAIMER
-----------
+# DISCLAIMER
 
 Matt Williams, the author, is neither affiliated with, nor endorsed by, Best Buy
+Troy McCabe is affiliated with Best Buy
 
-SUPPORT AND BUG REPORTS
------------------------
+# SUPPORT AND BUG REPORTS
 
 Bug reports, as well as feature requests, may be submitted at:
 
-http://code.google.com/p/bestbuy-service-remix/issues/list
+https://bitbucket.org/troymccabe/web-bbyopen/issue/
 
-Alternatively, you may email the developer directly: matt@mattwilliamsnyc.com
+Alternatively, you may email the developer directly: troy.mccabe@geeksquad.com
 
-GETTING STARTED
----------------
+# GETTING STARTED
 
-require_once 'BestBuy/Service/Remix.php';
-
+```
 $apiKey = '12345678'; // Your API key
-$remix  = new BestBuy_Service_Remix($apiKey);
+$remix  = new \BestBuy\Service\Remix($apiKey);
 
 // Retrieve a list of stores within 10 miles of a zip code
 $result = $remix->stores(array('area(10006,10)'))->query();
@@ -58,9 +54,9 @@ $result = $remix->stores(array('area(10006,10)'))
                 ->query();
 
 echo $result;
+```
 
-DOCUMENTATION
--------------
+# DOCUMENTATION
 
 Documentation was generated using PhpDocumentor [http://www.phpdoc.org/].
 

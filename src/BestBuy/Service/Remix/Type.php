@@ -16,16 +16,19 @@
  * {@link http://www.bestbuy.com/ Best Buy}.
  *
  * @category   BestBuy
- * @package    BestBuy_Service_Remix
+ * @package    BestBuy\Service\Remix
  * @subpackage Type
  * @author     Matt Williams <matt@mattwilliamsnyc.com>
+ * @author     Troy McCabe <troy.mccabe@geeksquad.com> (v2.0+)
  * @copyright  Copyright (c) 2008 {@link http://mattwilliamsnyc.com Matt Williams}
  * @license    http://www.opensource.org/licenses/bsd-license.php
  * @version    $Id: Type.php 14 2009-02-08 22:06:10Z mattwilliamsnyc $
  */
 
+namespace BestBuy\Service\Remix;
+
 /**
- * {@link BestBuy_Service_Remix_Type} represents a resource type to be targeted by an API call.
+ * {@link BestBuy\Service\Remix\Type} represents a resource type to be targeted by an API call.
  * Remix currently includes 2 types of information:
  * {@link http://remix.bestbuy.com/docs/Types/Stores stores} and
  * {@link http://remix.bestbuy.com/docs/Types/Products products}.
@@ -34,54 +37,55 @@
  * is available by "joining" the store and product types.
  *
  * @category   BestBuy
- * @package    BestBuy_Service_Remix
+ * @package    BestBuy\Service\Remix
  * @subpackage Type
  * @author     Matt Williams <matt@mattwilliamsnyc.com>
+ * @author     Troy McCabe <troy.mccabe@geeksquad.com> (v2.0+)
  * @copyright  Copyright (c) 2008 {@link http://mattwilliamsnyc.com Matt Williams}
  */
-class BestBuy_Service_Remix_Type
+class Type
 {
     /**
      * Unique identifier (Store ID or Product SKU); only used when targeting an individual resource
      *
      * @var string
      */
-    protected $_identifier;
+    protected $identifier;
 
     /**
      * Filters; only used when targeting a collection of stores or products
      *
      * @var array
      */
-    protected $_params;
+    protected $params;
 
     /**
      * Desired response format; only used when targeting an individual store or product
      *
      * @var string
      */
-    protected $_format;
+    protected $format;
 
     /**
      * Primary type of the targeted resource ("stores" or "products")
      *
      * @var string
      */
-    protected $_type;
+    protected $type;
 
     /**
      * Supported resource formats
      *
      * @var array
      */
-    protected static $_formats = array('xml', 'json');
+    protected static $formats = array('xml', 'json');
 
     /**
      * Supported resource types
      *
      * @var array
      */
-    protected static $_types = array('stores', 'products');
+    protected static $types = array('stores', 'products');
 
     /**
      * Constructor.
@@ -119,37 +123,32 @@ class BestBuy_Service_Remix_Type
      * @param array|string $filter String identifier (Store ID/Product SKU) or array of filters
      * @param string       $format 'xml' or 'json'; Only used when targeting an individual store or product
      */
-    public function __construct($type, $filter, $format ='xml')
+    public function __construct($type, $filter, $format = 'xml')
     {
         // Assign type ('stores' or 'products')
-        if(!in_array(($type = strtolower(trim($type))), self::$_types))
-        {
-            self::_throwException(sprintf('Invalid type "%s" (%s)', $type, join(', ', self::$_types)));
+        if (!in_array(($type = strtolower(trim($type))), self::$types)) {
+            throw new Type\Exception(sprintf('Invalid type "%s" (%s)', $type, join(', ', self::$types)));
         }
 
-        $this->_type = $type;
+        $this->type = $type;
 
         // Assign filter input as identifier (Store ID/Product SKU) or filter parameters
-        if(is_scalar($filter))
-        {
-            $this->_identifier = trim((string) $filter);
-        }
-        else if(is_array($filter))
-        {
-            $this->_params = $filter;
-        }
-        else
-        {
-            self::_throwException('$filter must be a string (identifier) or an array (parameters)');
+        if (is_scalar($filter)) {
+            $this->identifier = trim((string)$filter);
+        } else {
+            if (is_array($filter)) {
+                $this->params = $filter;
+            } else {
+                throw new Type\Exception('$filter must be a string (identifier) or an array (parameters)');
+            }
         }
 
         // Assign format ('xml' or 'json')
-        if(!in_array(($format = strtolower(trim($format))), self::$_formats))
-        {
-            self::_throwException(sprintf('Invalid format "%s" (%s)', $format, join(', ', self::$_formats)));
+        if (!in_array(($format = strtolower(trim($format))), self::$formats)) {
+            throw new Type\Exception(sprintf('Invalid format "%s" (%s)', $format, join(', ', self::$formats)));
         }
 
-        $this->_format = $format;
+        $this->format = $format;
     }
 
     /**
@@ -175,30 +174,14 @@ class BestBuy_Service_Remix_Type
      */
     public function toString()
     {
-        if(strlen($this->_identifier))
-        {
-            return sprintf('%s/%s.%s', $this->_type, $this->_identifier, $this->_format);
+        if (strlen($this->identifier)) {
+            return sprintf('%s/%s.%s', $this->type, $this->identifier, $this->format);
+        } else {
+            if (count($this->params)) {
+                return sprintf('%s(%s)', $this->type, join('&', $this->params));
+            }
         }
-        else if(count($this->_params))
-        {
-            return sprintf('%s(%s)', $this->_type, join('&', $this->_params));
-        }
 
-        return $this->_type;
-    }
-
-    /**
-     * Throws an exception with a user-supplied message.
-     *
-     * @param string $message Message to be provided with the exception being raised
-     *
-     * @throws BestBuy_Service_Remix_Type_Exception
-     */
-    protected static function _throwException($message)
-    {
-        /** @see BestBuy_Service_Remix_Type_Exception */
-        require_once 'BestBuy/Service/Remix/Type/Exception.php';
-
-        throw new BestBuy_Service_Remix_Type_Exception($message);
+        return $this->type;
     }
 }

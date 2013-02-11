@@ -16,20 +16,23 @@
  * {@link http://www.bestbuy.com/ Best Buy}.
  *
  * @category   BestBuy
- * @package    BestBuy_Service_Remix
+ * @package    BestBuy\Service\Remix
  * @subpackage Response
  * @author     Matt Williams <matt@mattwilliamsnyc.com>
+ * @author     Troy McCabe <troy.mccabe@geeksquad.com> (v2.0+)
  * @copyright  Copyright (c) 2008 {@link http://mattwilliamsnyc.com Matt Williams}
  * @license    http://www.opensource.org/licenses/bsd-license.php
  * @version    $Id: Response.php 6 2009-02-01 20:34:37Z mattwilliamsnyc $
  */
 
+namespace BestBuy\Service\Remix;
+
 /**
- * BestBuy_Service_Remix_Response represents a response to a
+ * BestBuy\Service\Remix\Response represents a response to a
  * {@link http://remix.bestbuy.com Remix} API call.
  *
  * In addition to the $_data property (accessible via $response->data or $response->getData()),
- * a BestBuy_Service_Remix_Response provides the following HTTP metadata collected by
+ * a BestBuy\Service\Remix\Response provides the following HTTP metadata collected by
  * {@link http://curl.haxx.se/ cURL}:
  *
  * <ul>
@@ -116,37 +119,38 @@
  * </ul>
  *
  * @category   BestBuy
- * @package    BestBuy_Service_Remix
+ * @package    BestBuy\Service\Remix
  * @subpackage Response
  * @author     Matt Williams <matt@mattwilliamsnyc.com>
+ * @author     Troy McCabe <troy.mccabe@geeksquad.com> (v2.0+)
  * @copyright  Copyright (c) 2008 {@link http://mattwilliamsnyc.com Matt Williams}
  */
-class BestBuy_Service_Remix_Response
+class Response
 {
     /**
      * Metadata related to the HTTP response collected by cURL
      *
      * @var array
      */
-    protected $_metadata = array();
+    protected $metadata = array();
 
     /**
      * Response body (if any) returned by Remix
      *
      * @var string
      */
-    protected $_data = '';
+    protected $data = '';
 
     /**
-     * Creates a new BestBuy_Service_Remix_Response object.
+     * Creates a new BestBuy\Service\Remix\Response object.
      *
      * @param string $data Response body (if any) returned by Remix
      * @param array  $meta HTTP {@link http://us3.php.net/curl_getinfo curl_getinfo() metadata}
      */
     public function __construct($data, array $meta)
     {
-        $this->_data     = $data;
-        $this->_metadata = $meta;
+        $this->data = $data;
+        $this->metadata = $meta;
     }
 
     /**
@@ -158,19 +162,16 @@ class BestBuy_Service_Remix_Response
      */
     public function __get($name)
     {
-        if('data' == $name)
-        {
-            return $this->_data;
-        }
-        else if(isset($this->_metadata[$name]))
-        {
-            return $this->_metadata[$name];
-        }
-        else
-        {
-            trigger_error(sprintf('Trying to access non-existant property "%s"', $name), E_USER_WARNING);
+        if ('data' == $name) {
+            return $this->data;
+        } else {
+            if (isset($this->metadata[$name])) {
+                return $this->metadata[$name];
+            } else {
+                trigger_error(sprintf('Trying to access non-existant property "%s"', $name), E_USER_WARNING);
 
-            return NULL;
+                return null;
+            }
         }
     }
 
@@ -183,12 +184,11 @@ class BestBuy_Service_Remix_Response
      */
     public function __isset($name)
     {
-        if('data' == $name)
-        {
-            return isset($this->_data);
+        if ('data' == $name) {
+            return isset($this->data);
         }
 
-        return isset($this->_metadata[$name]);
+        return isset($this->metadata[$name]);
     }
 
     /**
@@ -198,7 +198,7 @@ class BestBuy_Service_Remix_Response
      */
     public function __toString()
     {
-        return $this->_data;
+        return $this->data;
     }
 
     /**
@@ -208,23 +208,20 @@ class BestBuy_Service_Remix_Response
      */
     public function getData()
     {
-        return $this->_data;
+        return $this->data;
     }
 
     /**
      * Returns response document wrapped in a {@link http://us2.php.net/simplexml SimpleXml} object.
      *
-     * @return SimpleXmlElement|FALSE
+     * @return \SimpleXmlElement|boolean
      */
     public function toSimpleXml()
     {
-        try
-        {
-            $xml = @new SimpleXmlElement($this->_data);
-        }
-        catch(Exception $e)
-        {
-            return FALSE;
+        try {
+            $xml = @new \SimpleXmlElement($this->data);
+        } catch (Exception $e) {
+            return false;
         }
 
         return $xml;
@@ -237,7 +234,7 @@ class BestBuy_Service_Remix_Response
      */
     public function isError()
     {
-        return (4 == ($type = floor($this->_metadata['http_code'] / 100)) || 5 == $type);
+        return (4 == ($type = floor($this->metadata['http_code'] / 100)) || 5 == $type);
     }
 
     /**
@@ -247,6 +244,6 @@ class BestBuy_Service_Remix_Response
      */
     public function toArray()
     {
-        return array_merge($this->_metadata, array('data' => $this->_data));
+        return array_merge($this->metadata, array('data' => $this->data));
     }
 }

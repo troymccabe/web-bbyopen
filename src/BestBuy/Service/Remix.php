@@ -1,5 +1,4 @@
 <?php
-
 /**
  * LICENSE
  *
@@ -16,34 +15,28 @@
  * {@link http://www.bestbuy.com/ Best Buy}.
  *
  * @category   BestBuy
- * @package    BestBuy_Service_Remix
+ * @package    BestBuy\Service\Remix
  * @author     Matt Williams <matt@mattwilliamsnyc.com>
+ * @author     Troy McCabe <troy.mccabe@geeksquad.com> (v2.0+)
  * @copyright  Copyright (c) 2008 {@link http://mattwilliamsnyc.com Matt Williams}
  * @license    http://www.opensource.org/licenses/bsd-license.php
  * @version    $Id: Remix.php 23 2010-01-14 15:27:13Z mattwilliamsnyc $
  */
 
-/**
- * @see BestBuy_Service_Remix_Response
- */
-require_once 'BestBuy/Service/Remix/Response.php';
+namespace BestBuy\Service;
 
 /**
- * @see BestBuy_Service_Remix_Type
- */
-require_once 'BestBuy/Service/Remix/Type.php';
-
-/**
- * {@link BestBuy_Service_Remix} provides methods for interacting with (version 1 of)
+ * {@link BestBuy\Service\Remix} provides methods for interacting with (version 1 of)
  * {@link http://www.bestbuy.com Best Buy}'s {@link http://remix.bestbuy.com Remix} API
  * and is based on the publicly available {@link http://remix.bestbuy.com/docs API documentation}.
  *
  * @category   BestBuy
- * @package    BestBuy_Service_Remix
+ * @package    BestBuy\Service\Remix
  * @author     Matt Williams <matt@mattwilliamsnyc.com>
+ * @author     Troy McCabe <troy.mccabe@geeksquad.com> (v2.0+)
  * @copyright  Copyright (c) 2008 {@link http://mattwilliamsnyc.com Matt Williams}
  */
-class BestBuy_Service_Remix
+class Remix
 {
     /**
      * Entry point for all API requests
@@ -53,22 +46,22 @@ class BestBuy_Service_Remix
     /**
      * Key used to identify a client application to the API service
      */
-    protected $_apiKey;
+    protected $apiKey;
 
     /**
      * Length of time (in seconds) to wait for a response to an API call
      */
-    protected $_timeout = 10;
+    protected $timeout = 10;
 
     /**
      * Query parameters to be appended to an API request URI
      */
-    protected $_params = array();
+    protected $params = array();
 
     /**
      * Resource types (e.g. stores, products) to be targeted by an API call
      */
-    protected $_types = array();
+    protected $types = array();
 
     /**
      * Constructor.
@@ -79,7 +72,7 @@ class BestBuy_Service_Remix
      */
     public function __construct($apiKey)
     {
-        $this->_apiKey = $apiKey;
+        $this->apiKey = $apiKey;
     }
 
     /**
@@ -90,18 +83,16 @@ class BestBuy_Service_Remix
      * @param string $method Name of the query parameter to which a value will be assigned
      * @param array  $args   List of arguments; the first value is assigned to the targeted query parameter
      *
-     * @return BestBuy_Service_Remix
+     * @return \BestBuy\Service\Remix
      */
     public function __call($method, $args)
     {
-        if(count($args))
-        {
-            if(is_array($args[0]))
-            {
+        if (count($args)) {
+            if (is_array($args[0])) {
                 $args[0] = join(',', $args[0]);
             }
 
-            $this->_params[$method] = $args[0];
+            $this->params[$method] = $args[0];
 
             return $this;
         }
@@ -116,12 +107,12 @@ class BestBuy_Service_Remix
      *
      * @param array $filters One or more criteria used to filter results
      *
-     * @return BestBuy_Service_Remix
-     * @throws BestBuy_Service_Remix_Exception
+     * @return \BestBuy\Service\Remix
+     * @throws \BestBuy\Service\Remix\Exception
      */
-    public function products(array $filters =array())
+    public function products(array $filters = array())
     {
-        $this->_types['products'] = self::_buildType('products', $filters);
+        $this->types['products'] = self::buildType('products', $filters);
 
         return $this;
     }
@@ -133,12 +124,12 @@ class BestBuy_Service_Remix
      * @param string $sku    Identifier (SKU #) of the product to be targeted
      * @param string $format Desired response format ('xml' or 'json')
      *
-     * @return BestBuy_Service_Remix
-     * @throws BestBuy_Service_Remix_Exception
+     * @return \BestBuy\Service\Remix
+     * @throws \BestBuy\Service\Remix\Exception
      */
-    public function product($sku, $format ='xml')
+    public function product($sku, $format = 'xml')
     {
-        $this->_types['products'] = self::_buildType('products', $sku, $format);
+        $this->types['products'] = self::buildType('products', $sku, $format);
 
         return $this;
     }
@@ -152,12 +143,12 @@ class BestBuy_Service_Remix
      *
      * @param array $filters One or more criteria used to filter results
      *
-     * @return BestBuy_Service_Remix
-     * @throws BestBuy_Service_Remix_Exception
+     * @return \BestBuy\Service\Remix
+     * @throws \BestBuy\Service\Remix\Exception
      */
-    public function stores(array $filters =array())
+    public function stores(array $filters = array())
     {
-        $this->_types['stores'] = self::_buildType('stores', $filters);
+        $this->types['stores'] = self::buildType('stores', $filters);
 
         return $this;
     }
@@ -169,12 +160,12 @@ class BestBuy_Service_Remix
      * @param string $storeId Identifier (Store ID) of the store to be targeted
      * @param string $format  Desired response format ('xml' or 'json')
      *
-     * @return BestBuy_Service_Remix
-     * @throws BestBuy_Service_Remix_Exception
+     * @return \BestBuy\Service\Remix
+     * @throws \BestBuy\Service\Remix\Exception
      */
-    public function store($identifier, $format ='xml')
+    public function store($identifier, $format = 'xml')
     {
-        $this->_types['stores'] = new BestBuy_Service_Remix_Type('stores', $identifier, $format);
+        $this->types['stores'] = new Remix\Type('stores', $identifier, $format);
 
         return $this;
     }
@@ -184,19 +175,17 @@ class BestBuy_Service_Remix
      *
      * @param array $params Name/value pairs to be assigned as query parameters
      *
-     * @return BestBuy_Service_Remix
+     * @return \BestBuy\Service\Remix
      */
     public function params(array $params)
     {
-        foreach($params as $key => $value)
-        {
-            if(is_array($value))
-            {
+        foreach ($params as $key => $value) {
+            if (is_array($value)) {
                 $params[$key] = join(',', $value);
             }
         }
 
-        $this->_params = $params;
+        $this->params = $params;
 
         return $this;
     }
@@ -204,12 +193,12 @@ class BestBuy_Service_Remix
     /**
      * Clears all targeted resource types and query parameters; called after every {@link query()}.
      *
-     * @return BestBuy_Service_Remix
+     * @return \BestBuy\Service\Remix
      */
     public function clear()
     {
-        $this->_types  = array();
-        $this->_params = array();
+        $this->types = array();
+        $this->params = array();
 
         return $this;
     }
@@ -225,13 +214,12 @@ class BestBuy_Service_Remix
     {
         $types = array();
 
-        foreach($this->_types as $type)
-        {
-            $types[] = (string) $type;
+        foreach ($this->types as $type) {
+            $types[] = (string)$type;
         }
 
-        $params = array_merge($this->_params, array('apiKey' => $this->_apiKey));
-        $uri    = sprintf('/%s?%s', join('+', $types), urldecode(http_build_query($params, '', '&')));
+        $params = array_merge($this->params, array('apiKey' => $this->apiKey));
+        $uri = sprintf('/%s?%s', join('+', $types), urldecode(http_build_query($params, '', '&')));
 
         return self::API_BASE . $uri;
     }
@@ -241,17 +229,16 @@ class BestBuy_Service_Remix
      *
      * @param integer $timeout Length of time (in seconds) to wait before timing out
      *
-     * @return BestBuy_Service_Remix
-     * @throws BestBuy_Service_Remix_Exception
+     * @return \BestBuy\Service\Remix
+     * @throws \BestBuy\Service\Remix\Exception
      */
     public function setTimeout($timeout)
     {
-        if(0 >= $timeout || !(is_numeric($timeout) && ($f = floatval($timeout)) == intval($f)))
-        {
-            self::_throwException("Timeout ({$timeout}) must be a positive integer");
+        if (0 >= $timeout || !(is_numeric($timeout) && ($f = floatval($timeout)) == intval($f))) {
+            throw new Remix\Exception("Timeout ({$timeout}) must be a positive integer");
         }
 
-        $this->_timeout = $timeout;
+        $this->timeout = $timeout;
 
         return $this;
     }
@@ -259,24 +246,21 @@ class BestBuy_Service_Remix
     /**
      * Submits a query to the Remix API and returns the {@link BestBuy_Service_Remix_Response response}.
      *
-     * @return BestBuy_Service_Remix_Response
-     * @throws BestBuy_Service_Remix_Exception
+     * @return \BestBuy\Service\Remix
+     * @throws \BestBuy\Service\Remix\Exception
      */
     public function query()
     {
-        if(!count($this->_types))
-        {
-            self::_throwException(
-                'At least one resource (e.g. products, stores) must be targeted in order to perform an API query'
-            );
+        if (!count($this->types)) {
+            throw new Remix\Exception('At least one resource (e.g. products) must be targeted to perform an API query');
         }
 
         $ch = curl_init();
 
         curl_setopt($ch, CURLOPT_URL, $this->getTargetUri());
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
-        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, TRUE);
-        curl_setopt($ch, CURLOPT_TIMEOUT, $this->_timeout);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, true);
+        curl_setopt($ch, CURLOPT_TIMEOUT, $this->timeout);
 
         $data = curl_exec($ch);
         $meta = curl_getinfo($ch);
@@ -285,7 +269,7 @@ class BestBuy_Service_Remix
 
         $this->clear();
 
-        return new BestBuy_Service_Remix_Response($data, $meta);
+        return new Remix\Response($data, $meta);
     }
 
     /**
@@ -295,34 +279,16 @@ class BestBuy_Service_Remix
      * @param string|array $filter Identifier or filter array used to target this type resource
      * @param string       $format Desired response format ('json' or 'xml')
      *
-     * @return BestBuy_Service_Remix_Type
+     * @return \BestBuy\Service\Remix\Type
      */
-    protected static function _buildType($type, $filter, $format ='xml')
+    protected static function buildType($type, $filter, $format = 'xml')
     {
-        try
-        {
-            $type = new BestBuy_Service_Remix_Type($type, $filter, $format);
-        }
-        catch(BestBuy_Service_Remix_Type_Exception $e)
-        {
-            self::_throwException(sprintf("Invalid '%s' target:\n%s", $type, $e->getMessage()));
+        try {
+            $type = new Remix\Type($type, $filter, $format);
+        } catch (Remix\Type\Exception $e) {
+            throw new Remix\Exception(sprintf("Invalid '%s' target:\n%s", $type, $e->getMessage()));
         }
 
         return $type;
-    }
-
-    /**
-     * Throws an exception with a user-supplied message.
-     *
-     * @param string $message Message to be provided with the exception being raised
-     *
-     * @throws BestBuy_Service_Remix_Exception
-     */
-    protected static function _throwException($message)
-    {
-        /** @see BestBuy_Service_Remix_Exception */
-        require_once 'BestBuy/Service/Remix/Exception.php';
-
-        throw new BestBuy_Service_Remix_Exception($message);
     }
 }
