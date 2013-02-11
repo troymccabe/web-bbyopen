@@ -24,7 +24,7 @@ Alternatively, you may email the developer directly: troy.mccabe@geeksquad.com
 
 # GETTING STARTED
 
-:::php
+    :::php
     $apiKey = '12345678'; // Your API key
     $remix  = new \BestBuy\Service\Remix($apiKey);
 
