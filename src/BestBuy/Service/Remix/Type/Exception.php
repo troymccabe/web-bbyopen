@@ -19,7 +19,7 @@
  * @package    BestBuy\Service\Remix
  * @subpackage Type
  * @author     Matt Williams <matt@mattwilliamsnyc.com>
- * @author     Troy McCabe <troy.mccabe@geeksquad.com> (v2.0+)
+ * @author     Troy McCabe (v2.0+) <troy.mccabe@geeksquad.com> (v2.0+)
  * @copyright  Copyright (c) 2008 {@link http://mattwilliamsnyc.com Matt Williams}
  * @license    http://www.opensource.org/licenses/bsd-license.php
  * @version    $Id: Exception.php 6 2009-02-01 20:34:37Z mattwilliamsnyc $
@@ -34,7 +34,7 @@ namespace BestBuy\Service\Remix\Type;
  * @package    BestBuy\Service\Remix
  * @subpackage Type
  * @author     Matt Williams <matt@mattwilliamsnyc.com>
- * @author     Troy McCabe <troy.mccabe@geeksquad.com> (v2.0+)
+ * @author     Troy McCabe (v2.0+) <troy.mccabe@geeksquad.com> (v2.0+)
  * @copyright  Copyright (c) 2008 {@link http://mattwilliamsnyc.com Matt Williams}
  */
 class Exception extends \BestBuy\Service\Remix\Exception

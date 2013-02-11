@@ -17,7 +17,7 @@
  * @category   BestBuy
  * @package    BestBuy\Service\Remix
  * @author     Matt Williams <matt@mattwilliamsnyc.com>
- * @author     Troy McCabe <troy.mccabe@geeksquad.com> (v2.0+)
+ * @author     Troy McCabe (v2.0+) <troy.mccabe@geeksquad.com>
  * @copyright  Copyright (c) 2008 {@link http://mattwilliamsnyc.com Matt Williams}
  * @license    http://www.opensource.org/licenses/bsd-license.php
  * @version    $Id: Remix.php 23 2010-01-14 15:27:13Z mattwilliamsnyc $
@@ -33,7 +33,7 @@ namespace BestBuy\Service;
  * @category   BestBuy
  * @package    BestBuy\Service\Remix
  * @author     Matt Williams <matt@mattwilliamsnyc.com>
- * @author     Troy McCabe <troy.mccabe@geeksquad.com> (v2.0+)
+ * @author     Troy McCabe (v2.0+) <troy.mccabe@geeksquad.com>
  * @copyright  Copyright (c) 2008 {@link http://mattwilliamsnyc.com Matt Williams}
  */
 class Remix
