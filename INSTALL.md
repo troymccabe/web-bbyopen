@@ -18,4 +18,4 @@ The following composer.json will download and install the latest version of the 
 
 You can find more information about installing curl here:
 
-http://www.php.net/manual/en/curl.installation.php
+<http://www.php.net/manual/en/curl.installation.php>

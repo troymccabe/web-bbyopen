@@ -12,6 +12,7 @@ Discussion Forums: <http://remix.bestbuy.com/forum>
 # DISCLAIMER
 
 Matt Williams, the author, is neither affiliated with, nor endorsed by, Best Buy
+
 Troy McCabe is affiliated with Best Buy
 
 # SUPPORT AND BUG REPORTS
