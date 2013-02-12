@@ -1,13 +1,13 @@
 # INTRODUCTION
 
 `\BestBuy\Service\Remix` is a PHP library that supports interaction with
-Best Buy's Remix API (http://remix.bestbuy.com/).
+Best Buy's Remix API (<http://remix.bestbuy.com/>).
 
 Best Buy provides the following resources to API users:
 
-Developer Network: http://remix.bestbuy.com/
-API Documentation: http://remix.bestbuy.com/docs
-Discussion Forums: http://remix.bestbuy.com/forum
+Developer Network: <http://remix.bestbuy.com/>
+API Documentation: <http://remix.bestbuy.com/docs>
+Discussion Forums: <http://remix.bestbuy.com/forum>
 
 # DISCLAIMER
 
@@ -18,9 +18,9 @@ Troy McCabe is affiliated with Best Buy
 
 Bug reports, as well as feature requests, may be submitted at:
 
-https://bitbucket.org/troymccabe/web-bbyopen/issue/
+<https://bitbucket.org/troymccabe/web-bbyopen/issue/>
 
-Alternatively, you may email the developer directly: troy.mccabe@geeksquad.com
+Alternatively, you may email the developer directly: <troy.mccabe@geeksquad.com>
 
 # GETTING STARTED
 
@@ -57,8 +57,8 @@ Alternatively, you may email the developer directly: troy.mccabe@geeksquad.com
 
 # DOCUMENTATION
 
-Documentation was generated using PhpDocumentor [http://www.phpdoc.org/].
+Documentation was generated using PhpDocumentor [<http://www.phpdoc.org/>].
 
 Documentation may be regenerated as follows (from the base directory):
 
-phpdoc -d . -t docs/phpdoc -ti 'BestBuy Remix API client' -o HTML:frames:DOM/earthli 
+`phpdoc -d ./src -t ./docs/phpdoc`

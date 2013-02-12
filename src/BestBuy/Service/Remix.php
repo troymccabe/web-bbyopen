@@ -163,9 +163,9 @@ class Remix
      * @return \BestBuy\Service\Remix
      * @throws \BestBuy\Service\Remix\Exception
      */
-    public function store($identifier, $format = 'xml')
+    public function store($storeId, $format = 'xml')
     {
-        $this->types['stores'] = new Remix\Type('stores', $identifier, $format);
+        $this->types['stores'] = new Remix\Type('stores', $storeId, $format);
 
         return $this;
     }

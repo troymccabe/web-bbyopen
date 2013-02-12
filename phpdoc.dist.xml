@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <phpdoc>
-    <title>Troymccabe\Web-bbyopen</title>
+    <title>BBYOpen PHP wrapper</title>
     <parser>
         <target>build/phpdoc</target>
     </parser>
