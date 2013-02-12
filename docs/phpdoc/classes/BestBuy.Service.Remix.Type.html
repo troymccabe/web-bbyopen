@@ -33,7 +33,7 @@
 <a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
                                     Reports <b class="caret"></b></a><ul class="dropdown-menu">
 <li><a href="../errors.html"><i class="icon-remove-sign"></i> Errors 
-                <span class="label label-info">2</span></a></li>
+                <span class="label label-info">0</span></a></li>
 <li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
                 <ul></ul></a></li>
 <li><a href="../deprecated.html"><i class="icon-stop"></i> Deprecated elements 
@@ -61,6 +61,13 @@
 <li class="method public "><a href="#method___construct" title="__construct :: Constructor."><span class="description">Constructor.</span><pre>__construct()</pre></a></li>
 <li class="method public "><a href="#method___toString" title="__toString :: Allows this type to be cast to a string."><span class="description">Allows this type to be cast to a string.</span><pre>__toString()</pre></a></li>
 <li class="method public "><a href="#method_toString" title="toString :: Formats this type as a URI fragment."><span class="description">Formats this type as a URI fragment.</span><pre>toString()</pre></a></li>
+</ul>
+</li>
+<li class="nav-header protected">» Protected
+                    <ul>
+<li class="method protected "><a href="#method_assignFilter" title="assignFilter :: Assigns the filter for the construction of the request uri"><span class="description">Assigns the filter for the construction of the request uri</span><pre>assignFilter()</pre></a></li>
+<li class="method protected "><a href="#method_validateFormat" title="validateFormat :: Validates that the format requested is a valid format"><span class="description">Validates that the format requested is a valid format</span><pre>validateFormat()</pre></a></li>
+<li class="method protected "><a href="#method_validateType" title="validateType :: Validates that the type provided is a valid type"><span class="description">Validates that the type provided is a valid type</span><pre>validateType()</pre></a></li>
 </ul>
 </li>
 <li class="nav-header">
@@ -178,6 +185,11 @@ contain an array of filtering statements (e.g. array('name=bat*', 'itemUpdateDat
 <h4>$format</h4>
 <code>string</code><p>'xml' or 'json'; Only used when targeting an individual store or product</p>
 </div>
+<h3>Exceptions</h3>
+<table class="table table-bordered"><tr>
+<th><code><a href="../classes/BestBuy.Service.Remix.Type.Exception.html">\BestBuy\Service\Remix\Type\Exception</a></code></th>
+<td></td>
+</tr></table>
 </div></div>
 </div>
 <a id="method___toString"></a><div class="element clickable method public method___toString" data-toggle="collapse" data-target=".method___toString .collapse">
@@ -203,6 +215,60 @@ contain an array of filtering statements (e.g. array('name=bat*', 'itemUpdateDat
 </ul></div>
 <h3>Returns</h3>
 <div class="subelement response"><code>string</code></div>
+</div></div>
+</div>
+<a id="method_assignFilter"></a><div class="element clickable method protected method_assignFilter" data-toggle="collapse" data-target=".method_assignFilter .collapse">
+<h2>Assigns the filter for the construction of the request uri</h2>
+<pre>assignFilter(string | array $filter) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$filter</h4>
+<code>string</code><code>array</code>
+</div>
+<h3>Exceptions</h3>
+<table class="table table-bordered"><tr>
+<th><code><a href="../classes/BestBuy.Service.Remix.Type.Exception.html">\BestBuy\Service\Remix\Type\Exception</a></code></th>
+<td></td>
+</tr></table>
+</div></div>
+</div>
+<a id="method_validateFormat"></a><div class="element clickable method protected method_validateFormat" data-toggle="collapse" data-target=".method_validateFormat .collapse">
+<h2>Validates that the format requested is a valid format</h2>
+<pre>validateFormat(string $format) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$format</h4>
+<code>string</code><p>\BestBuy\Service\Remix::FORMAT_XML or \BestBuy\Service\Remix::FORMAT_JSON</p>
+</div>
+<h3>Exceptions</h3>
+<table class="table table-bordered"><tr>
+<th><code><a href="../classes/BestBuy.Service.Remix.Type.Exception.html">\BestBuy\Service\Remix\Type\Exception</a></code></th>
+<td></td>
+</tr></table>
+</div></div>
+</div>
+<a id="method_validateType"></a><div class="element clickable method protected method_validateType" data-toggle="collapse" data-target=".method_validateType .collapse">
+<h2>Validates that the type provided is a valid type</h2>
+<pre>validateType(string $type) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$type</h4>
+<code>string</code><p>'stores' or 'products'</p>
+</div>
+<h3>Exceptions</h3>
+<table class="table table-bordered"><tr>
+<th><code><a href="../classes/BestBuy.Service.Remix.Type.Exception.html">\BestBuy\Service\Remix\Type\Exception</a></code></th>
+<td></td>
+</tr></table>
 </div></div>
 </div>
 <h3>
@@ -250,7 +316,7 @@ contain an array of filtering statements (e.g. array('name=bat*', 'itemUpdateDat
 <div class="row"><footer class="span12">
             Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
             Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a12</a> and<br>
-            generated on 2013-02-11T17:58:31-06:00.<br></footer></div>
+            generated on 2013-02-12T01:43:14-06:00.<br></footer></div>
 </div>
 </body>
 </html>

@@ -33,7 +33,7 @@
 <a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
                                     Reports <b class="caret"></b></a><ul class="dropdown-menu">
 <li><a href="../errors.html"><i class="icon-remove-sign"></i> Errors 
-                <span class="label label-info">2</span></a></li>
+                <span class="label label-info">0</span></a></li>
 <li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
                 <ul></ul></a></li>
 <li><a href="../deprecated.html"><i class="icon-stop"></i> Deprecated elements 
@@ -79,9 +79,6 @@ resource for an API call."><span class="description">Targets the (optionally fil
 resource for an API call.</span><pre>stores()</pre></a></li>
 </ul>
 </li>
-<li class="nav-header protected">» Protected
-                    <ul><li class="method protected "><a href="#method_buildType" title="buildType :: Builds a resource {@link \BestBuy\Service\Remix\Type type} to be targeted for an API call."><span class="description">Builds a resource {@link \BestBuy\Service\Remix\Type type} to be targeted for an API call.</span><pre>buildType()</pre></a></li></ul>
-</li>
 <li class="nav-header">
 <i class="icon-custom icon-property"></i> Properties
                     <ul></ul>
@@ -96,7 +93,11 @@ resource for an API call.</span><pre>stores()</pre></a></li>
 </li>
 <li class="nav-header">
 <i class="icon-custom icon-constant"></i> Constants
-                    <ul><li class="constant  "><a href="#constant_API_BASE" title="API_BASE :: Entry point for all API requests"><span class="description">Entry point for all API requests</span><pre>API_BASE</pre></a></li></ul>
+                    <ul>
+<li class="constant  "><a href="#constant_API_BASE" title="API_BASE :: Entry point for all API requests"><span class="description">Entry point for all API requests</span><pre>API_BASE</pre></a></li>
+<li class="constant  "><a href="#constant_FORMAT_JSON" title="FORMAT_JSON :: The constant for JSON formatted response"><span class="description">The constant for JSON formatted response</span><pre>FORMAT_JSON</pre></a></li>
+<li class="constant  "><a href="#constant_FORMAT_XML" title="FORMAT_XML :: The constant for XML formatted response"><span class="description">The constant for XML formatted response</span><pre>FORMAT_XML</pre></a></li>
+</ul>
 </li>
 </ul>
 </div>
@@ -223,11 +224,11 @@ resource (by SKU #) for an API call.</h2>
 </div>
 <div class="subelement argument">
 <h4>$format</h4>
-<code>string</code><p>Desired response format ('xml' or 'json')</p>
+<code>string</code><p>Desired response format (FORMAT_XML or FORMAT_JSON)</p>
 </div>
 <h3>Exceptions</h3>
 <table class="table table-bordered"><tr>
-<th><code><a href="../classes/BestBuy.Service.Remix.Exception.html">\BestBuy\Service\Remix\Exception</a></code></th>
+<th><code><a href="../classes/BestBuy.Service.Remix.Type.Exception.html">\BestBuy\Service\Remix\Type\Exception</a></code></th>
 <td></td>
 </tr></table>
 <h3>Returns</h3>
@@ -237,7 +238,7 @@ resource (by SKU #) for an API call.</h2>
 <a id="method_products"></a><div class="element clickable method public method_products" data-toggle="collapse" data-target=".method_products .collapse">
 <h2>Targets the (optionally filtered) {@link http://remix.bestbuy.com/docs/Types/Products products}
 resource for an API call.</h2>
-<pre>products(array $filters) : <a href="../classes/BestBuy.Service.Remix.html">\BestBuy\Service\Remix</a></pre>
+<pre>products(array $filters, string $format) : <a href="../classes/BestBuy.Service.Remix.html">\BestBuy\Service\Remix</a></pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"><p>May be used in combination with <a href="stores()">stores()</a> to check for
@@ -246,9 +247,13 @@ resource for an API call.</h2>
 <div class="subelement argument">
 <h4>$filters</h4>
 <code>array</code><p>One or more criteria used to filter results</p></div>
+<div class="subelement argument">
+<h4>$format</h4>
+<code>string</code><p>Desired response format (FORMAT_XML or FORMAT_JSON)</p>
+</div>
 <h3>Exceptions</h3>
 <table class="table table-bordered"><tr>
-<th><code><a href="../classes/BestBuy.Service.Remix.Exception.html">\BestBuy\Service\Remix\Exception</a></code></th>
+<th><code><a href="../classes/BestBuy.Service.Remix.Type.Exception.html">\BestBuy\Service\Remix\Type\Exception</a></code></th>
 <td></td>
 </tr></table>
 <h3>Returns</h3>
@@ -257,7 +262,7 @@ resource for an API call.</h2>
 </div>
 <a id="method_query"></a><div class="element clickable method public method_query" data-toggle="collapse" data-target=".method_query .collapse">
 <h2>Submits a query to the Remix API and returns the {@link \BestBuy\Service\Remix\Response response}.</h2>
-<pre>query() : <a href="../classes/BestBuy.Service.Remix.html">\BestBuy\Service\Remix</a></pre>
+<pre>query() : <a href="../classes/BestBuy.Service.Remix.Response.html">\BestBuy\Service\Remix\Response</a></pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"></div>
@@ -267,7 +272,7 @@ resource for an API call.</h2>
 <td></td>
 </tr></table>
 <h3>Returns</h3>
-<div class="subelement response"><code><a href="../classes/BestBuy.Service.Remix.html">\BestBuy\Service\Remix</a></code></div>
+<div class="subelement response"><code><a href="../classes/BestBuy.Service.Remix.Response.html">\BestBuy\Service\Remix\Response</a></code></div>
 </div></div>
 </div>
 <a id="method_setTimeout"></a><div class="element clickable method public method_setTimeout" data-toggle="collapse" data-target=".method_setTimeout .collapse">
@@ -293,19 +298,22 @@ resource for an API call.</h2>
 <a id="method_store"></a><div class="element clickable method public method_store" data-toggle="collapse" data-target=".method_store .collapse">
 <h2>Targets a specific {@link http://remix.bestbuy.com/docs/Types/Stores store}
 resource (by Store ID) for an API call.</h2>
-<pre>store($identifier, string $format) : <a href="../classes/BestBuy.Service.Remix.html">\BestBuy\Service\Remix</a></pre>
+<pre>store(string $storeId, string $format) : <a href="../classes/BestBuy.Service.Remix.html">\BestBuy\Service\Remix</a></pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"></div>
 <h3>Parameters</h3>
-<div class="subelement argument"><h4>$identifier</h4></div>
+<div class="subelement argument">
+<h4>$storeId</h4>
+<code>string</code><p>Identifier (Store ID) of the store to be targeted</p>
+</div>
 <div class="subelement argument">
 <h4>$format</h4>
-<code>string</code><p>Desired response format ('xml' or 'json')</p>
+<code>string</code><p>Desired response format (FORMAT_XML or FORMAT_JSON)</p>
 </div>
 <h3>Exceptions</h3>
 <table class="table table-bordered"><tr>
-<th><code><a href="../classes/BestBuy.Service.Remix.Exception.html">\BestBuy\Service\Remix\Exception</a></code></th>
+<th><code><a href="../classes/BestBuy.Service.Remix.Type.Exception.html">\BestBuy\Service\Remix\Type\Exception</a></code></th>
 <td></td>
 </tr></table>
 <h3>Returns</h3>
@@ -315,7 +323,7 @@ resource (by Store ID) for an API call.</h2>
 <a id="method_stores"></a><div class="element clickable method public method_stores" data-toggle="collapse" data-target=".method_stores .collapse">
 <h2>Targets the (optionally filtered) {@link http://remix.bestbuy.com/docs/Types/Stores stores}
 resource for an API call.</h2>
-<pre>stores(array $filters) : <a href="../classes/BestBuy.Service.Remix.html">\BestBuy\Service\Remix</a></pre>
+<pre>stores(array $filters, string $format) : <a href="../classes/BestBuy.Service.Remix.html">\BestBuy\Service\Remix</a></pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"><p>May be used in combination with <a href="products()">products()</a> to check for
@@ -324,60 +332,42 @@ resource for an API call.</h2>
 <div class="subelement argument">
 <h4>$filters</h4>
 <code>array</code><p>One or more criteria used to filter results</p></div>
+<div class="subelement argument">
+<h4>$format</h4>
+<code>string</code><p>Desired response format (FORMAT_XML or FORMAT_JSON)</p>
+</div>
 <h3>Exceptions</h3>
 <table class="table table-bordered"><tr>
-<th><code><a href="../classes/BestBuy.Service.Remix.Exception.html">\BestBuy\Service\Remix\Exception</a></code></th>
+<th><code><a href="../classes/BestBuy.Service.Remix.Type.Exception.html">\BestBuy\Service\Remix\Type\Exception</a></code></th>
 <td></td>
 </tr></table>
 <h3>Returns</h3>
 <div class="subelement response"><code><a href="../classes/BestBuy.Service.Remix.html">\BestBuy\Service\Remix</a></code></div>
 </div></div>
 </div>
-<a id="method_buildType"></a><div class="element clickable method protected method_buildType" data-toggle="collapse" data-target=".method_buildType .collapse">
-<h2>Builds a resource {@link \BestBuy\Service\Remix\Type type} to be targeted for an API call.</h2>
-<pre>buildType(string $type, string | array $filter, string $format) : <a href="../classes/BestBuy.Service.Remix.Type.html">\BestBuy\Service\Remix\Type</a></pre>
-<div class="labels"><span class="label">Static</span></div>
-<div class="row collapse"><div class="detail-description">
-<div class="long_description"></div>
-<h3>Parameters</h3>
-<div class="subelement argument">
-<h4>$type</h4>
-<code>string</code><p>Desired resource type ('stores' or 'products')</p>
-</div>
-<div class="subelement argument">
-<h4>$filter</h4>
-<code>string</code><code>array</code><p>Identifier or filter array used to target this type resource</p></div>
-<div class="subelement argument">
-<h4>$format</h4>
-<code>string</code><p>Desired response format ('json' or 'xml')</p>
-</div>
-<h3>Returns</h3>
-<div class="subelement response"><code><a href="../classes/BestBuy.Service.Remix.Type.html">\BestBuy\Service\Remix\Type</a></code></div>
-</div></div>
-</div>
 <h3>
 <i class="icon-custom icon-property"></i> Properties</h3>
 <a id="property_apiKey"> </a><div class="element clickable property protected property_apiKey" data-toggle="collapse" data-target=".property_apiKey .collapse">
 <h2></h2>
-<pre>$apiKey </pre>
+<pre>$apiKey : string</pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
 </div>
 <a id="property_params"> </a><div class="element clickable property protected property_params" data-toggle="collapse" data-target=".property_params .collapse">
 <h2></h2>
-<pre>$params </pre>
+<pre>$params : array</pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
 </div>
 <a id="property_timeout"> </a><div class="element clickable property protected property_timeout" data-toggle="collapse" data-target=".property_timeout .collapse">
 <h2></h2>
-<pre>$timeout </pre>
+<pre>$timeout : int</pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
 </div>
 <a id="property_types"> </a><div class="element clickable property protected property_types" data-toggle="collapse" data-target=".property_types .collapse">
 <h2></h2>
-<pre>$types </pre>
+<pre>$types : array</pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description"><div class="long_description"><p>stores, products) to be targeted by an API call</p></div></div></div>
 </div>
@@ -385,7 +375,19 @@ resource for an API call.</h2>
 <i class="icon-custom icon-constant"></i> Constants</h3>
 <a id="constant_API_BASE"> </a><div class="element clickable constant  constant_API_BASE" data-toggle="collapse" data-target=".constant_API_BASE .collapse">
 <h2>Entry point for all API requests</h2>
-<pre>API_BASE </pre>
+<pre>API_BASE : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="constant_FORMAT_JSON"> </a><div class="element clickable constant  constant_FORMAT_JSON" data-toggle="collapse" data-target=".constant_FORMAT_JSON .collapse">
+<h2>The constant for JSON formatted response</h2>
+<pre>FORMAT_JSON : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="constant_FORMAT_XML"> </a><div class="element clickable constant  constant_FORMAT_XML" data-toggle="collapse" data-target=".constant_FORMAT_XML .collapse">
+<h2>The constant for XML formatted response</h2>
+<pre>FORMAT_XML : string</pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
 </div>
@@ -396,7 +398,7 @@ resource for an API call.</h2>
 <div class="row"><footer class="span12">
             Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
             Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a12</a> and<br>
-            generated on 2013-02-11T17:58:31-06:00.<br></footer></div>
+            generated on 2013-02-12T01:43:14-06:00.<br></footer></div>
 </div>
 </body>
 </html>
