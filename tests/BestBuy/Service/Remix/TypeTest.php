@@ -34,13 +34,22 @@ class TypeTest extends \PHPUnit_Framework_TestCase
      */
     public function testAssignFilter()
     {
+        // testing scalar
         $scalarType = new Type('products', 123, \BestBuy\Service\Remix::FORMAT_XML);
+        $this->assertAttributeEquals(123, 'identifier', $scalarType);
 
+        // testing vector
         $params = array('id=123');
         $vectorType = new Type('stores', $params, \BestBuy\Service\Remix::FORMAT_XML);
-
-        $this->assertAttributeEquals(123, 'identifier', $scalarType);
         $this->assertAttributeEquals($params, 'params', $vectorType);
+
+        // testing error
+        $params = new \StdClass();
+        try {
+            $objType = new Type('stores', $params, \BestBuy\Service\Remix::FORMAT_XML);
+        } catch (\Exception $e) {
+            $this->assertInstanceOf('\BestBuy\Service\Remix\Type\Exception', $e);
+        }
     }
 
     /**
@@ -48,13 +57,19 @@ class TypeTest extends \PHPUnit_Framework_TestCase
      */
     public function testToString()
     {
+        // testing scalar
         $scalarType = new Type('products', 123, \BestBuy\Service\Remix::FORMAT_XML);
+        $this->assertEquals('products/123.xml', $scalarType->toString());
 
+        // testing vector
         $params = array('id=123');
         $vectorType = new Type('stores', $params, \BestBuy\Service\Remix::FORMAT_XML);
-
-        $this->assertEquals('products/123.xml', $scalarType->toString());
         $this->assertEquals('stores(id=123)', $vectorType->toString());
+
+        // testing empty vector
+        $params = array();
+        $emptyVectorType = new Type('stores', $params, \BestBuy\Service\Remix::FORMAT_XML);
+        $this->assertEquals('stores', $emptyVectorType->toString());
     }
 
     /**
@@ -62,9 +77,11 @@ class TypeTest extends \PHPUnit_Framework_TestCase
      */
     public function testValidateFormat()
     {
+        // testing success
         $type = new Type('products', 123, \BestBuy\Service\Remix::FORMAT_XML);
         $this->assertAttributeEquals(\BestBuy\Service\Remix::FORMAT_XML, 'format', $type);
 
+        // testing failure
         try {
             new Type('products', 123, 'badformat');
         } catch (Exception $e) {
@@ -77,9 +94,11 @@ class TypeTest extends \PHPUnit_Framework_TestCase
      */
     public function testValidateType()
     {
+        // testing success
         $type = new Type('products', 123, \BestBuy\Service\Remix::FORMAT_XML);
         $this->assertAttributeEquals('products', 'type', $type);
 
+        // testing failure
         try {
             new Type('badtype', 123, \BestBuy\Service\Remix::FORMAT_XML);
         } catch (Exception $e) {

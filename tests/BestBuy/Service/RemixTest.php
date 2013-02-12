@@ -42,6 +42,18 @@ class RemixTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Tests the magic method __call
+     */
+    public function test__Call()
+    {
+        $this->remix->active('false');
+        $this->assertAttributeEquals(array('active' => 'false'), 'params', $this->remix);
+
+        $this->remix->active(array('false', 'true'));
+        $this->assertAttributeEquals(array('active' => 'false,true'), 'params', $this->remix);
+    }
+
+    /**
      * Tests clearing the params
      */
     public function testClear()
@@ -69,10 +81,15 @@ class RemixTest extends \PHPUnit_Framework_TestCase
      */
     public function testParams()
     {
+        // test setting initially
         $params = array('a' => 'b', 'c' => 'd');
         $this->remix->params($params);
-
         $this->assertAttributeEquals($params, 'params', $this->remix);
+
+        // test appending
+        $newParams = array('e' => array('test', 'face'));
+        $this->remix->params($newParams);
+        $this->assertAttributeEquals(array('e' => 'test,face'), 'params', $this->remix);
     }
 
     /**
@@ -102,8 +119,15 @@ class RemixTest extends \PHPUnit_Framework_TestCase
      */
     public function testQuery()
     {
-        $this->remix->store(281);
+        // test the exception if we're not doing anything proper
+        try {
+            $this->remix->query();
+        } catch (\Exception $e) {
+            $this->assertInstanceOf('\BestBuy\Service\Remix\Exception', $e);
+        }
 
+        // test valid search
+        $this->remix->store(281);
         $this->assertInstanceOf('\BestBuy\Service\Remix\Response', $this->remix->query());
     }
 

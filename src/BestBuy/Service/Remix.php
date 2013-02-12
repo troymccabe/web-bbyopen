@@ -216,7 +216,7 @@ class Remix
     /**
      * Submits a query to the Remix API and returns the {@link \BestBuy\Service\Remix\Response response}.
      *
-     * @return \BestBuy\Service\Remix
+     * @return \BestBuy\Service\Remix\Response
      * @throws \BestBuy\Service\Remix\Exception
      */
     public function query()

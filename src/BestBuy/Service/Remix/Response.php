@@ -1,5 +1,4 @@
 <?php
-
 /**
  * LICENSE
  *
@@ -212,6 +211,16 @@ class Response
     }
 
     /**
+     * Checks the HTTP status code of the response for 4xx or 5xx class errors.
+     *
+     * @return boolean
+     */
+    public function isError()
+    {
+        return (4 == ($type = floor($this->metadata['http_code'] / 100)) || 5 == $type);
+    }
+
+    /**
      * Returns response document wrapped in a {@link http://us2.php.net/simplexml SimpleXml} object.
      *
      * @return \SimpleXmlElement|boolean
@@ -220,21 +229,11 @@ class Response
     {
         try {
             $xml = @new \SimpleXmlElement($this->data);
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             return false;
         }
 
         return $xml;
-    }
-
-    /**
-     * Checks the HTTP status code of the response for 4xx or 5xx class errors.
-     *
-     * @return boolean
-     */
-    public function isError()
-    {
-        return (4 == ($type = floor($this->metadata['http_code'] / 100)) || 5 == $type);
     }
 
     /**
