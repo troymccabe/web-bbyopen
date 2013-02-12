@@ -65,3 +65,15 @@ Documentation was generated using PhpDocumentor [<http://www.phpdoc.org/>].
 Documentation may be regenerated as follows (from the base directory):
 
 `phpdoc -d ./src -t ./docs/phpdoc`
+
+# TESTS
+
+Tests are written for PHPUnit [<https://github.com/sebastianbergmann/phpunit/>]
+
+Tests can be run as follows (from the base directory):
+
+`curl -s https://getcomposer.org/installer | php`
+`php composer.phar install --dev`
+`./vendor/bin/phpunit --bootstrap ./tests/bootstrap.php ./tests`
+And you can generate coverage documents by entering:
+`./vendor/bin/phpunit --coverage-html ./tests/report ./tests`
