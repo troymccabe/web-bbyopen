@@ -1,3 +1,17 @@
+# Mac
+.DS_Store
+
+# PHPStorm
 .idea
-config.php
+
+# PHPUnit
+phpunit.xml
+build
+
+# Composer
 composer.lock
+*.phar
+
+# General
+vendor
+data
