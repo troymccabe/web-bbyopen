@@ -6,7 +6,9 @@ Best Buy's Remix API (<http://remix.bestbuy.com/>).
 Best Buy provides the following resources to API users:
 
 Developer Network: <http://remix.bestbuy.com/>
+
 API Documentation: <http://remix.bestbuy.com/docs>
+
 Discussion Forums: <http://remix.bestbuy.com/forum>
 
 # DISCLAIMER
