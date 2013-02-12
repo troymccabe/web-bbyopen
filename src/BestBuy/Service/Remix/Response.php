@@ -31,7 +31,7 @@ namespace BestBuy\Service\Remix;
  * BestBuy\Service\Remix\Response represents a response to a
  * {@link http://remix.bestbuy.com Remix} API call.
  *
- * In addition to the $_data property (accessible via $response->data or $response->getData()),
+ * In addition to the $data property (accessible via $response->data or $response->getData()),
  * a BestBuy\Service\Remix\Response provides the following HTTP metadata collected by
  * {@link http://curl.haxx.se/ cURL}:
  *
@@ -142,7 +142,7 @@ class Response
     protected $data = '';
 
     /**
-     * Creates a new BestBuy\Service\Remix\Response object.
+     * Creates a new \BestBuy\Service\Remix\Response object.
      *
      * @param string $data Response body (if any) returned by Remix
      * @param array  $meta HTTP {@link http://us3.php.net/curl_getinfo curl_getinfo() metadata}

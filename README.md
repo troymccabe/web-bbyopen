@@ -19,7 +19,7 @@ Troy McCabe is affiliated with Best Buy
 
 Bug reports, as well as feature requests, may be submitted at:
 
-<https://bitbucket.org/troymccabe/web-bbyopen/issue/>
+<https://bitbucket.org/troymccabe/web-bbyopen/issues/>
 
 Alternatively, you may email the developer directly: <troy.mccabe@geeksquad.com>
 

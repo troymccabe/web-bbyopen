@@ -1,5 +1,4 @@
 <?php
-
 /**
  * LICENSE
  *
@@ -78,7 +77,7 @@ class Type
      *
      * @var array
      */
-    protected static $formats = array('xml', 'json');
+    protected static $formats = array(\BestBuy\Service\Remix::FORMAT_XML, \BestBuy\Service\Remix::FORMAT_JSON);
 
     /**
      * Supported resource types
@@ -122,33 +121,22 @@ class Type
      * @param string       $type   'stores' or 'products'
      * @param array|string $filter String identifier (Store ID/Product SKU) or array of filters
      * @param string       $format 'xml' or 'json'; Only used when targeting an individual store or product
+     *
+     * @throws \BestBuy\Service\Remix\Type\Exception
      */
-    public function __construct($type, $filter, $format = 'xml')
+    public function __construct($type, $filter, $format = \BestBuy\Service\Remix::FORMAT_XML)
     {
-        // Assign type ('stores' or 'products')
-        if (!in_array(($type = strtolower(trim($type))), self::$types)) {
-            throw new Type\Exception(sprintf('Invalid type "%s" (%s)', $type, join(', ', self::$types)));
-        }
+        // validate and set the format
+        $format = strtolower(trim($format));
+        $this->validateFormat($format);
+        $this->format = $format;
 
+        // validate and set the type
+        $type = strtolower(trim($type));
+        $this->validateType($type);
         $this->type = $type;
 
-        // Assign filter input as identifier (Store ID/Product SKU) or filter parameters
-        if (is_scalar($filter)) {
-            $this->identifier = trim((string)$filter);
-        } else {
-            if (is_array($filter)) {
-                $this->params = $filter;
-            } else {
-                throw new Type\Exception('$filter must be a string (identifier) or an array (parameters)');
-            }
-        }
-
-        // Assign format ('xml' or 'json')
-        if (!in_array(($format = strtolower(trim($format))), self::$formats)) {
-            throw new Type\Exception(sprintf('Invalid format "%s" (%s)', $format, join(', ', self::$formats)));
-        }
-
-        $this->format = $format;
+        $this->assignFilter($filter);
     }
 
     /**
@@ -183,5 +171,53 @@ class Type
         }
 
         return $this->type;
+    }
+
+    /**
+     * Assigns the filter for the construction of the request uri
+     *
+     * @param string|array $filter
+     * @throws Type\Exception
+     */
+    protected function assignFilter($filter)
+    {
+        // Assign filter input as identifier (Store ID/Product SKU) or filter parameters
+        if (is_scalar($filter)) {
+            $this->identifier = trim((string)$filter);
+        } else {
+            if (is_array($filter)) {
+                $this->params = $filter;
+            } else {
+                throw new Type\Exception('$filter must be a string (identifier) or an array (parameters)');
+            }
+        }
+    }
+
+    /**
+     * Validates that the format requested is a valid format
+     *
+     * @param string $format \BestBuy\Service\Remix::FORMAT_XML or \BestBuy\Service\Remix::FORMAT_JSON
+     * @throws Type\Exception
+     */
+    protected function validateFormat($format)
+    {
+        // Assign format ('xml' or 'json')
+        if (!in_array($format, self::$formats)) {
+            throw new Type\Exception(sprintf('Invalid format "%s" (%s)', $format, join(', ', self::$formats)));
+        }
+    }
+
+    /**
+     * Validates that the type provided is a valid type
+     *
+     * @param string $type 'stores' or 'products'
+     * @throws Type\Exception
+     */
+    protected function validateType($type)
+    {
+        // Assign type ('stores' or 'products')
+        if (!in_array($type, self::$types)) {
+            throw new Type\Exception(sprintf('Invalid type "%s" (%s)', $type, join(', ', self::$types)));
+        }
     }
 }

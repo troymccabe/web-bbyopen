@@ -40,26 +40,50 @@ class Remix
 {
     /**
      * Entry point for all API requests
+     *
+     * @var string
      */
     const API_BASE = 'http://api.remix.bestbuy.com/v1';
 
     /**
+     * The constant for JSON formatted response
+     *
+     * @var string
+     */
+    const FORMAT_JSON = 'json';
+
+    /**
+     * The constant for XML formatted response
+     *
+     * @var string
+     */
+    const FORMAT_XML = 'xml';
+
+    /**
      * Key used to identify a client application to the API service
+     *
+     * @var string
      */
     protected $apiKey;
 
     /**
-     * Length of time (in seconds) to wait for a response to an API call
-     */
-    protected $timeout = 10;
-
-    /**
      * Query parameters to be appended to an API request URI
+     *
+     * @var array
      */
     protected $params = array();
 
     /**
+     * Length of time (in seconds) to wait for a response to an API call
+     *
+     * @var int
+     */
+    protected $timeout = 10;
+
+    /**
      * Resource types (e.g. stores, products) to be targeted by an API call
+     *
+     * @var array
      */
     protected $types = array();
 
@@ -93,99 +117,7 @@ class Remix
             }
 
             $this->params[$method] = $args[0];
-
-            return $this;
         }
-    }
-
-    /**
-     * Targets the (optionally filtered) {@link http://remix.bestbuy.com/docs/Types/Products products}
-     * resource for an API call.
-     *
-     * May be used in combination with {@link stores()} to check for
-     * {@link http://remix.bestbuy.com/docs/Types/Store_Availability store availability}.
-     *
-     * @param array $filters One or more criteria used to filter results
-     *
-     * @return \BestBuy\Service\Remix
-     * @throws \BestBuy\Service\Remix\Exception
-     */
-    public function products(array $filters = array())
-    {
-        $this->types['products'] = self::buildType('products', $filters);
-
-        return $this;
-    }
-
-    /**
-     * Targets a specific {@link http://remix.bestbuy.com/docs/Types/Products product}
-     * resource (by SKU #) for an API call.
-     *
-     * @param string $sku    Identifier (SKU #) of the product to be targeted
-     * @param string $format Desired response format ('xml' or 'json')
-     *
-     * @return \BestBuy\Service\Remix
-     * @throws \BestBuy\Service\Remix\Exception
-     */
-    public function product($sku, $format = 'xml')
-    {
-        $this->types['products'] = self::buildType('products', $sku, $format);
-
-        return $this;
-    }
-
-    /**
-     * Targets the (optionally filtered) {@link http://remix.bestbuy.com/docs/Types/Stores stores}
-     * resource for an API call.
-     *
-     * May be used in combination with {@link products()} to check for
-     * {@link http://remix.bestbuy.com/docs/Types/Store_Availability store availability}.
-     *
-     * @param array $filters One or more criteria used to filter results
-     *
-     * @return \BestBuy\Service\Remix
-     * @throws \BestBuy\Service\Remix\Exception
-     */
-    public function stores(array $filters = array())
-    {
-        $this->types['stores'] = self::buildType('stores', $filters);
-
-        return $this;
-    }
-
-    /**
-     * Targets a specific {@link http://remix.bestbuy.com/docs/Types/Stores store}
-     * resource (by Store ID) for an API call.
-     *
-     * @param string $storeId Identifier (Store ID) of the store to be targeted
-     * @param string $format  Desired response format ('xml' or 'json')
-     *
-     * @return \BestBuy\Service\Remix
-     * @throws \BestBuy\Service\Remix\Exception
-     */
-    public function store($storeId, $format = 'xml')
-    {
-        $this->types['stores'] = new Remix\Type('stores', $storeId, $format);
-
-        return $this;
-    }
-
-    /**
-     * Assigns one or more query parameters (as name/value pairs) to be included with an API call.
-     *
-     * @param array $params Name/value pairs to be assigned as query parameters
-     *
-     * @return \BestBuy\Service\Remix
-     */
-    public function params(array $params)
-    {
-        foreach ($params as $key => $value) {
-            if (is_array($value)) {
-                $params[$key] = join(',', $value);
-            }
-        }
-
-        $this->params = $params;
 
         return $this;
     }
@@ -225,20 +157,58 @@ class Remix
     }
 
     /**
-     * Sets the amount of time (in seconds) to wait for a response to an API call.
+     * Assigns one or more query parameters (as name/value pairs) to be included with an API call.
      *
-     * @param integer $timeout Length of time (in seconds) to wait before timing out
+     * @param array $params Name/value pairs to be assigned as query parameters
      *
      * @return \BestBuy\Service\Remix
-     * @throws \BestBuy\Service\Remix\Exception
      */
-    public function setTimeout($timeout)
+    public function params(array $params)
     {
-        if (0 >= $timeout || !(is_numeric($timeout) && ($f = floatval($timeout)) == intval($f))) {
-            throw new Remix\Exception("Timeout ({$timeout}) must be a positive integer");
+        foreach ($params as $key => $value) {
+            if (is_array($value)) {
+                $params[$key] = join(',', $value);
+            }
         }
 
-        $this->timeout = $timeout;
+        $this->params = $params;
+
+        return $this;
+    }
+
+    /**
+     * Targets a specific {@link http://remix.bestbuy.com/docs/Types/Products product}
+     * resource (by SKU #) for an API call.
+     *
+     * @param string $sku    Identifier (SKU #) of the product to be targeted
+     * @param string $format Desired response format (FORMAT_XML or FORMAT_JSON)
+     *
+     * @return \BestBuy\Service\Remix
+     * @throws \BestBuy\Service\Remix\Type\Exception
+     */
+    public function product($sku, $format = Remix::FORMAT_XML)
+    {
+        $this->types['products'] = new Remix\Type('products', $sku, $format);
+
+        return $this;
+    }
+
+    /**
+     * Targets the (optionally filtered) {@link http://remix.bestbuy.com/docs/Types/Products products}
+     * resource for an API call.
+     *
+     * May be used in combination with {@link stores()} to check for
+     * {@link http://remix.bestbuy.com/docs/Types/Store_Availability store availability}.
+     *
+     * @param array $filters One or more criteria used to filter results
+     * @param string $format Desired response format (FORMAT_XML or FORMAT_JSON)
+     *
+     * @return \BestBuy\Service\Remix
+     * @throws \BestBuy\Service\Remix\Type\Exception
+     */
+    public function products(array $filters = array(), $format = Remix::FORMAT_XML)
+    {
+        $this->types['products'] = new Remix\Type('products', $filters, $format);
 
         return $this;
     }
@@ -273,22 +243,58 @@ class Remix
     }
 
     /**
-     * Builds a resource {@link \BestBuy\Service\Remix\Type type} to be targeted for an API call.
+     * Targets a specific {@link http://remix.bestbuy.com/docs/Types/Stores store}
+     * resource (by Store ID) for an API call.
      *
-     * @param string       $type   Desired resource type ('stores' or 'products')
-     * @param string|array $filter Identifier or filter array used to target this type resource
-     * @param string       $format Desired response format ('json' or 'xml')
+     * @param string $storeId Identifier (Store ID) of the store to be targeted
+     * @param string $format  Desired response format (FORMAT_XML or FORMAT_JSON)
      *
-     * @return \BestBuy\Service\Remix\Type
+     * @return \BestBuy\Service\Remix
+     * @throws \BestBuy\Service\Remix\Type\Exception
      */
-    protected static function buildType($type, $filter, $format = 'xml')
+    public function store($storeId, $format = Remix::FORMAT_XML)
     {
-        try {
-            $type = new Remix\Type($type, $filter, $format);
-        } catch (Remix\Type\Exception $e) {
-            throw new Remix\Exception(sprintf("Invalid '%s' target:\n%s", $type, $e->getMessage()));
+        $this->types['stores'] = new Remix\Type('stores', $storeId, $format);
+
+        return $this;
+    }
+
+    /**
+     * Targets the (optionally filtered) {@link http://remix.bestbuy.com/docs/Types/Stores stores}
+     * resource for an API call.
+     *
+     * May be used in combination with {@link products()} to check for
+     * {@link http://remix.bestbuy.com/docs/Types/Store_Availability store availability}.
+     *
+     * @param array $filters One or more criteria used to filter results
+     * @param string $format Desired response format (FORMAT_XML or FORMAT_JSON)
+     *
+     * @return \BestBuy\Service\Remix
+     * @throws \BestBuy\Service\Remix\Type\Exception
+     */
+    public function stores(array $filters = array(), $format = Remix::FORMAT_XML)
+    {
+        $this->types['stores'] = new Remix\Type('stores', $filters, $format);
+
+        return $this;
+    }
+
+    /**
+     * Sets the amount of time (in seconds) to wait for a response to an API call.
+     *
+     * @param integer $timeout Length of time (in seconds) to wait before timing out
+     *
+     * @return \BestBuy\Service\Remix
+     * @throws \BestBuy\Service\Remix\Exception
+     */
+    public function setTimeout($timeout)
+    {
+        if (0 >= $timeout || !(is_numeric($timeout) && ($f = floatval($timeout)) == intval($f))) {
+            throw new Remix\Exception("Timeout ({$timeout}) must be a positive integer");
         }
 
-        return $type;
+        $this->timeout = $timeout;
+
+        return $this;
     }
 }
