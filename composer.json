@@ -1,5 +1,5 @@
 {
-    "name": "troymccabe/web-bbyopen",
+    "name": "troymccabe/bbyopen",
     "description": "An adaptation of http://code.google.com/p/bestbuy-service-remix/ for making BBYOpen calls.",
     "type": "library",
     "keywords": ["bbyopen", "remix", "best buy", "bby", "geek squad"],
