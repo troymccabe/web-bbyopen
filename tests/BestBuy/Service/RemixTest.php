@@ -132,6 +132,35 @@ class RemixTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Tests the throttling control of the service
+     */
+    public function testRequestsPerSecond()
+    {
+        $this->remix->setRequestsPerSecond(2);
+
+        $start = time();
+        $this->remix->store(1)->query();
+        $this->remix->store(2)->query();
+        $this->remix->store(3)->query();
+        $this->remix->store(4)->query();
+        $this->remix->store(5)->query();
+        $this->remix->store(6)->query();
+        $end = time();
+
+        $this->assertGreaterThanOrEqual(2, $end - $start);
+    }
+
+    /**
+     * Tests setting requests per second
+     */
+    public function testSetRequestsPerSecond()
+    {
+        $this->remix->setRequestsPerSecond(20);
+
+        $this->assertAttributeEquals(20, 'requestsPerSecond', $this->remix);
+    }
+
+    /**
      * Tests getting a single store
      */
     public function testStore()

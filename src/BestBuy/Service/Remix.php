@@ -67,11 +67,32 @@ class Remix
     protected $apiKey;
 
     /**
+     * The time of the last BBYOpen query
+     *
+     * @var int
+     */
+    protected $lastQueryTime;
+
+    /**
      * Query parameters to be appended to an API request URI
      *
      * @var array
      */
     protected $params = array();
+
+    /**
+     * The number of requests allowed to be executed in 1 second
+     *
+     * @var int
+     */
+    protected $requestsPerSecond = 5;
+
+    /**
+     * The requests executed during the current second
+     *
+     * @var int
+     */
+    protected $requestsThisSecond = 0;
 
     /**
      * Length of time (in seconds) to wait for a response to an API call
@@ -225,21 +246,42 @@ class Remix
             throw new Remix\Exception('At least one resource (e.g. products) must be targeted to perform an API query');
         }
 
-        $ch = curl_init();
+        // if the last query time is the same (in the same second) and we're at the max requests per second
+        // sleep for a second and resent the requests this second
+        $queryTime = time();
+        if ($this->lastQueryTime == $queryTime && $this->requestsThisSecond == $this->requestsPerSecond) {
+            sleep(1);
+            $this->requestsThisSecond = 0;
+        }
 
+        // increment this for next time
+        $this->lastQueryTime = $queryTime;
+        $this->requestsThisSecond++;
+
+        // make the request
+        $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $this->getTargetUri());
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, true);
         curl_setopt($ch, CURLOPT_TIMEOUT, $this->timeout);
-
         $data = curl_exec($ch);
         $meta = curl_getinfo($ch);
-
         curl_close($ch);
 
+        // clear the request stuff
         $this->clear();
 
         return new Remix\Response($data, $meta);
+    }
+
+    /**
+     * Sets the requests per second able to be executed
+     *
+     * @param int $requestsPerSecond The requests per second
+     */
+    public function setRequestsPerSecond($requestsPerSecond)
+    {
+        $this->requestsPerSecond = $requestsPerSecond;
     }
 
     /**
