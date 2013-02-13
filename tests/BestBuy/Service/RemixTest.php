@@ -1,11 +1,5 @@
 <?php
 /**
- * LICENSE
- *
- * This source file is subject to the BSD license bundled with this package.
- *
- * Available online: {@link http://www.opensource.org/licenses/bsd-license.php}
- *
  * @category   BestBuy
  * @package    BestBuy\Service\Remix
  * @author     Troy McCabe <troy.mccabe@geeksquad.com>
