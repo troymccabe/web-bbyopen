@@ -1,0 +1,68 @@
+<?php
+/**
+ * @category   BestBuy
+ * @package    BestBuy\Service\Remix
+ * @author     Troy McCabe <troy.mccabe@geeksquad.com>
+ * @copyright  Copyright (c) 2013 {@link http://geeksquad.com Geek Squad}
+ * @license    http://www.opensource.org/licenses/bsd-license.php
+ * @version    $Id: RemixTest.php 23 2010-01-14 15:27:13Z troymccabe $
+ */
+
+namespace BestBuy\Service;
+
+use BestBuy\Service\Remix\Exception;
+
+/**
+ * Provides a mock object for {@link \BestBuy\Service\Remix}
+ *
+ * You can use this in your own applications to test with a fake version that doesn't actually make
+ * requests to bbyopen
+ *
+ * @category   BestBuy
+ * @package    BestBuy\Service\Remix
+ * @author     Troy McCabe <troy.mccabe@geeksquad.com>
+ * @copyright  Copyright (c) 2013 {@link http://geeksquad.com Geek Squad}
+ */
+class RemixMock extends Remix
+{
+    /**
+     * The list of testcases and their responses that we have registered
+     *
+     * @var array
+     */
+    protected $testCases = array();
+
+    /**
+     * Registers a test case that we can test against and provide a response for
+     *
+     * @param string $uri The uri to test against
+     * @param string $data The data to respond with
+     * @param array $meta The headers to respond with
+     */
+    public function registerTestCase($uri, $data, $meta = array())
+    {
+        $this->testCases[$uri] = array(
+            'data' => $data,
+            'meta' => $meta
+        );
+    }
+
+    /**
+     * Overrides the query() method to provide the test case responses
+     *
+     * @return Remix\Response
+     * @throws Remix\Exception
+     */
+    public function query()
+    {
+        // find a testcase that matches the uri, and send that as a response
+        foreach ($this->testCases as $uri => $packet) {
+            if ($uri == $this->getTargetUri()) {
+                return new Remix\Response($packet['data'], $packet['meta']);
+            }
+        }
+
+        // explode if we didn't find any
+        throw new Exception('Failed to find testcase matching any registered URIs');
+    }
+}
