@@ -41,7 +41,8 @@ class RemixMock extends Remix
      */
     public function registerTestCase($uri, $data, $meta = array())
     {
-        $this->testCases[$uri] = array(
+        $this->testCases[] = array(
+            'uri' => $uri,
             'data' => $data,
             'meta' => $meta
         );
@@ -58,13 +59,13 @@ class RemixMock extends Remix
         $uri = $this->getTargetUri();
 
         // find a testcase that matches the uri, and send that as a response
-        foreach ($this->testCases as $uri => $packet) {
-            if ($uri == $uri) {
+        foreach ($this->testCases as $packet) {
+            if ($uri == $packet['uri']) {
                 return new Remix\Response($packet['data'], $packet['meta']);
             }
         }
 
         // explode if we didn't find any
-        throw new Exception('Failed to find testcase matching any registered URIs. URI provided: ' . $uri);
+        throw new Exception('Failed to find test case matching any registered URIs. URI expected: ' . $uri);
     }
 }
