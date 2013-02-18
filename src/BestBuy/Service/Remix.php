@@ -339,4 +339,43 @@ class Remix
 
         return $this;
     }
+
+    /**
+     * Sets the page that we're currently retrieving
+     *
+     * @param int $page
+     * @return \BestBuy\Service\Remix
+     */
+    public function page($page)
+    {
+        $this->params['page'] = $page;
+
+        return $this;
+    }
+
+    /**
+     * Sets the size of the page to retrieve
+     *
+     * @param int $pageSize
+     * @return \BestBuy\Service\Remix
+     */
+    public function pageSize($pageSize)
+    {
+        $this->params['pageSize'] = $pageSize;
+
+        return $this;
+    }
+
+    /**
+     * Sets which details are shown in the response
+     *
+     * @param int $pageSize
+     * @return \BestBuy\Service\Remix
+     */
+    public function show($show)
+    {
+        $this->params['show'] = $show;
+
+        return $this;
+    }
 }

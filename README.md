@@ -1,15 +1,15 @@
 # INTRODUCTION
 
 `\BestBuy\Service\Remix` is a PHP library that supports interaction with
-Best Buy's Remix API (<http://remix.bestbuy.com/>).
+Best Buy's BBYOpen API (<https://bbyopen.com/>).
 
 Best Buy provides the following resources to API users:
 
-Developer Network: <http://remix.bestbuy.com/>
+Developer Network: <https://bbyopen.com/>
 
-API Documentation: <http://remix.bestbuy.com/docs>
+API Documentation: <https://bbyopen.com/bbyopen-apis-overview>
 
-Discussion Forums: <http://remix.bestbuy.com/forum>
+Discussion Forums: <https://bbyopen.com/forum>
 
 # DISCLAIMER
 
@@ -29,21 +29,21 @@ Alternatively, you may email the developer directly: <troy.mccabe@geeksquad.com>
 
     :::php
     $apiKey = '12345678'; // Your API key
-    $remix  = new \BestBuy\Service\Remix($apiKey);
+    $bbyOpen  = new \BestBuy\Service\Remix($apiKey);
 
     // Retrieve a list of stores within 10 miles of a zip code
-    $result = $remix->stores(array('area(10006,10)'))->query();
+    $result = $bbyOpen->stores(array('area(10006,10)'))->query();
 
     // Result objects may be implicitly cast as strings
     echo $result;
 
     // Retrieve a list of Movies containing the text "Bat"
-    $result = $remix->products(array('name=bat*', 'type=Movie'))->query();
+    $result = $bbyOpen->products(array('name=bat*', 'type=Movie'))->query();
 
     echo $result;
 
     // Retrieve fields from a list of Movies starting with "Bat" in JSON format
-    $result = $remix->products(array('type=Movie', 'name=bat*'))
+    $result = $bbyOpen->products(array('type=Movie', 'name=bat*'))
                     ->show(array('name','regularPrice','url', 'sku'))
                     ->format('json')
                     ->query();
@@ -51,7 +51,7 @@ Alternatively, you may email the developer directly: <troy.mccabe@geeksquad.com>
     echo $result;
 
     // Check for store availability of a Playstation 3 in a given area
-    $result = $remix->stores(array('area(10006,10)'))
+    $result = $bbyOpen->stores(array('area(10006,10)'))
                     ->products(array('sku=8982988'))
                     ->sort('distance')
                     ->query();
