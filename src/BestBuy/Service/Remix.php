@@ -172,7 +172,8 @@ class Remix
         }
 
         $params = array_merge($this->params, array('apiKey' => $this->apiKey));
-        $uri = sprintf('/%s?%s', join('+', $types), urldecode(http_build_query($params, '', '&')));
+        $uri = preg_replace('/\s+/', '%20',
+            sprintf('/%s?%s', join('+', $types), urldecode(http_build_query($params, '', '&'))));
 
         return self::API_BASE . $uri;
     }
