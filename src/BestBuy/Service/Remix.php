@@ -172,8 +172,7 @@ class Remix
         }
 
         $params = array_merge($this->params, array('apiKey' => $this->apiKey));
-        $uri = preg_replace('/\s+/', '%20',
-            sprintf('/%s?%s', join('+', $types), urldecode(http_build_query($params, '', '&'))));
+        $uri = sprintf('/%s?%s', join('+', $types), urldecode(http_build_query($params, '', '&')));
 
         return self::API_BASE . $uri;
     }
@@ -261,7 +260,7 @@ class Remix
 
         // make the request
         $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $this->getTargetUri());
+        curl_setopt($ch, CURLOPT_URL, preg_replace('/\s+/', '%20', $this->getTargetUri()));
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, true);
         curl_setopt($ch, CURLOPT_TIMEOUT, $this->timeout);
