@@ -174,7 +174,7 @@ class Remix
         $params = array_merge($this->params, array('apiKey' => $this->apiKey));
         $uri = sprintf('/%s?%s', join('+', $types), urldecode(http_build_query($params, '', '&')));
 
-        return self::API_BASE . $uri;
+        return (defined('BBYOPEN_URI') ? BBYOPEN_URI : self::API_BASE) . $uri;
     }
 
     /**

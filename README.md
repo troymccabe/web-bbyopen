@@ -58,6 +58,8 @@ Alternatively, you may email the developer directly: <troy.mccabe@geeksquad.com>
 
     echo $result;
 
+To override the root URI, you can define `BBYOPEN_URI`, which will replace `Remix::API_BASE` in the built URL.
+
 # DOCUMENTATION
 
 Documentation was generated using PhpDocumentor [<http://www.phpdoc.org/>].
