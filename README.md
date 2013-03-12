@@ -29,7 +29,7 @@ Alternatively, you may email the developer directly: <troy.mccabe@geeksquad.com>
 
     :::php
     $apiKey = '12345678'; // Your API key
-    $bbyOpen  = new \BestBuy\Service\BBYOpen($apiKey);
+    $bbyOpen  = new \BestBuy\Service\BBYOpen\Client($apiKey);
 
     // Retrieve a list of stores within 10 miles of a zip code
     $result = $bbyOpen->stores(array('area(10006,10)'))->query();
