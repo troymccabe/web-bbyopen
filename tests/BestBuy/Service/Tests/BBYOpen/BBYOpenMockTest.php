@@ -8,7 +8,9 @@
  * @version    $Id: BBYOpenTest.php 23 2010-01-14 15:27:13Z troymccabe $
  */
 
-namespace BestBuy\Service\Tests;
+namespace BestBuy\Service\BBYOpen\Tests;
+
+use BestBuy\Service\BBYOpen\ClientMock;
 
 /**
  * Provides test cases for {@link \BestBuy\Service\BBYOpen}
@@ -18,14 +20,12 @@ namespace BestBuy\Service\Tests;
  * @author     Troy McCabe <troy.mccabe@geeksquad.com>
  * @copyright  Copyright (c) 2013 {@link http://geeksquad.com Geek Squad}
  */
-use BestBuy\Service\BBYOpenMock;
-
 class BBYOpenMockTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * The mock object
      *
-     * @var BBYOpenMock
+     * @var ClientMock
      */
     protected $mock;
 
@@ -36,7 +36,7 @@ class BBYOpenMockTest extends \PHPUnit_Framework_TestCase
     {
         parent::setUp();
 
-        $this->mock = new BBYOpenMock('foo');
+        $this->mock = new ClientMock('foo');
     }
 
     /**
@@ -64,7 +64,7 @@ class BBYOpenMockTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('baz', $response);
 
         try {
-            $mock = new BBYOpenMock('foo');
+            $mock = new ClientMock('foo');
             $mock->registerTestCase('bar', 'baz');
             $mock->query();
         } catch (\Exception $e) {

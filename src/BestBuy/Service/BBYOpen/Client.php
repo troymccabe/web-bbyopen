@@ -23,7 +23,7 @@
  * @version    $Id: BBYOpen.php 23 2010-01-14 15:27:13Z mattwilliamsnyc $
  */
 
-namespace BestBuy\Service;
+namespace BestBuy\Service\BBYOpen;
 
 /**
  * {@link \BestBuy\Service\BBYOpen} provides methods for interacting with (version 1 of)
@@ -36,7 +36,7 @@ namespace BestBuy\Service;
  * @author     Troy McCabe (v2.0+) <troy.mccabe@geeksquad.com>
  * @copyright  Copyright (c) 2008 {@link http://mattwilliamsnyc.com Matt Williams}
  */
-class BBYOpen
+class Client
 {
     /**
      * Entry point for all API requests
@@ -128,7 +128,7 @@ class BBYOpen
      * @param string $method Name of the query parameter to which a value will be assigned
      * @param array  $args   List of arguments; the first value is assigned to the targeted query parameter
      *
-     * @return \BestBuy\Service\BBYOpen
+     * @return Client
      */
     public function __call($method, $args)
     {
@@ -146,7 +146,7 @@ class BBYOpen
     /**
      * Clears all targeted resource types and query parameters; called after every {@link query()}.
      *
-     * @return \BestBuy\Service\BBYOpen
+     * @return Client
      */
     public function clear()
     {
@@ -182,7 +182,7 @@ class BBYOpen
      *
      * @param array $params Name/value pairs to be assigned as query parameters
      *
-     * @return \BestBuy\Service\BBYOpen
+     * @return Client
      */
     public function params(array $params)
     {
@@ -204,12 +204,12 @@ class BBYOpen
      * @param string $sku    Identifier (SKU #) of the product to be targeted
      * @param string $format Desired response format (FORMAT_XML or FORMAT_JSON)
      *
-     * @return \BestBuy\Service\BBYOpen
+     * @return Client
      * @throws \BestBuy\Service\BBYOpen\Type\Exception
      */
-    public function product($sku, $format = BBYOpen::FORMAT_XML)
+    public function product($sku, $format = Client::FORMAT_XML)
     {
-        $this->types['products'] = new BBYOpen\Type('products', $sku, $format);
+        $this->types['products'] = new Type('products', $sku, $format);
 
         return $this;
     }
@@ -224,12 +224,12 @@ class BBYOpen
      * @param array $filters One or more criteria used to filter results
      * @param string $format Desired response format (FORMAT_XML or FORMAT_JSON)
      *
-     * @return \BestBuy\Service\BBYOpen
+     * @return Client
      * @throws \BestBuy\Service\BBYOpen\Type\Exception
      */
-    public function products(array $filters = array(), $format = BBYOpen::FORMAT_XML)
+    public function products(array $filters = array(), $format = Client::FORMAT_XML)
     {
-        $this->types['products'] = new BBYOpen\Type('products', $filters, $format);
+        $this->types['products'] = new Type('products', $filters, $format);
 
         return $this;
     }
@@ -243,7 +243,7 @@ class BBYOpen
     public function query()
     {
         if (!count($this->types)) {
-            throw new BBYOpen\Exception('At least one resource (e.g. products) must be targeted to perform an API query');
+            throw new Exception('At least one resource (e.g. products) must be targeted to perform an API query');
         }
 
         // if the last query time is the same (in the same second) and we're at the max requests per second
@@ -271,7 +271,7 @@ class BBYOpen
         // clear the request stuff
         $this->clear();
 
-        return new BBYOpen\Response($data, $meta);
+        return new Response($data, $meta);
     }
 
     /**
@@ -291,12 +291,12 @@ class BBYOpen
      * @param string $storeId Identifier (Store ID) of the store to be targeted
      * @param string $format  Desired response format (FORMAT_XML or FORMAT_JSON)
      *
-     * @return \BestBuy\Service\BBYOpen
+     * @return Client
      * @throws \BestBuy\Service\BBYOpen\Type\Exception
      */
-    public function store($storeId, $format = BBYOpen::FORMAT_XML)
+    public function store($storeId, $format = Client::FORMAT_XML)
     {
-        $this->types['stores'] = new BBYOpen\Type('stores', $storeId, $format);
+        $this->types['stores'] = new Type('stores', $storeId, $format);
 
         return $this;
     }
@@ -311,12 +311,12 @@ class BBYOpen
      * @param array $filters One or more criteria used to filter results
      * @param string $format Desired response format (FORMAT_XML or FORMAT_JSON)
      *
-     * @return \BestBuy\Service\BBYOpen
+     * @return Client
      * @throws \BestBuy\Service\BBYOpen\Type\Exception
      */
-    public function stores(array $filters = array(), $format = BBYOpen::FORMAT_XML)
+    public function stores(array $filters = array(), $format = Client::FORMAT_XML)
     {
-        $this->types['stores'] = new BBYOpen\Type('stores', $filters, $format);
+        $this->types['stores'] = new Type('stores', $filters, $format);
 
         return $this;
     }
@@ -326,55 +326,16 @@ class BBYOpen
      *
      * @param integer $timeout Length of time (in seconds) to wait before timing out
      *
-     * @return \BestBuy\Service\BBYOpen
+     * @return Client
      * @throws \BestBuy\Service\BBYOpen\Exception
      */
     public function setTimeout($timeout)
     {
         if (0 >= $timeout || !(is_numeric($timeout) && ($f = floatval($timeout)) == intval($f))) {
-            throw new BBYOpen\Exception("Timeout ({$timeout}) must be a positive integer");
+            throw new Exception("Timeout ({$timeout}) must be a positive integer");
         }
 
         $this->timeout = $timeout;
-
-        return $this;
-    }
-
-    /**
-     * Sets the page that we're currently retrieving
-     *
-     * @param int $page
-     * @return \BestBuy\Service\BBYOpen
-     */
-    public function page($page)
-    {
-        $this->params['page'] = $page;
-
-        return $this;
-    }
-
-    /**
-     * Sets the size of the page to retrieve
-     *
-     * @param int $pageSize
-     * @return \BestBuy\Service\BBYOpen
-     */
-    public function pageSize($pageSize)
-    {
-        $this->params['pageSize'] = $pageSize;
-
-        return $this;
-    }
-
-    /**
-     * Sets which details are shown in the response
-     *
-     * @param int $show
-     * @return \BestBuy\Service\BBYOpen
-     */
-    public function show($show)
-    {
-        $this->params['show'] = $show;
 
         return $this;
     }

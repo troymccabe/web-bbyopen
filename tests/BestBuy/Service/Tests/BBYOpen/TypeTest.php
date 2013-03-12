@@ -11,6 +11,10 @@
 
 namespace BestBuy\Service\BBYOpen\Tests;
 
+use BestBuy\Service\BBYOpen\Client;
+use BestBuy\Service\BBYOpen\Type;
+use BestBuy\Service\BBYOpen\Type\Exception;
+
 /**
  * Provides test cases for {@link \BestBuy\Service\BBYOpen\Type}
  *
@@ -20,11 +24,6 @@ namespace BestBuy\Service\BBYOpen\Tests;
  * @author     Troy McCabe <troy.mccabe@geeksquad.com>
  * @copyright  Copyright (c) 2013 {@link http://geeksquad.com Geek Squad}
  */
-
-use BestBuy\Service\BBYOpen\Type;
-use BestBuy\Service\BBYOpen\Type\Exception;
-use BestBuy\Service\BBYOpen;
-
 class TypeTest extends \PHPUnit_Framework_TestCase
 {
     /**
@@ -33,18 +32,18 @@ class TypeTest extends \PHPUnit_Framework_TestCase
     public function testAssignFilter()
     {
         // testing scalar
-        $scalarType = new Type('products', 123, BBYOpen::FORMAT_XML);
+        $scalarType = new Type('products', 123, Client::FORMAT_XML);
         $this->assertAttributeEquals(123, 'identifier', $scalarType);
 
         // testing vector
         $params = array('id=123');
-        $vectorType = new Type('stores', $params, BBYOpen::FORMAT_XML);
+        $vectorType = new Type('stores', $params, Client::FORMAT_XML);
         $this->assertAttributeEquals($params, 'params', $vectorType);
 
         // testing error
         $params = new \StdClass();
         try {
-            new Type('stores', $params, BBYOpen::FORMAT_XML);
+            new Type('stores', $params, Client::FORMAT_XML);
         } catch (\Exception $e) {
             $this->assertInstanceOf('\BestBuy\Service\BBYOpen\Type\Exception', $e);
         }
@@ -56,17 +55,17 @@ class TypeTest extends \PHPUnit_Framework_TestCase
     public function testToString()
     {
         // testing scalar
-        $scalarType = new Type('products', 123, BBYOpen::FORMAT_XML);
+        $scalarType = new Type('products', 123, Client::FORMAT_XML);
         $this->assertEquals('products/123.xml', $scalarType->toString());
 
         // testing vector
         $params = array('id=123');
-        $vectorType = new Type('stores', $params, BBYOpen::FORMAT_XML);
+        $vectorType = new Type('stores', $params, Client::FORMAT_XML);
         $this->assertEquals('stores(id=123)', $vectorType->toString());
 
         // testing empty vector
         $params = array();
-        $emptyVectorType = new Type('stores', $params, BBYOpen::FORMAT_XML);
+        $emptyVectorType = new Type('stores', $params, Client::FORMAT_XML);
         $this->assertEquals('stores', $emptyVectorType->toString());
     }
 
@@ -76,8 +75,8 @@ class TypeTest extends \PHPUnit_Framework_TestCase
     public function testValidateFormat()
     {
         // testing success
-        $type = new Type('products', 123, BBYOpen::FORMAT_XML);
-        $this->assertAttributeEquals(BBYOpen::FORMAT_XML, 'format', $type);
+        $type = new Type('products', 123, Client::FORMAT_XML);
+        $this->assertAttributeEquals(Client::FORMAT_XML, 'format', $type);
 
         // testing failure
         try {
@@ -93,12 +92,12 @@ class TypeTest extends \PHPUnit_Framework_TestCase
     public function testValidateType()
     {
         // testing success
-        $type = new Type('products', 123, BBYOpen::FORMAT_XML);
+        $type = new Type('products', 123, Client::FORMAT_XML);
         $this->assertAttributeEquals('products', 'type', $type);
 
         // testing failure
         try {
-            new Type('badtype', 123, BBYOpen::FORMAT_XML);
+            new Type('badtype', 123, Client::FORMAT_XML);
         } catch (Exception $e) {
             $this->assertInstanceOf('\BestBuy\Service\BBYOpen\Type\Exception', $e);
         }

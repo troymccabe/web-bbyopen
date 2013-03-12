@@ -11,6 +11,8 @@
 
 namespace BestBuy\Service\BBYOpen\Tests;
 
+use BestBuy\Service\BBYOpen\Client;
+
 /**
  * Provides test cases for {@link \BestBuy\Service\BBYOpen\Response}
  *
@@ -20,9 +22,6 @@ namespace BestBuy\Service\BBYOpen\Tests;
  * @author     Troy McCabe <troy.mccabe@geeksquad.com>
  * @copyright  Copyright (c) 2013 {@link http://geeksquad.com Geek Squad}
  */
-
-use BestBuy\Service\BBYOpen;
-
 class ResponseTest extends \PHPUnit_Framework_TestCase
 {
     /**
@@ -37,7 +36,7 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $bbyOpen = new BBYOpen(BBYOPEN_KEY);
+        $bbyOpen = new Client(BBYOPEN_KEY);
         $this->response = $bbyOpen->store(281)->query();
     }
 
@@ -95,7 +94,7 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(false, $this->response->isError());
 
         // make a new bbyopen to test failure
-        $bbyOpen = new BBYOpen(BBYOPEN_KEY);
+        $bbyOpen = new Client(BBYOPEN_KEY);
         $response = $bbyOpen->stores(array('thiskeydoesntexist=abc'))->query();
         $this->assertEquals(true, $response->isError());
     }
@@ -109,8 +108,8 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('\SimpleXMLElement', $this->response->toSimpleXml());
 
         // test failure
-        $bbyOpen = new BBYOpen(BBYOPEN_KEY);
-        $response = $bbyOpen->store(281, BBYOpen::FORMAT_JSON)->query();
+        $bbyOpen = new Client(BBYOPEN_KEY);
+        $response = $bbyOpen->store(281, Client::FORMAT_JSON)->query();
         $this->assertEquals(false, $response->toSimpleXml());
     }
 

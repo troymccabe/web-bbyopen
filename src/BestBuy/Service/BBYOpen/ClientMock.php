@@ -1,5 +1,19 @@
 <?php
 /**
+ * LICENSE
+ *
+ * This source file is subject to the BSD license bundled with this package.
+ *
+ * Available online: {@link http://www.opensource.org/licenses/bsd-license.php}
+ *
+ * If you did not receive a copy of the license, and are unable to obtain it,
+ * email {@link mailto:matt@mattwilliamsnyc.com matt@mattwilliamsnyc.com},
+ * and I will send you a copy.
+ *
+ * {@link http://mattwilliamsnyc.com Matt Williams}, the author,
+ * is neither affiliated with, nor endorsed by,
+ * {@link http://www.bestbuy.com/ Best Buy}.
+ *
  * @category   BestBuy
  * @package    BestBuy\Service\BBYOpen
  * @author     Troy McCabe <troy.mccabe@geeksquad.com>
@@ -7,10 +21,7 @@
  * @license    http://www.opensource.org/licenses/bsd-license.php
  * @version    $Id: BBYOpenMock.php 23 2010-01-14 15:27:13Z troymccabe $
  */
-
-namespace BestBuy\Service;
-
-use BestBuy\Service\BBYOpen\Exception;
+namespace BestBuy\Service\BBYOpen;
 
 /**
  * Provides a mock object for {@link \BestBuy\Service\BBYOpen}
@@ -23,7 +34,7 @@ use BestBuy\Service\BBYOpen\Exception;
  * @author     Troy McCabe <troy.mccabe@geeksquad.com>
  * @copyright  Copyright (c) 2013 {@link http://geeksquad.com Geek Squad}
  */
-class BBYOpenMock extends BBYOpen
+class ClientMock extends Client
 {
     /**
      * The list of testcases and their responses that we have registered
@@ -51,8 +62,8 @@ class BBYOpenMock extends BBYOpen
     /**
      * Overrides the query() method to provide the test case responses
      *
-     * @return BBYOpen\Response
-     * @throws BBYOpen\Exception
+     * @return Response
+     * @throws Exception
      */
     public function query()
     {
@@ -61,7 +72,7 @@ class BBYOpenMock extends BBYOpen
         // find a testcase that matches the uri, and send that as a response
         foreach ($this->testCases as $packet) {
             if ($uri == $packet['uri']) {
-                return new BBYOpen\Response($packet['data'], $packet['meta']);
+                return new Response($packet['data'], $packet['meta']);
             }
         }
 

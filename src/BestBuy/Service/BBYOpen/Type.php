@@ -42,8 +42,6 @@ namespace BestBuy\Service\BBYOpen;
  * @author     Troy McCabe (v2.0+) <troy.mccabe@geeksquad.com>
  * @copyright  Copyright (c) 2008 {@link http://mattwilliamsnyc.com Matt Williams}
  */
-use BestBuy\Service\BBYOpen;
-
 class Type
 {
     /**
@@ -79,7 +77,7 @@ class Type
      *
      * @var array
      */
-    protected static $formats = array(BBYOpen::FORMAT_XML, BBYOpen::FORMAT_JSON);
+    protected static $formats = array(Client::FORMAT_XML, Client::FORMAT_JSON);
 
     /**
      * Supported resource types
@@ -126,7 +124,7 @@ class Type
      *
      * @throws \BestBuy\Service\BBYOpen\Type\Exception
      */
-    public function __construct($type, $filter, $format = BBYOpen::FORMAT_XML)
+    public function __construct($type, $filter, $format = Client::FORMAT_XML)
     {
         // validate and set the format
         $format = strtolower(trim($format));
