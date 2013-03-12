@@ -25,7 +25,7 @@
         "ext-curl": "*"
     },
     "autoload": {
-        "psr-0": {"BestBuy\\Service\\Remix": "src/"}
+        "psr-0": {"BestBuy\\Service\\BBYOpen": "src/"}
     },
     "minimum-stability": "dev",
     "extra": {

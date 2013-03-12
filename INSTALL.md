@@ -14,7 +14,7 @@ The following composer.json will download and install the latest version of the 
 
 # SYSTEM REQUIREMENTS
 
-`\BestBuy\Service\Remix` requires PHP 5.3.0 or later and libcurl 7.10.5 or later.
+`\BestBuy\Service\BBYOpen` requires PHP 5.3.0 or later and libcurl 7.10.5 or later.
 
 You can find more information about installing curl here:
 

@@ -1,6 +1,6 @@
 # INTRODUCTION
 
-`\BestBuy\Service\Remix` is a PHP library that supports interaction with
+`\BestBuy\Service\BBYOpen` is a PHP library that supports interaction with
 Best Buy's BBYOpen API (<https://bbyopen.com/>).
 
 Best Buy provides the following resources to API users:
@@ -29,7 +29,7 @@ Alternatively, you may email the developer directly: <troy.mccabe@geeksquad.com>
 
     :::php
     $apiKey = '12345678'; // Your API key
-    $bbyOpen  = new \BestBuy\Service\Remix($apiKey);
+    $bbyOpen  = new \BestBuy\Service\BBYOpen($apiKey);
 
     // Retrieve a list of stores within 10 miles of a zip code
     $result = $bbyOpen->stores(array('area(10006,10)'))->query();
@@ -58,7 +58,7 @@ Alternatively, you may email the developer directly: <troy.mccabe@geeksquad.com>
 
     echo $result;
 
-To override the root URI, you can define `BBYOPEN_URI`, which will replace `Remix::API_BASE` in the built URL.
+To override the root URI, you can define `BBYOPEN_URI`, which will replace `BBYOpen::API_BASE` in the built URL.
 
 # DOCUMENTATION
 
@@ -66,7 +66,7 @@ Documentation was generated using PhpDocumentor [<http://www.phpdoc.org/>].
 
 Documentation may be regenerated as follows (from the base directory):
 
-`phpdoc -d ./src -t ./docs/phpdoc`
+`phpdoc`
 
 # TESTS
 

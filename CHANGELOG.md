@@ -1,4 +1,5 @@
-  * Version 2.0.0 (2013-02-??)
+  * Version 2.0.0 (2013-03-11)
+    * Remix -> BBYOpen
     * Updated to PHP 5.3+
     * Added composer support
 

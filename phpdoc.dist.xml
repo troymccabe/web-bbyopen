@@ -5,7 +5,7 @@
         <target>build/phpdoc</target>
     </parser>
     <transformer>
-        <target>docs</target>
+        <target>build/phpdoc</target>
     </transformer>
     <transformations>
         <template name="responsive" />
