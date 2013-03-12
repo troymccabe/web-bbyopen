@@ -369,7 +369,7 @@ class BBYOpen
     /**
      * Sets which details are shown in the response
      *
-     * @param int $pageSize
+     * @param int $show
      * @return \BestBuy\Service\BBYOpen
      */
     public function show($show)

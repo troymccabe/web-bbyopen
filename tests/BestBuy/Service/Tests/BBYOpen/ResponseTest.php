@@ -1,34 +1,34 @@
 <?php
 /**
  * @category   BestBuy
- * @package    BestBuy\Service\Remix
+ * @package    BestBuy\Service\BBYOpen
  * @subpackage Response
  * @author     Troy McCabe <troy.mccabe@geeksquad.com>
  * @copyright  Copyright (c) 2013 {@link http://geeksquad.com Geek Squad}
  * @license    http://www.opensource.org/licenses/bsd-license.php
- * @version    $Id: RemixTest.php 23 2010-01-14 15:27:13Z troymccabe $
+ * @version    $Id: ResponseTest.php 23 2010-01-14 15:27:13Z troymccabe $
  */
 
-namespace BestBuy\Service\Remix;
+namespace BestBuy\Service\BBYOpen\Tests;
 
 /**
- * Provides test cases for {@link \BestBuy\Service\Remix\Response}
+ * Provides test cases for {@link \BestBuy\Service\BBYOpen\Response}
  *
  * @category   BestBuy
- * @package    BestBuy\Service\Remix
+ * @package    BestBuy\Service\BBYOpen
  * @subpackage Response
  * @author     Troy McCabe <troy.mccabe@geeksquad.com>
  * @copyright  Copyright (c) 2013 {@link http://geeksquad.com Geek Squad}
  */
 
-use BestBuy\Service\Remix;
+use BestBuy\Service\BBYOpen;
 
 class ResponseTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * A response used for testing
      *
-     * @var \BestBuy\Service\Remix\Response
+     * @var \BestBuy\Service\BBYOpen\Response
      */
     protected $response;
 
@@ -37,8 +37,8 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $remix = new Remix('uh592qch6yz3fwvskezru7cr');
-        $this->response = $remix->store(281)->query();
+        $bbyOpen = new BBYOpen(BBYOPEN_KEY);
+        $this->response = $bbyOpen->store(281)->query();
     }
 
     /**
@@ -94,9 +94,9 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
         // testing that we don't have an error
         $this->assertEquals(false, $this->response->isError());
 
-        // make a new remix to test failure
-        $remix = new Remix('uh592qch6yz3fwvskezru7cr');
-        $response = $remix->stores(array('thiskeydoesntexist=abc'))->query();
+        // make a new bbyopen to test failure
+        $bbyOpen = new BBYOpen(BBYOPEN_KEY);
+        $response = $bbyOpen->stores(array('thiskeydoesntexist=abc'))->query();
         $this->assertEquals(true, $response->isError());
     }
 
@@ -109,8 +109,8 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('\SimpleXMLElement', $this->response->toSimpleXml());
 
         // test failure
-        $remix = new Remix('uh592qch6yz3fwvskezru7cr');
-        $response = $remix->store(281, \BestBuy\Service\Remix::FORMAT_JSON)->query();
+        $bbyOpen = new BBYOpen(BBYOPEN_KEY);
+        $response = $bbyOpen->store(281, BBYOpen::FORMAT_JSON)->query();
         $this->assertEquals(false, $response->toSimpleXml());
     }
 
