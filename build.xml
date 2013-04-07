@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="BBYOpen-Wrapper" default="phpunit" basedir="." description="BBYOpen Wrapper">
+    <target name="phpdoc">
+        <phpdoc2 title="BBYOpen source documentation" destdir="./build/phpdoc" template="new-black">
+            <fileset dir="./src">
+                <include name="**/*.php" />
+            </fileset>
+        </phpdoc2>
+    </target>
+    <target name="phpunit" depends="phpdoc">
+        <coverage-setup database="./build/coverage.db">
+            <fileset dir="tests">
+                <include name="**/*.php"/>
+            </fileset>
+        </coverage-setup>
+        <phpunit bootstrap="./tests/bootstrap.php" codecoverage="true" haltonerror="true" haltonfailure="true">
+            <formatter todir="build" type="xml"/>
+            <batchtest>
+                <fileset dir="tests">
+                    <include name="**/*Test*.php"/>
+                </fileset>
+            </batchtest>
+        </phpunit>
+    </target>
+</project>
