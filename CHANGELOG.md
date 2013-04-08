@@ -3,7 +3,6 @@
     * Moved into namespace
     * Updated to PHP 5.3+
     * Added composer support
-    * Changed name to Client
 
 
   * Version 1.0.4 (2010-01-14)
