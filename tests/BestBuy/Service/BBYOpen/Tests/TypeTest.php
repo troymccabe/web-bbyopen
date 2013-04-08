@@ -38,7 +38,7 @@ class TypeTest extends \PHPUnit_Framework_TestCase
         // testing vector
         $params = array('id=123');
         $vectorType = new Type('stores', $params, Client::FORMAT_XML);
-        $this->assertAttributeEquals($params, '123params', $vectorType);
+        $this->assertAttributeEquals($params, 'params', $vectorType);
 
         // testing error
         $params = new \StdClass();
