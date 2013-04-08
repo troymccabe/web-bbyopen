@@ -93,6 +93,9 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
         // testing that we don't have an error
         $this->assertEquals(false, $this->response->isError());
 
+        // sleep so we don't go over queries per second
+        sleep(1);
+
         // make a new bbyopen to test failure
         $bbyOpen = new Client(BBYOPEN_KEY);
         $response = $bbyOpen->stores(array('thiskeydoesntexist=abc'))->query();
@@ -106,6 +109,9 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
     {
         // test success
         $this->assertInstanceOf('\SimpleXMLElement', $this->response->toSimpleXml());
+
+        // sleep so we don't go over queries per second
+        sleep(1);
 
         // test failure
         $bbyOpen = new Client(BBYOPEN_KEY);
