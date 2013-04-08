@@ -1,22 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="BBYOpen-Wrapper" default="phpunit" basedir="." description="BBYOpen Wrapper">
-    <target name="composer">
-        <if>
-            <available file="./composer.lock" property="composer.installed" />
-            <then>
-                <composer command="update" composer="/usr/local/bin/composer" />
-            </then>
-            <else>
-                <composer command="install" composer="/usr/local/bin/composer">
-                    <arg value="--dev" />
-                </composer>
-            </else>
-        </if>
-    </target>
-    <target name="phpdoc" depends="composer">
+    <target name="phpdoc">
         <if>
             <not>
-                <available file="./build/phpdoc/" type="dir" />
+                <available file="./build/phpdoc/" type="dir" property="phpdocdir" />
             </not>
             <then>
                 <mkdir dir="./build/phpdoc/" mode="0777" />
