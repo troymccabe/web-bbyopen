@@ -3,14 +3,14 @@
 
 # PHPStorm
 .idea
-
 # PHPUnit
+
 phpunit.xml
 build
 
 # Composer
 composer.lock
-*.phar
+composer.phar
 
 # General
 vendor
