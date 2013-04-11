@@ -4,13 +4,14 @@
     "type": "library",
     "keywords": ["bbyopen", "remix", "best buy", "bby", "geek squad"],
     "homepage": "https://bitbucket.org/troymccabe/web-bbyopen",
-    "license": "BSD",
+    "license": "BSD-3-Clause-Clear",
     "authors": [
         {
             "name": "Matt Williams",
             "homepage": "http://mattwilliamsnyc.com",
             "email": "matt@mattwilliamsnyc.com"
-        }, {
+        },
+        {
             "name": "Troy McCabe",
             "email": "troy.mccabe@geeksquad.com"
         }
