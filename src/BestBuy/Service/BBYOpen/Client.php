@@ -43,7 +43,7 @@ class Client
      *
      * @var string
      */
-    const API_BASE = 'http://api.remix.bestbuy.com/v1';
+    const API_BASE = 'https://api.bestbuy.com/v1';
 
     /**
      * The constant for JSON formatted response
