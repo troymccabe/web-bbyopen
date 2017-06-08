@@ -1,5 +1,7 @@
 # INTRODUCTION
 
+## [DEPRECATED: use https://github.com/BestBuyAPIs/bestbuy-sdk-php]
+
 `\BestBuy\Service\BBYOpen` is a PHP library that supports interaction with
 Best Buy's BBYOpen API (<https://bbyopen.com/>).
 
